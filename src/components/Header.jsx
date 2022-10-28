@@ -40,7 +40,13 @@ const Header = () => {
                   <strong>교육과정</strong>
                 </Li>
                 <Li>
-                  <strong onClick={()=>{navigate("/create")}}>등록하기</strong>
+                  <strong
+                    onClick={() => {
+                      navigate("/create");
+                    }}
+                  >
+                    등록하기
+                  </strong>
                 </Li>
                 <Li>
                   <strong>
@@ -88,12 +94,10 @@ const Headers = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1380px;
+  max-width: 1410px;
   height: 74.563px;
   margin: auto;
-  @media (min-width: 1200px) {
-    width: 1170px;
-  }
+  margin-top: 8px;
 `;
 const Logo = styled.img`
   margin-top: 24px;
@@ -121,12 +125,12 @@ const LoginUl = styled.ul`
   margin: auto;
   list-style: none;
   & li:nth-child(2) {
-    margin-top: 30px;
+    margin-top: 26px;
     cursor: pointer;
   }
 `;
 const Li = styled.li`
-  margin: 17px;
+  margin: 13px;
 `;
 const Span = styled.div`
   cursor: pointer;

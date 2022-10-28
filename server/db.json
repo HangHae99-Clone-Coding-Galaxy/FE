@@ -1,5 +1,16 @@
 {
-  "user": [],
+  "user": [
+    {
+      "userId": "오성은",
+      "password": "",
+      "id": 1
+    },
+    {
+      "userId": "nnmmaz95@gmail.com",
+      "password": "",
+      "id": 2
+    }
+  ],
   "signup": [
     {
       "userid": "nnmmaz",

@@ -140,4 +140,7 @@ const FooterBottomContainer = styled.div`
 const Flex = styled.div`
   display: flex;
   justify-content: center;
+  & img {
+    margin-top: -5px;
+  }
 `;
