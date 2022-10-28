@@ -10,7 +10,7 @@ const initialState = {
 
 //HG
 const instance = axios.create({
-  baseURL: "http://3.86.227.196:8080",
+  baseURL: "",
 });
 
 export const loginApi = async (userInfo) => {
@@ -24,7 +24,7 @@ export const __getUsers = createAsyncThunk(
   "post/getUser",
   async (payload, thunkAPI) => {
     try {
-      const users = await axios.get(`http://3.86.227.196:8080`);
+      const users = await axios.get("http://localhost:3000");
       return thunkAPI.fulfillWithValue(users.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -37,7 +37,7 @@ export const __addUser = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      await axios.post("http://3.86.227.196:8080/users/signup", payload);
+      await axios.post("http://localhost:3000/users/signup", payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -48,20 +48,18 @@ export const __addUser = createAsyncThunk(
 export const __setUser = createAsyncThunk(
   "post/setUser",
   async (payload, thunkAPI) => {
+    console.log(payload);
     try {
-      const response = await axios.post(
-        "http://3.86.227.196:8080/users/login",
-        payload
-      );
-      const accessToken = response.headers.authorization;
-      const refreshToken = response.headers["refresh-token"];
-      if (response.status === 200 || response.status === 201) {
-        window.localStorage.setItem("accessToken", accessToken);
-        window.localStorage.setItem("refreshToken", refreshToken);
-        alert("로그인 성공");
-        window.location.replace("/");
-        return thunkAPI.fulfillWithValue(response.data);
-      }
+      await axios.post("http://localhost:3000/user", payload);
+      // const accessToken = response.headers.authorization;
+      // const refreshToken = response.headers["refresh-token"];
+      // if (response.status === 200 || response.status === 201) {
+      //   window.localStorage.setItem("accessToken", accessToken);
+      //   window.localStorage.setItem("refreshToken", refreshToken);
+      alert("로그인 성공");
+      window.location.replace("/");
+      return thunkAPI.fulfillWithValue(payload);
+      // }
     } catch (error) {
       if (400 < error.response.status && error.response.status < 500) {
         window.location.reload();
@@ -90,8 +88,8 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
-      state.token = action.payload.token;
-      state.isLogin = true;
+      // state.token = action.payload.token;
+      // state.isLogin = true;
     },
   },
   extraReducers: {

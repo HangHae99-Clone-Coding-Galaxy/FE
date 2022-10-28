@@ -21,6 +21,9 @@ const Header = () => {
   const main = () => {
     navigate("/");
   };
+  const cart = () => {
+    navigate("/cart");
+  };
   return (
     <>
       {isOpen && <Login />}
@@ -44,7 +47,7 @@ const Header = () => {
               </Ul>
             </Nav>
             <div>
-              <Ul>
+              <LoginUl>
                 <Li>
                   <Span
                     onClick={() => {
@@ -55,12 +58,13 @@ const Header = () => {
                     {token ? "로그아웃" : "로그인"}
                   </Span>
                 </Li>
-                <Li>
-                  <Span>
-                    <FaCartPlus />
-                  </Span>
+                <Li onClick={cart}>
+                  <FaCartPlus />
+                  {/* <CartQuantity> */}
+                  {/* <span>3</span> */}
+                  {/* </CartQuantity> */}
                 </Li>
-              </Ul>
+              </LoginUl>
             </div>
           </Flex>
         </Container>
@@ -109,6 +113,15 @@ const Ul = styled.ul`
   margin: auto;
   list-style: none;
 `;
+const LoginUl = styled.ul`
+  display: flex;
+  margin: auto;
+  list-style: none;
+  & li:nth-child(2) {
+    margin-top: 30px;
+    cursor: pointer;
+  }
+`;
 const Li = styled.li`
   margin: 17px;
 `;
@@ -116,3 +129,15 @@ const Span = styled.div`
   cursor: pointer;
   margin-top: 14px;
 `;
+// const CartQuantity = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 16px;
+//   width: 12px;
+//   background: #ff4949;
+//   border-radius: 2px;
+//   & span {
+//     color: #fff;
+//   }
+// `;
