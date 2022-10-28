@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         font-family: 'NanumSquare', sans-serif !important;
         color: #444;
+        box-sizing: border-box;
     };
     button{
         cursor: pointer;

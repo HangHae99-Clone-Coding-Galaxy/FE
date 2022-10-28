@@ -4,14 +4,19 @@ import Header from "./Header";
 
 const Register = () => {
   return (
-    <Section>
-      <PageTitle>
-        <Ul>
-          <Li>홈</Li>
-          <Li>회원가입</Li>
-        </Ul>
-      </PageTitle>
-    </Section>
+    <>
+      <Section>
+        <Container>
+          <PageTitle>
+            <Ul>
+              <Li>홈</Li>/<Li>회원가입</Li>
+            </Ul>
+            <H1>회원가입</H1>
+          </PageTitle>
+        </Container>
+      </Section>
+      {/* <Page></Page> */}
+    </>
   );
 };
 
@@ -24,5 +29,19 @@ const Section = styled.div`
 const PageTitle = styled.div`
   padding-top: 30px;
 `;
-const Ul = styled.div``;
-const Li = styled.div``;
+const Container = styled.div`
+  width: 1200px;
+  margin: auto;
+`;
+const Ul = styled.div`
+  font-size: 11px;
+  display: flex;
+`;
+const Li = styled.div`
+  margin: 0 10px;
+`;
+const H1 = styled.h1`
+  font-size: 20px;
+  font-weight: 600;
+  margin: 10px;
+`;
