@@ -15,7 +15,7 @@ const Register = () => {
           </PageTitle>
         </Container>
       </Section>
-      {/* <Page></Page> */}
+      <Page>페이지2</Page>
     </>
   );
 };
@@ -45,3 +45,4 @@ const H1 = styled.h1`
   font-weight: 600;
   margin: 10px;
 `;
+const Page = styled.div``;
