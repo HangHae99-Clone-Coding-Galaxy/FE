@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
+import YouTube from "react-youtube";
 import { useNavigate, useLocation } from "react-router-dom";
+import ReactPlayer from "react-player";
 
 const Create = () => {
   //등록해야되는 항목 state
@@ -7,7 +9,7 @@ const Create = () => {
    const [content,SetContent] = useState(); 
    const [category, setCategory] = useState();
    const [file, setFile] = useState([]);
-
+<>``</>
    //value 항목별 담기
    const changeCategory = (e) => {
     setCategory(e.target.value);
