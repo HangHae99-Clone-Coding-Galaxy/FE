@@ -14,7 +14,8 @@ const Login = () => {
     navigate("/");
   };
 
-  const logins = useSelector((state) => state.userSlice);
+  const logins = useSelector((state) => state.userSlice.users);
+  console.log(logins);
 
   const clickHandler = async () => {
     dispatch(__setUser(login));
@@ -45,6 +46,7 @@ const Login = () => {
       password: "",
     });
   };
+  console.log(login);
   return (
     <ModalContainer>
       <Modal>
@@ -60,8 +62,8 @@ const Login = () => {
             </Close>
           </Flex>
           <Input
-            id="email"
-            name="email"
+            id="userId"
+            name="userId"
             type="email"
             placeholder="아이디"
             onClick={onChangeHandler}
@@ -73,27 +75,27 @@ const Login = () => {
             placeholder="비밀번호"
             onClick={onChangeHandler}
           />
+          <ul>
+            <li>
+              <LoginButton type="submit" onClick={clickHandler}>
+                로그인
+              </LoginButton>
+            </li>
+            <li>
+              <RegisterButton
+                onClick={() => {
+                  dispatch(closeModal());
+                  register();
+                }}
+              >
+                10초 회원가입
+              </RegisterButton>
+            </li>
+            <Kakao>
+              <img src="../img/kakao.png"></img>
+            </Kakao>
+          </ul>
         </Box>
-        <ul>
-          <li>
-            <LoginButton type="submit" onClick={clickHandler}>
-              로그인
-            </LoginButton>
-          </li>
-          <li>
-            <RegisterButton
-              onClick={() => {
-                dispatch(closeModal());
-                register();
-              }}
-            >
-              10초 회원가입
-            </RegisterButton>
-          </li>
-          <Kakao>
-            <img src="../img/kakao.png"></img>
-          </Kakao>
-        </ul>
       </Modal>
     </ModalContainer>
   );
