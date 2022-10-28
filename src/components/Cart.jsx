@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const Cart = () => {
 
+
   const navigate = useNavigate();
 
   const main = () => {
@@ -24,7 +25,7 @@ const Cart = () => {
       </Section>
     </>
   );
-};
+;
 
 
 export default Cart;
