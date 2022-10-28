@@ -41,7 +41,7 @@ const Review = () => {
           name="ment"
           value={comment.ment}
           maxLength={200}
-          placeholder="댓글 추가"
+          placeholder="댓글 추가."
           onChange={(e) => onChangeHandler(e)}
         />
         <button type={"submit"}>+</button>
