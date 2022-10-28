@@ -1,5 +1,5 @@
 import React from "react";
-import Main from "../components/courses/Main";
+import Main from "../components/Main";
 
 const MainPage = () => {
   return <Main />;

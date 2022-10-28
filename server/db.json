@@ -1,11 +1,13 @@
 {
-    "user":[
-        {
-            "id":1,
-            "userId":"nnmmaz95@gmail.com",
-            "password":"12341234!",
-            "passwordConfirm": "12341234!",
-            "nickname" : "오성은"
-        }
-    ]
+  "user": [],
+  "signup": [
+    {
+      "userid": "nnmmaz",
+      "email": "nnmmaz95@gmail.com",
+      "password": "12341234!",
+      "passwordConfirm": "12341234!",
+      "username": "오성은",
+      "id": 1
+    }
+  ]
 }
