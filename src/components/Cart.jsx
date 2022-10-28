@@ -25,7 +25,7 @@ const Cart = () => {
       </Section>
     </>
   );
-;
+  };
 
 
 export default Cart;
