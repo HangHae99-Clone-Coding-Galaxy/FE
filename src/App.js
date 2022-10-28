@@ -7,9 +7,7 @@ import Main from"../src/pages/Main"
 const App = () => {
   return (
     <>
-      <Router />
-      <Main/>
-      <Footer />
+          <Router />
     </>
   );
 };

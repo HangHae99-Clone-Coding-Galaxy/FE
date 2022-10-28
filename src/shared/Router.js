@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../components/Login"
 import Register from "../components/Register"
 import Header from "../components/Header";
+import Create from "../components/Create";
 import AllCourses from "../pages/AllCourses";
 import Git from "../components/courses/Git";
 import HtmlCss from "../components/courses/HtmlCss";
@@ -18,6 +19,7 @@ const Router = () => {
           <Route exact path="/login" element={ <Login/> } />
           <Route exact path="/register" element={ <Register/> } />
           <Route exact path="/allcourses" element={ <AllCourses/> } />
+          <Route exact path="/create" element={ <Create/> } />
           <Route exact path="/git" element={ <Git/> } />
           <Route exact path="/htmlcss" element={ <HtmlCss/> } />
           <Route exact path="/javascriptes6" element={ <JavaScriptEs6/> } />
