@@ -15,7 +15,7 @@ const Register = () => {
           </PageTitle>
         </Container>
       </Section>
-      <Page>페이지</Page>
+      <Page>페이지2</Page>
     </>
   );
 };
