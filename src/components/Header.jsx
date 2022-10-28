@@ -1,13 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "../features/modalSlice";
+import Login from "./Login";
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const token = localStorage.getItem("accessToken");
+  const isOpen = useSelector((state) => state.modalSlice.isOpen);
+
+  const toLogin = () => {
+    if (token) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+    }
+  };
+  const main = () => {
+    navigate("/");
+  };
   return (
     <>
+      {isOpen && <Login />}
       <Headers className="sleek">
         <Container>
           <Flex>
-            <Logo src="img/logo2-3.png"></Logo>
+            <Logo src="img/logo2-3.png" onClick={main}></Logo>
             <Nav>
               <Ul>
                 <Li>
@@ -26,7 +46,14 @@ const Header = () => {
             <div>
               <Ul>
                 <Li>
-                  <Span>로그인</Span>
+                  <Span
+                    onClick={() => {
+                      dispatch(openModal());
+                      toLogin();
+                    }}
+                  >
+                    {token ? "로그아웃" : "로그인"}
+                  </Span>
                 </Li>
                 <Li>
                   <Span>
@@ -85,7 +112,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   margin: 17px;
 `;
-const Span = styled.li`
-  margin-top: 14px;
+const Span = styled.div`
   cursor: pointer;
+  margin-top: 14px;
 `;
