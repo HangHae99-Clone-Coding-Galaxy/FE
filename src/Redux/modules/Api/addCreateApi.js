@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_SERVER;
 
 export const addCreateApi = async (payload) => {
-    const response = await axios.post(`${BASE_URL}/api/courses/create`, payload);
+    const response = await axios.post("http://localhost:3001/create", payload);
     return response.data;
   };

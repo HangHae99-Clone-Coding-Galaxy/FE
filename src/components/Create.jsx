@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __addCreate } from "../Redux/modules/addCreateSlice";
 
 const Create = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   //등록해야되는 항목 state
   const [title, SetTile] = useState();
   const [content, SetContent] = useState();
@@ -25,18 +29,20 @@ const Create = () => {
 
   //  폼데이터 변환 후 청크 전달
   const addClass = () => {
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
     formData.append("category", category);
     formData.append("file", file[0]);
-    dispatchEvent(__addCreate(formData));
-    navigator("/");
+    
+    dispatch(__addCreate(formData));
+    navigate("/");
   };
 
   return (
     <form onSubmit={addClass} encType="multipart/form-data">
-      <select onChange={changeCategory} value="category">
+      <select onChange={changeCategory} value={category}>
         <option value="">선택</option>
         <option value="ReactBasic">리액트</option>
         <option value="JavaScriptEs6">자바스크립트ES6</option>
@@ -45,13 +51,14 @@ const Create = () => {
         <option value="HtmlCss">HTML/CSS</option>
         <option value="Git">git/github</option>
       </select>
-      <input type="text" value="title" onChange={onChangeTitle} />
-      <textarea type="text" value="content" onChange={onChangeContent} />
+
+      <input type="text" value={title} id="title" placeholder="강좌명" onChange={onChangeTitle} />
+      <textarea type="text" value={content} id="content" placeholder="강좌내용" onChange={onChangeContent} />
       <input
         onChange={onChangeHandler}
         id="video_file"
         type="file"
-        accept=".mp4"
+        accept="video/mp4,video/mkv, video/x-m4v,video/*"
         name="file"
       ></input>
       <button>등록</button>
