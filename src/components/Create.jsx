@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const Create = () => {
   //등록해야되는 항목 state
@@ -22,8 +22,20 @@ const Create = () => {
     setFile(e.target.files);
   };
 
+  //  폼데이터 변환 후 청크 전달
+  const addClass = () => {
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('category', category);
+    formData.append('file', file[0]);
+
+
+};
+
+
   return (
-    <form encType="multipart/form-data">
+    <form onSubmit={addClass} encType="multipart/form-data">
       <select
               onChange={changeCategory}
               value="category"
@@ -45,6 +57,7 @@ const Create = () => {
                 accept=".mp4"
                 name="file"
               ></input>
+              <button>등록</button>
     </form>
   )
 }

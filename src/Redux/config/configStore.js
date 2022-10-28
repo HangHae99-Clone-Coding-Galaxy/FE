@@ -3,6 +3,7 @@ import modalSlice from "../../features/modalSlice";
 import userSlice from "../../features/userSlice";
 
 export const store = configureStore({
+
   reducer: {
     modalSlice,
     userSlice,
@@ -10,4 +11,5 @@ export const store = configureStore({
   middleware: getDefaultMiddleware({
     serializableCheck: false,
   }),
+
 });

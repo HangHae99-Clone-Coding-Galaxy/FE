@@ -40,6 +40,9 @@ const Header = () => {
                   <strong>교육과정</strong>
                 </Li>
                 <Li>
+                  <strong onClick={()=>{navigate("/create")}}>등록하기</strong>
+                </Li>
+                <Li>
                   <strong>
                     <FaSearch />
                   </strong>
