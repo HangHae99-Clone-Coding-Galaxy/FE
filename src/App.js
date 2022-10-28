@@ -1,14 +1,17 @@
-import React from 'react'
+import React from "react";
+import Footer from "./components/Footer";
 import Router from "./shared/Router";
-import Main from './pages/Main';
+import Main from"../src/pages/Main"
+
 
 const App = () => {
   return (
-    <div>
-      <Main />
+    <>
       <Router />
-    </div>
-  )
-}
+      <Main/>
+      <Footer />
+    </>
+  );
+};
 
-export default App
+export default App;

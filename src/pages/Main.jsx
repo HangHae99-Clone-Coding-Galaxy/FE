@@ -1,13 +1,12 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+
+
 
 
 const Main = () => {
   return (
     <div>
-    < Header/>
-    <Footer />
+        <p>메인화면</p>
     </div>
   )
 }
