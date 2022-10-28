@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import Cart from "./Cart";
+import Create from "./Create";
 import AllCourses from "../pages/AllCourses";
 import styled from "styled-components"
 
@@ -12,6 +13,7 @@ const Header = () => {
       <AllCourses />
       <Login />
       <Cart />
+      <Create />
     </HeaderWrap>
   );
 };
