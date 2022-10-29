@@ -5,6 +5,7 @@ import {addCreateApi, getCreateApi} from "./Api/addCreateApi"
 export const __addCreate = createAsyncThunk(
     "addCreate",
     async (payload, thunkAPI) => {
+      console.log(payload);
       try{
         const response = await addCreateApi(payload);
         return thunkAPI.fulfillWithValue(response);
@@ -30,8 +31,7 @@ export const __addCreate = createAsyncThunk(
     name: "courses",
     initialState:{
         courses : [],
-        course:{},
-        board: null,
+        course:null,
         isLoading: false,
         error: null,
     },
@@ -59,7 +59,7 @@ export const __addCreate = createAsyncThunk(
       [__getCreate.fulfilled]: (state, action) => {
         state.isLoading = false;
         state.isDone = true;
-        state.boards = action.payload;
+        state.courses = action.payload;
       },
       [__getCreate.rejected]: (state, action) => {
         state.isLoading = false;
