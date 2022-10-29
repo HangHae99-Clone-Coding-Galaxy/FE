@@ -1,8 +1,10 @@
+
 import React from 'react'
 import { useEffect } from 'react'
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux'
 import { __getCreate } from '../Redux/modules/addCreateSlice';
+
 
 export default function AllCourses() {
 
@@ -22,6 +24,7 @@ export default function AllCourses() {
 
   return (
     <div>
+
      {courses.map((course)=>{
       return(
         <div key={course.id}>
@@ -31,8 +34,9 @@ export default function AllCourses() {
         </div>
       )
      })}
+
     </div>
-  )
+  );
 }
 
 const CourseCard = styled.div`

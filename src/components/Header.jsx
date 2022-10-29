@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,7 @@ const Header = () => {
   const cart = () => {
     navigate("/cart");
   };
+
   return (
     <>
       {isOpen && <Login />}
@@ -40,7 +41,13 @@ const Header = () => {
                   <strong>교육과정</strong>
                 </Li>
                 <Li>
-                  <strong onClick={()=>{navigate("/create")}}>등록하기</strong>
+                  <strong
+                    onClick={() => {
+                      navigate("/create");
+                    }}
+                  >
+                    등록하기
+                  </strong>
                 </Li>
                 <Li>
                   <strong>
@@ -63,9 +70,6 @@ const Header = () => {
                 </Li>
                 <Li onClick={cart}>
                   <FaCartPlus />
-                  {/* <CartQuantity> */}
-                  {/* <span>3</span> */}
-                  {/* </CartQuantity> */}
                 </Li>
               </LoginUl>
             </div>
@@ -88,12 +92,10 @@ const Headers = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1380px;
+  max-width: 1410px;
   height: 74.563px;
   margin: auto;
-  @media (min-width: 1200px) {
-    width: 1170px;
-  }
+  margin-top: 8px;
 `;
 const Logo = styled.img`
   margin-top: 24px;
@@ -106,6 +108,9 @@ const Nav = styled.nav`
   margin-left: 400px;
   width: 252.984px;
   height: 74.563;
+  & li :hover {
+    color: #ff4949;
+  }
 `;
 const Flex = styled.nav`
   display: flex;
@@ -121,26 +126,14 @@ const LoginUl = styled.ul`
   margin: auto;
   list-style: none;
   & li:nth-child(2) {
-    margin-top: 30px;
+    margin-top: 26px;
     cursor: pointer;
   }
 `;
 const Li = styled.li`
-  margin: 17px;
+  margin: 13px;
 `;
 const Span = styled.div`
   cursor: pointer;
   margin-top: 14px;
 `;
-// const CartQuantity = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   height: 16px;
-//   width: 12px;
-//   background: #ff4949;
-//   border-radius: 2px;
-//   & span {
-//     color: #fff;
-//   }
-// `;
