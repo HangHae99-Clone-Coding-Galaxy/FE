@@ -3,32 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Cart = () => {
-
-
-
-  const navigate = useNavigate();
-
-  const main = () => {
-    navigate("/");
-  };
-  return (
-    <>
-      <Section>
-        <Container>
-          <PageTitle>
-            <Ul>
-              <Li onClick={main}>홈</Li>/<Li>신청하기</Li>
-            </Ul>
-            <H1>신청하기</H1>
-            <H5>Step 1 : 강의선택</H5>
-          </PageTitle>
-        </Container>
-      </Section>
-    </>
-  );
-
-  return <section id="title"></section>;
-
   const navigate = useNavigate();
 
   const main = () => {
@@ -50,7 +24,6 @@ const Cart = () => {
     </>
   );
 };
-
 
 export default Cart;
 

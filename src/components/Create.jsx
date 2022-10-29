@@ -17,8 +17,6 @@ const Create = () => {
 
   //이미지미리보기  state
   const [imageSrc, setImageSrc] = useState("");
-  
-
 
   //value 항목별 담기
   const changeCategory = (e) => {
@@ -31,7 +29,6 @@ const Create = () => {
     SetContent(e.target.value);
   };
   const onChangeImage = (e) => {
-
     setImage(e.target.files[0]);
 
     let reader = new FileReader();
@@ -52,7 +49,6 @@ const Create = () => {
 
   //  폼데이터 변환 후 청크 전달
   const addClass = () => {
-
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
@@ -61,14 +57,12 @@ const Create = () => {
     formData.append("video", video);
 
     //폼데이터 콘솔보기
-      for(let pair of formData.entries()){
-    console.log(pair[0]+','+pair[1]);
-  }
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + "," + pair[1]);
+    }
     dispatch(__addCreate(formData));
     navigate("/");
   };
-
-  
 
   return (
     <FormWrap onSubmit={addClass} encType="multipart/form-data">
@@ -81,8 +75,20 @@ const Create = () => {
         <option value="HtmlCss">HTML/CSS</option>
         <option value="Git">git/github</option>
       </select>
-      <input type="text" value={title} id="title" placeholder="강좌명" onChange={onChangeTitle} />
-      <textarea type="text" value={content} id="content" placeholder="강좌내용" onChange={onChangeContent} />
+      <input
+        type="text"
+        value={title}
+        id="title"
+        placeholder="강좌명"
+        onChange={onChangeTitle}
+      />
+      <textarea
+        type="text"
+        value={content}
+        id="content"
+        placeholder="강좌내용"
+        onChange={onChangeContent}
+      />
       <p>이미지미리보기</p>
       <ImgSize src={imageSrc} alt="" />
       <input
@@ -91,7 +97,7 @@ const Create = () => {
         type="file"
         accept="image/*"
         name="image"
-      ></input>      
+      ></input>
       <input
         onChange={onChangeVideo}
         id="video_file"
@@ -107,12 +113,12 @@ const Create = () => {
 export default Create;
 
 const FormWrap = styled.div`
-margin-top: 30px;
-margin-left: auto;
-margin-right: auto;
-display: flex;
-flex-direction: column;
-justify-content: center;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 300px;
   height: 400px;
@@ -125,8 +131,6 @@ justify-content: center;
 `;
 
 const ImgSize = styled.img`
-
   width: 70px;
-  height:70px;
-
+  height: 70px;
 `;
