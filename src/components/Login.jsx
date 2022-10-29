@@ -17,13 +17,8 @@ const Login = () => {
   const logins = useSelector((state) => state.userSlice.users);
   console.log(logins);
 
-  const clickHandler = async () => {
-    dispatch(__setUser(login));
-    navigate("/");
-  };
-
-  const register = () => {
-    navigate("/register");
+  const signup = () => {
+    navigate("/signup");
   };
 
   const [login, setLogin] = useState({
@@ -51,41 +46,41 @@ const Login = () => {
     <ModalContainer>
       <Modal>
         <Box onSubmit={(e) => handleAddUsers(e)}>
-          <Flex>
-            <H3>로그인</H3>
-            <Close
-              onClick={() => {
-                dispatch(closeModal());
-              }}
-            >
-              <IoIosClose />
-            </Close>
-          </Flex>
-          <Input
-            id="userId"
-            name="userId"
-            type="email"
-            placeholder="아이디"
-            onClick={onChangeHandler}
-          />
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="비밀번호"
-            onClick={onChangeHandler}
-          />
+          <Div>
+            <Flex>
+              <H3>로그인</H3>
+              <Close
+                onClick={() => {
+                  dispatch(closeModal());
+                }}
+              >
+                <IoIosClose />
+              </Close>
+            </Flex>
+            <Input
+              id="userId"
+              name="userId"
+              type="email"
+              placeholder="아이디"
+              onClick={onChangeHandler}
+            />
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="비밀번호"
+              onClick={onChangeHandler}
+            />
+          </Div>
           <ul>
             <li>
-              <LoginButton type="submit" onClick={clickHandler}>
-                로그인
-              </LoginButton>
+              <LoginButton type="submit">로그인</LoginButton>
             </li>
             <li>
               <RegisterButton
                 onClick={() => {
                   dispatch(closeModal());
-                  register();
+                  signup();
                 }}
               >
                 10초 회원가입
@@ -123,7 +118,6 @@ const Modal = styled.div`
   box-shadow: 0 0 10px rgb(0 0 0 / 50%);
 `;
 const Box = styled.form`
-  padding: 30px;
   box-sizing: border-box;
 `;
 const H3 = styled.h3`
@@ -131,6 +125,9 @@ const H3 = styled.h3`
 `;
 const Close = styled.div`
   cursor: pointer;
+`;
+const Div = styled.div`
+  padding: 30px;
 `;
 const Flex = styled.div`
   display: flex;
