@@ -9,7 +9,7 @@ const HtmlCss = () => {
   const courses = useSelector((state)=> state.courses.courses)
 
   useEffect(()=>{
-    if(courses.category==="Git"){
+    if(courses.category==="HtmlCss"){
       return dispatch(__getCreate())
     }else{
       return alert("아직 생성된 강의가 없습니다.")
@@ -20,12 +20,11 @@ const HtmlCss = () => {
     <>
       {courses.category.HtmlCss?.map((item) => {
         return(
-          <>
-          <p>{item.id}</p>
+          <div key={item.id}>
           <p>{item.title}</p>
           <p>{item.content}</p>
           <p>{item.file}</p>
-          </>
+          </div>
         )
       })}
       <Review/>

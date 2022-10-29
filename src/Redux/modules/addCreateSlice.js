@@ -30,6 +30,7 @@ export const __addCreate = createAsyncThunk(
     name: "courses",
     initialState:{
         courses : [],
+        course:{},
         board: null,
         isLoading: false,
         error: null,
@@ -43,7 +44,8 @@ export const __addCreate = createAsyncThunk(
       },
       [__addCreate.fulfilled]: (state, action) => {
         state.isLoading = false;
-        state.courses.push(action.payload);
+        const classId = state.courses[state.courses.length - 1]?.id + 1 || 1;
+        state.courses.push(action.payload,classId);
       },
       [__addCreate.rejected]: (state, action) => {
         state.isLoading = false;
