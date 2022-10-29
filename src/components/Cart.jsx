@@ -3,17 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Cart = () => {
-<<<<<<< HEAD
-
-=======
-  return (
-    <div>
-      <p>/장바구니 장바구니</p>
-    </div>
-  );
-
-  return <section id="title"></section>;
->>>>>>> 5cb7148350d7a2c43bb2caf8bf891b30b42357d6
 
   const navigate = useNavigate();
 
@@ -35,12 +24,8 @@ const Cart = () => {
       </Section>
     </>
   );
-<<<<<<< HEAD
   };
 
-=======
-};
->>>>>>> 5cb7148350d7a2c43bb2caf8bf891b30b42357d6
 
 export default Cart;
 
