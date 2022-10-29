@@ -72,7 +72,7 @@ const Header = () => {
             <div>
               <LoginUl>
                 <Li>
-                  <Flex></Flex>
+                  <Flex>
                     <Img
                       src="https://i.pinimg.com/originals/d2/4f/89/d24f89d6afaec9d3a55d47fed799800e.jpg"
                       alt=""
