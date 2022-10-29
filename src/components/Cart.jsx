@@ -3,17 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Cart = () => {
-<<<<<<< HEAD
-<<<<<<< HEAD
   return (
     <div>
       <p>/장바구니 장바구니</p>
     </div>
   );
-=======
+
   return <section id="title"></section>;
->>>>>>> d4c2a637f34b7b1193c47cc704a3b11650723de7
-=======
+
   const navigate = useNavigate();
 
   const main = () => {
@@ -34,7 +31,6 @@ const Cart = () => {
       </Section>
     </>
   );
->>>>>>> origin/seoungeun
 };
 
 export default Cart;

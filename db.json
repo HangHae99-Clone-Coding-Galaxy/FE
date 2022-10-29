@@ -9,7 +9,7 @@
   "comments": [
     {
       "id": 1,
-      "body": "some comment",
+      "comment": "some comment",
       "postId": 1
     }
   ],
