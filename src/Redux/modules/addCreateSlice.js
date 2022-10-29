@@ -1,12 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {addCreateApi} from "./Api/addCreateApi"
+import {addCreateApi, getCreateApi} from "./Api/addCreateApi"
 
 
 export const __addCreate = createAsyncThunk(
     "addCreate",
     async (payload, thunkAPI) => {
+      console.log(payload);
       try{
         const response = await addCreateApi(payload);
+        return thunkAPI.fulfillWithValue(response);
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  export const __getCreate = createAsyncThunk(
+    "getCreate",
+    async (payload, thunkAPI) => {
+      try{
+        const response = await getCreateApi(payload);
         return thunkAPI.fulfillWithValue(response);
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -18,7 +31,7 @@ export const __addCreate = createAsyncThunk(
     name: "courses",
     initialState:{
         courses : [],
-        board: null,
+        course:null,
         isLoading: false,
         error: null,
     },
@@ -31,9 +44,24 @@ export const __addCreate = createAsyncThunk(
       },
       [__addCreate.fulfilled]: (state, action) => {
         state.isLoading = false;
-        state.courses.push(action.payload);
+        const classId = state.courses[state.courses.length - 1]?.id + 1 || 1;
+        state.courses.push(action.payload,classId);
       },
       [__addCreate.rejected]: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      },
+
+      [__getCreate.pending]: (state) => {
+        state.isLoading = true;
+        state.isDone = false;
+      },
+      [__getCreate.fulfilled]: (state, action) => {
+        state.isLoading = false;
+        state.isDone = true;
+        state.courses = action.payload;
+      },
+      [__getCreate.rejected]: (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       },

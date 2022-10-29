@@ -11,7 +11,7 @@ const Review = () => {
 
   const [comment, setComment] = useState(init);
   const dispatch = useDispatch();
-  // const postid = useSelector((state) => state.bookSlice.post.id);📌
+  // const postid = useSelector((state) => state.commentSlice.post.id);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -41,7 +41,7 @@ const Review = () => {
           name="ment"
           value={comment.ment}
           maxLength={200}
-          placeholder="댓글 추가."
+          placeholder="댓글 추가"
           onChange={(e) => onChangeHandler(e)}
         />
         <button type={"submit"}>+</button>

@@ -6,8 +6,6 @@ const Main = () => {
   return (
     <div>
       <p>메인화면</p>
-      <Review></Review>
-      <ReviewList></ReviewList>
     </div>
   );
 };
