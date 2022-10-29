@@ -1,24 +1,29 @@
-// import React, { useEffect } from "react";
-// import ReviewListItem from "./ReviewListItem";
-// import { useSelector, useDispatch } from "react-redux";
-// import { __getComment } from "../slice";
-// import { useParams } from "react-router-dom";
+import React from "react";
+// import Review from "./Review";
+import ReviewListItem from "./ReviewListItem";
+import styled from "styled-components";
 
-// function ReviewList() {
-//   const commentList = useSelector((state) => state.commentSlice.comment);
-//   const dispatch = useDispatch();
-//   const { id } = useParams();
-//   useEffect(() => {
-//     dispatch(__getComment(id));
-//   }, [dispatch, id]);
+function ReviewList() {
+  return (
+    <PL>
+      <LT>오늘 어떤책을 고르셨나요?😉</LT>
+      <ReviewListItem />
+    </PL>
+  );
+}
 
-//   return (
-//     <div>
-//       {commentList.map((comment) => (
-//         <ReviewListItem key={comment.id} comment={comment} />
-//       ))}
-//     </div>
-//   );
-// }
+export default ReviewList;
 
-// export default ReviewList;
+const PL = styled.div`
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto 0 auto;
+`;
+
+const LT = styled.div`
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+`;

@@ -1,6 +1,6 @@
 import React from "react";
-import Review from "../components/Review";
-import ReviewList from "../components/ReviewList";
+// import Review from "../components/Review";
+// import ReviewList from "../components/ReviewList";
 
 const Main = () => {
   return (
