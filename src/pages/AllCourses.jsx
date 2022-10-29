@@ -23,36 +23,70 @@ export default function AllCourses() {
   };
 
   return (
-    <div>
+    <CoursesWrap>
 
      {courses.map((course)=>{
       return(
-        <div key={course.id}>
+        <Card key={course.id}>
+          <IMG src='https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png'/>
         {/* <img src={course.image} alt="test"/> */}
-        <p>{course.title}</p>
+        <TextWrap>
+        <h5>{course.title}</h5>
         <p>{course.content}</p>
-        </div>
+        </TextWrap>
+        </Card>
       )
      })}
 
-    </div>
+    </CoursesWrap>
   );
 }
 
-const CourseCard = styled.div`
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 80px;
-  background: transparent;
-  border: 1px solid black;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  gap: 10px;
+const CoursesWrap = styled.div`
+display: grid;
+border: none;
+grid-template-columns: repeat(3, 1fr);
+margin-left: 200px;
+margin-right: 200px;
 `;
+
+const IMG = styled.img`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+   flex-direction: column;
+    border: 1px solid #ccc;
+    color: #a0a0a0;
+    border-radius: 4px;
+    width: 400px;
+    height: 250px;
+    /* margin: 0.6rem 0.6rem;
+    padding: 0.1rem; */
+    outline: none
+`;
+const Card = styled.div`
+display: flex;
+flex-direction: column;
+width: 440px;
+height: 417px;
+justify-content: center;
+align-items: center;
+border: 1px solid gray;
+font-size: 1.2rem;
+font-weight: bold;
+`;
+
+const TextWrap = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 10px;
+gap: 0.7rem;
+border: 1px solid gray;
+font-size: 0.9rem;
+font-weight: bold;
+cursor: pointer;
+`;
+

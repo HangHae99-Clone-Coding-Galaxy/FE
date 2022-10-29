@@ -224,6 +224,7 @@ const FormWrap = styled.form`
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
