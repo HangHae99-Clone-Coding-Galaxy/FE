@@ -1268,6 +1268,7 @@
     prop-types "^15.8.1"
 
 "@humanwhocodes/config-array@^0.11.6":
+
   version "0.11.6"
   resolved "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.6.tgz"
   integrity sha512-jJr+hPTJYKyDILJfhNSHsjiwXYf26Flsz8DvNndOsHs5pwSnpGUEy8yzF0JYhCEvTDdV2vuOK5tt8BVhwO5/hg==
@@ -10047,3 +10048,4 @@ youtube-player@5.5.2, youtube-player@^5.5.0:
     debug "^2.6.6"
     load-script "^1.0.0"
     sister "^3.0.0"
+
