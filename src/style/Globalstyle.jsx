@@ -7,8 +7,12 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-family: 'NanumSquare', sans-serif !important;
-        color: black;
+        color: #444;
+        box-sizing: border-box;
     };
+    button{
+        cursor: pointer;
+    }
 `;
 
 export default GlobalStyle;
