@@ -3,14 +3,16 @@ import styled from "styled-components";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "../features/modalSlice";
+import { openModal, openSearchModal } from "../features/modalSlice";
 import Login from "./Login";
+import Search from "./Search";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("accessToken");
   const isOpen = useSelector((state) => state.modalSlice.isOpen);
+  const searchOpen = useSelector((state) => state.modalSlice.searchOpen);
 
   const toLogin = () => {
     if (token) {
@@ -23,6 +25,12 @@ const Header = () => {
   };
   const cart = () => {
     navigate("/cart");
+  };
+  const search = () => {
+    navigate("/search");
+  };
+  const mypage = () => {
+    navigate("/members");
   };
 
   return (
@@ -51,7 +59,12 @@ const Header = () => {
                 </Li>
                 <Li>
                   <strong>
-                    <FaSearch />
+                    <FaSearch
+                      onClick={() => {
+                        dispatch(openSearchModal());
+                        search();
+                      }}
+                    />
                   </strong>
                 </Li>
               </Ul>
@@ -59,14 +72,21 @@ const Header = () => {
             <div>
               <LoginUl>
                 <Li>
-                  <Span
-                    onClick={() => {
-                      dispatch(openModal());
-                      toLogin();
-                    }}
-                  >
-                    {token ? "로그아웃" : "로그인"}
-                  </Span>
+                  <Flex></Flex>
+                    <Img
+                      src="https://i.pinimg.com/originals/d2/4f/89/d24f89d6afaec9d3a55d47fed799800e.jpg"
+                      alt=""
+                      onClick={mypage}
+                    />
+                    <Span
+                      onClick={() => {
+                        dispatch(openModal());
+                        toLogin();
+                      }}
+                    >
+                      {token ? "로그아웃" : "로그인"}
+                    </Span>
+                  </Flex>
                 </Li>
                 <Li onClick={cart}>
                   <FaCartPlus />
@@ -135,5 +155,13 @@ const Li = styled.li`
 `;
 const Span = styled.div`
   cursor: pointer;
-  margin-top: 14px;
+  margin-top: 15px;
+`;
+const Img = styled.img`
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-right: 10px;
+  cursor: pointer;
 `;

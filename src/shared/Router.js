@@ -8,12 +8,13 @@ import JavaScriptJQuery from "../components/courses/JavaScriptJQuery";
 import NodeJsMongoDB from "../components/courses/NodeJsMongoDB";
 import ReactBasic from "../components/courses/ReactBasic";
 import GlobalStyle from "../style/Globalstyle";
-import Cart from "../components/Cart";
 import Header from "../components/Header";
 import MainPage from "../pages/MainPage";
 import SignUp from "../components/SignUp";
 import Footer from "../components/Footer";
-import Search from "../components/Search";
+import SearchDetail from "../components/SearchDetail";
+import Members from "../components/Members";
+import MembersEdit from "../components/MembersEdit";
 
 const Router = () => {
   return (
@@ -24,8 +25,9 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<SearchDetail />} />
+        <Route path="/members" element={<Members />} />
+        <Route path="/membersEdit" element={<MembersEdit />} />
         <Route path="/allcourses" element={<AllCourses />} />
         <Route path="/git" element={<Git />} />
         <Route path="/htmlcss" element={<HtmlCss />} />
