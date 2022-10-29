@@ -35,7 +35,11 @@ const Create = () => {
     formData.append("content", content);
     formData.append("category", category);
     formData.append("file", file[0]);
-    
+
+    //폼데이터 콘솔보기
+      for(let pair of formData.entries()){
+    console.log(pair[0]+','+pair[1]);
+  }
     dispatch(__addCreate(formData));
     navigate("/");
   };
