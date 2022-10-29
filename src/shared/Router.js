@@ -1,17 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../components/Login";
 import AllCourses from "../pages/AllCourses";
-import Git from "../components/courses/Git";
-import HtmlCss from "../components/courses/HtmlCss";
-import JavaScriptEs6 from "../components/courses/JavaScriptEs6";
-import JavaScriptJQuery from "../components/courses/JavaScriptJQuery";
-import NodeJsMongoDB from "../components/courses/NodeJsMongoDB";
-import ReactBasic from "../components/courses/ReactBasic";
 import GlobalStyle from "../style/Globalstyle";
 import Header from "../components/Header";
 import MainPage from "../pages/MainPage";
 import SignUp from "../components/SignUp";
 import Footer from "../components/Footer";
+import Create from "../components/Create";
 import SearchDetail from "../components/SearchDetail";
 import Members from "../components/Members";
 import MembersEdit from "../components/MembersEdit";
@@ -29,12 +24,7 @@ const Router = () => {
         <Route path="/members" element={<Members />} />
         <Route path="/membersEdit" element={<MembersEdit />} />
         <Route path="/allcourses" element={<AllCourses />} />
-        <Route path="/git" element={<Git />} />
-        <Route path="/htmlcss" element={<HtmlCss />} />
-        <Route path="/javascriptes6" element={<JavaScriptEs6 />} />
-        <Route path="/javascriptjquery" element={<JavaScriptJQuery />} />
-        <Route path="/nodejsmongodb" element={<NodeJsMongoDB />} />
-        <Route path="/reactbasic" element={<ReactBasic />} />
+        <Route path="/create" element={<Create />} />
       </Routes>
       <Footer />
     </BrowserRouter>

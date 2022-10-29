@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { SiBookstack } from "react-icons/si";
+import AllCourses from "../pages/AllCourses";
 
 const Main = () => {
   return (
@@ -38,6 +39,7 @@ const Main = () => {
       <Guide>
         <img src="img/guide.png" alt="" />
       </Guide>
+      <AllCourses/>
       <Flex>
         <div>
           <h4>
