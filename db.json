@@ -3,6 +3,21 @@
     {
       "id": 1
     }
+<<<<<<< HEAD
 
   ]
 }
+=======
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "comment": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
+>>>>>>> 5cb7148350d7a2c43bb2caf8bf891b30b42357d6

@@ -3,8 +3,10 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { __getCreate } from '../../Redux/modules/addCreateSlice';
 import Review from '../../components/Review'
+import { useParams } from 'react-router-dom';
 
 const HtmlCss = () => {
+  const {id} = useParams();
   const dispatch = useDispatch;
   const courses = useSelector((state)=> state.courses.courses)
 
@@ -27,7 +29,10 @@ const HtmlCss = () => {
           </div>
         )
       })}
-      <Review/>
+      {
+        <input type="text" />
+      }
+
     </>
   );
 }
