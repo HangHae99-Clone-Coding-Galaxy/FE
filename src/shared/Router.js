@@ -13,6 +13,7 @@ import Header from "../components/Header";
 import MainPage from "../pages/MainPage";
 import SignUp from "../components/SignUp";
 import Footer from "../components/Footer";
+import Search from "../components/Search";
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/allcourses" element={<AllCourses />} />
         <Route path="/git" element={<Git />} />
         <Route path="/htmlcss" element={<HtmlCss />} />

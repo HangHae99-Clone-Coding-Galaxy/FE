@@ -39,7 +39,9 @@ const Footer = () => {
                   <br />
                   <p>ⓒ Codingapple, 강의 예제 복사 금지 </p>
                 </div>
-                <Img src="img/info1.png" />
+                <a href="https://pf.kakao.com/_DLZzd">
+                  <Img src="img/info1.png" />
+                </a>
               </FooterBottom>
             </FooterTop>
           </Row>

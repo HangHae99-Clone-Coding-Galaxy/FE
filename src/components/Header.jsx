@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,7 @@ const Header = () => {
   const cart = () => {
     navigate("/cart");
   };
+
   return (
     <>
       {isOpen && <Login />}
@@ -69,9 +70,6 @@ const Header = () => {
                 </Li>
                 <Li onClick={cart}>
                   <FaCartPlus />
-                  {/* <CartQuantity> */}
-                  {/* <span>3</span> */}
-                  {/* </CartQuantity> */}
                 </Li>
               </LoginUl>
             </div>
@@ -110,6 +108,9 @@ const Nav = styled.nav`
   margin-left: 400px;
   width: 252.984px;
   height: 74.563;
+  & li :hover {
+    color: #ff4949;
+  }
 `;
 const Flex = styled.nav`
   display: flex;
@@ -136,15 +137,3 @@ const Span = styled.div`
   cursor: pointer;
   margin-top: 14px;
 `;
-// const CartQuantity = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   height: 16px;
-//   width: 12px;
-//   background: #ff4949;
-//   border-radius: 2px;
-//   & span {
-//     color: #fff;
-//   }
-// `;
