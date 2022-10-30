@@ -15,3 +15,7 @@ await axios.post(`${BASE_URL}/courses`, payload);
     const response = await axios.get(`${BASE_URL}/courses?id=${id}`);
     return response.data[0];
   };
+
+  export const delCreateApi = async (courseId) => {
+    await axios.delete(`${BASE_URL}/courses/${courseId}`);
+      };

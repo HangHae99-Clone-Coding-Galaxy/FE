@@ -14,6 +14,11 @@
       "userId": "",
       "password": "",
       "id": 3
+    },
+    {
+      "userId": "sohee1234",
+      "password": "",
+      "id": 4
     }
   ],
   "signup": [
@@ -24,6 +29,14 @@
       "passwordConfirm": "12341234!",
       "username": "오성은",
       "id": 1
+    },
+    {
+      "userid": "sohee1234",
+      "email": "v_vsoi@naver.com",
+      "password": "a123456789",
+      "passwordConfirm": "a123456789",
+      "username": "임소희",
+      "id": 2
     }
   ]
 }
