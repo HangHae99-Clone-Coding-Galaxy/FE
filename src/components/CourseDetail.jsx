@@ -23,9 +23,11 @@ const CourseDetail = () => {
 
   const course = useSelector((state) => state.addCreateSlice.course);
 
+
   const [pay, setPay] = useState(true);
 
   const [edit, setEdit] = useState(false);
+
 
   useEffect(() => {
     dispatch(__getCreateId(id));
@@ -46,6 +48,7 @@ const CourseDetail = () => {
 
   return (
     <div>
+
       {edit ? (
         <div>
           <img src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></img>
@@ -99,6 +102,7 @@ const CourseDetail = () => {
       ) : (
         <p>강의구매를 해야 해당강의를 수강할 수 있습니다.</p>
       )}
+
       <ReviewList />
       <Review />
     </div>
