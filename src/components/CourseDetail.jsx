@@ -26,8 +26,8 @@ const CourseDetail = () => {
 
   return (
     <div>
-      <p>{course.title}</p>
-      <p>{course.content}</p>
+      <p>{course?.title}</p>
+      <p>{course?.content}</p>
     </div>
   );
 };

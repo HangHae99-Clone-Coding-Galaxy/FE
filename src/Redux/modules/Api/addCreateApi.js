@@ -11,6 +11,7 @@ await axios.post(`${BASE_URL}/courses`, payload);
   };
 
   export const getCreateIdApi = async (id) => {
+    console.log(id)
     const response = await axios.get(`${BASE_URL}/courses?id=${id}`);
     return response.data[0];
   };
