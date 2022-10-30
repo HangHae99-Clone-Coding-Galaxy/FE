@@ -7,14 +7,15 @@ function ReviewList() {
   return (
     <PL>
       <LT>오늘 어떤책을 고르셨나요?😉</LT>
-      <ReviewListItem />
+
+      {/* <ReviewListItem /> */}
     </PL>
   );
 }
 
 export default ReviewList;
 
-const PL = styled.div`
+const PL = styled.form`
   width: 550px;
   display: flex;
   flex-direction: column;

@@ -8,7 +8,7 @@ function Review() {
   const init = {
     title: "",
     writer: "",
-    review: "",
+    // review: "",
   };
   const dispatch = useDispatch();
   const [post, setPost] = useState(init);
@@ -24,6 +24,8 @@ function Review() {
     dispatch(__addPost(post));
     setPost(init);
   };
+
+  // 댓글 기능
 
   return (
     <Form onSubmit={onClickHandler}>
@@ -46,7 +48,7 @@ function Review() {
           onChange={(e) => onChangeHandler(e)}
         />
       </Wraper>
-      <textarea
+      {/* <textarea
         cols="1"
         rows="50"
         name="review"
@@ -54,10 +56,10 @@ function Review() {
         value={post.review}
         maxLength={1000}
         onChange={(e) => onChangeHandler(e)}
-      />
+      /> */}
       <button
         type={"submit"}
-        disabled={!post.writer || !post.title || !post.review}
+        // disabled={!post.writer || !post.title || !post.review}
         styles={{ color: "white" }}
         theme={"black"}
         size={"large"}

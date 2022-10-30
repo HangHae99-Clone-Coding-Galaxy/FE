@@ -28,7 +28,7 @@ function ReviewListItem() {
           <Content
             onClick={() => {
               dispatch(__getPostId(item.id));
-              navigate(`/detail/${item.id}`);
+              // navigate(`/detail/${item.id}`);
             }}
             key={item.id}
           >
@@ -43,7 +43,7 @@ function ReviewListItem() {
 
 export default ReviewListItem;
 
-const Wraper = styled.div`
+const Wraper = styled.form`
   margin: 20px;
   gap: 30px;
   display: flex;
