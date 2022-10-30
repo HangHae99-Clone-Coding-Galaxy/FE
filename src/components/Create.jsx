@@ -20,10 +20,9 @@ const Create = () => {
 
   // const [imageSrc, setImageSrc] = useState("");
 
-
   const onChangeInput = (e) => {
-    const {name,value} = e.target;
-    SetInput({...input, [name]: value,});
+    const { name, value } = e.target;
+    SetInput({ ...input, [name]: value });
   };
 
   // const onChangeImage = (e) => {
@@ -45,14 +44,14 @@ const Create = () => {
   // };
 
   const submitHandler = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     dispatch(__addCreate(input));
-    navigate("/")
+    navigate("/");
   };
 
   // const submitHandler = (e) => {
   //   e.preventDefault();
-    
+
   //   const formData = new FormData();
   //   formData.append("title", input.title);
   //   formData.append("content", input.content);

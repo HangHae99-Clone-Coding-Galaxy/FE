@@ -1,91 +1,63 @@
-// import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { __delComment, __editComment } from "../Redux/commentSlice";
-// import styled from "styled-components";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { __getPost, __getPostId } from "../Redux/bookSlice";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-// function ReviewListItem(props) {
-//   const dispatch = useDispatch();
-//   const { comment } = props;
-//   const [edit, setEdit] = useState(false);
-//   const [bookEdit, setBookEdit] = useState(comment);
+function ReviewListItem() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-//   // useEffect(() => {
-//   //   dispatch(__getComment(id));
-//   // }, [dispatch, bookEdit]);
+  useEffect(() => {
+    dispatch(__getPost());
+  }, [dispatch]);
 
-//   //init = {ment : 1, name"""}
-//   //ment : 1
-//   //ment : 12
-//   // {0: 1, 1:2, ment : 1}
+  const posts = useSelector((state) => state.bookSlice.posts);
 
-//   //init = {title:"", body:""}
-//   // e.target: {title:"ㅇㄴㄹㄴㅇㄹ", body:"ㄴㅇㄹㄴㅇㄹ"}
-//   // 전개 {title:"ㄴㅇㄹㄴㅇㄹ", body:"ㄴㅇㄹㄴㅇㄹ"}
+  return (
+    <Wraper>
+      {/* 
+      {
+       posts.map((item)=>{
+        {id}
+       }) 
+      } */}
 
-//   //{ment : 1, name:""} + ment: "abcd" ment만 덮자
-//   //풀어쓰고 있었던 ...bookEdit {ment : 1, name:""} X "1" O
-//   // const onChangeClick =(e)=>{
-//   //   console.log("@submit!")
-//   //   e.preventDefault();
-//   //  dispatch(__editComment({...props,coment:bookEdit}));
-//   //  setEdit(false);
-//   // }
+      {posts.map((item) => {
+        return (
+          <Content
+            onClick={() => {
+              dispatch(__getPostId(item.id));
+              // navigate(`/detail/${item.id}`);
+            }}
+            key={item.id}
+          >
+            {" "}
+            {item.writer} 님의 오늘의 책은? {item.title}{" "}
+          </Content>
+        );
+      })}
+    </Wraper>
+  );
+}
 
-//   return (
-//     <Wraper>
-//       <p>
-//         {comment.name}님 :
-//         {edit ? (
-//           <input
-//             type="text"
-//             name="ment"
-//             required
-//             default_value={comment.ment}
-//             onChange={(e) => setBookEdit(e.target.value)}
-//           />
-//         ) : (
-//           comment.ment
-//         )}
-//         {edit ? (
-//           <button
-//             onClick={(e) => {
-//               e.preventDefault();
-//               dispatch(__editComment({ ...comment, ment: bookEdit }));
-//               setEdit(false);
-//             }}
-//             type="submit"
-//           >
-//             완료
-//           </button>
-//         ) : (
-//           <button
-//             onClick={() => {
-//               setEdit(!edit);
-//             }}
-//           >
-//             수정
-//           </button>
-//         )}
-//         <button onClick={() => dispatch(__delComment(comment))}>삭제</button>
-//       </p>
-//     </Wraper>
-//   );
-// }
+export default ReviewListItem;
 
-// export default ReviewListItem;
+const Wraper = styled.form`
+  margin: 20px;
+  gap: 30px;
+  display: flex;
+  flex-direction: column-reverse;
+  cursor: pointer;
+`;
 
-// const Wraper = styled.div`
-//   margin: 20px;
-//   gap: 30px;
-//   display: flex;
-//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-//   border-radius: 50px;
-//   flex-direction: column;
-//   padding: 10px;
-//   justify-content: space-between;
-//   align-items: center;
-//   font-size: 20px;
-//   font-weight: bold;
-//   flex-direction: column-reverse;
-//   /* margin: 100px auto 0 auto; */
-// `;
+const Content = styled.li`
+  text-align: center;
+  cursor: pointer;
+  list-style: none;
+  padding-left: 0px;
+  &:hover {
+    color: #003bd2;
+    text-decoration: underline;
+  }
+`;

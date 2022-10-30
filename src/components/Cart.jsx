@@ -4,7 +4,6 @@
 
 // const Cart = () => {
 
-
 //   const navigate = useNavigate();
 
 //   const main = () => {
@@ -27,10 +26,7 @@
 //   );
 // ;
 
-
-
 // export default Cart;
-
 
 // const Section = styled.div`
 //   background: #fafafa;
