@@ -20,7 +20,6 @@ const SearchDetail = () => {
               <Li onClick={main}>홈</Li>/
             </Ul>
             <H1>검색결과""</H1>
-            <H4>검색 갯수 들어갈 곳</H4>
           </PageTitle>
         </Container>
       </Section>
