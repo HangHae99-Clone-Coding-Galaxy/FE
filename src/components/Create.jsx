@@ -15,7 +15,7 @@ const Create = () => {
   };
 
   const [input, SetInput] = useState(init);
-  // const [image, setImage] = useState(null);
+  // const [thumbnail, setThumbnail] = useState(null);
   // const [video, setVideo] = useState(null);
 
   // const [imageSrc, setImageSrc] = useState("");
@@ -26,7 +26,7 @@ const Create = () => {
   };
 
   // const onChangeImage = (e) => {
-  //   setImage(e.target.files[0])
+  //   setThumbnail(e.target.files[0])
   //      let reader = new FileReader();
   //       if (e.target.files[0]) {
   //         reader.readAsDataURL(e.target.files[0]);
@@ -55,7 +55,7 @@ const Create = () => {
   //   const formData = new FormData();
   //   formData.append("title", input.title);
   //   formData.append("content", input.content);
-  //   formData.append("image",image);
+  //   formData.append("thumbnail",thumbnail);
   //   formData.append("video",video);
 
   //   for(let pair of formData.entries()){
@@ -86,7 +86,7 @@ const Create = () => {
        <input
         type="file"
         autoComplete="off"
-        id="image"
+        id="thumbnail"
         accept="image/*"
         placeholder="이미지업로드"
         onChange={onChangeImage}
@@ -98,8 +98,8 @@ const Create = () => {
         accept="video/mp4,video/mkv, video/x-m4v,video/*"
         placeholder="비디오업로드"
         onChange={onChangeVideo}
-      />
-       */}
+      /> */}
+      
       <button>등록</button>
     </FormWrap>
   );

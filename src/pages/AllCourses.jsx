@@ -1,5 +1,6 @@
 
 import React from 'react'
+import ReactPlayer from 'react-player'
 import { useEffect } from 'react'
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,7 +21,7 @@ export default function AllCourses() {
 
   if(courses.length===0){
     return (
-      <h1>아직 생성된 강의가 없습니다.</h1>
+      <p>아직 생성된 게시물이 없습니다.</p>
       )
   };
 
@@ -34,13 +35,14 @@ export default function AllCourses() {
           navigate(`/course/${course.id}`)
         }}
         >
-          <IMG src='https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png'/>
-        {/* <img src={course.image} alt="test"/> */}
+          <IMG src='https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png'/> 
+        {/* {/* <IMG src={course.thumbnail} alt="test"/> */}
         <TextWrap>
         <h5>{course.title}</h5>
         <p>{course.content}</p>
         </TextWrap>
         </Card>
+        
       )
      })}
 
@@ -89,6 +91,7 @@ align-items: center;
 font-size: 1.2rem;
 font-weight: bold;
 transition: all 0.7s;
+
   :hover {
     transform: scale(0.9);
   }
@@ -119,6 +122,16 @@ display: flex;
     text-align: center;
     width: 360px;
     height: 20px;
+  }
+`;
+
+const PlayerWrapper = styled.div`
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */;
+  .react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 `;
 
