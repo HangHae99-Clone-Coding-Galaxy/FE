@@ -43,11 +43,16 @@ export default function AllCourses() {
 }
 
 const CoursesWrap = styled.div`
-display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1320px;
+  margin: 0 auto;
+  border: none;
+/* display: grid;
 border: none;
 grid-template-columns: repeat(3, 1fr);
-margin-left: 200px;
-margin-right: 200px;
+grid-auto-rows: minmax(417px);
+padding: 10px; */
 `;
 
 const IMG = styled.img`
@@ -63,30 +68,51 @@ justify-content: center;
     height: 250px;
     /* margin: 0.6rem 0.6rem;
     padding: 0.1rem; */
-    outline: none
+    outline: none;
+    cursor: pointer;
 `;
+
 const Card = styled.div`
 display: flex;
+align-self: flex-start;
 flex-direction: column;
 width: 440px;
 height: 417px;
 justify-content: center;
 align-items: center;
-border: 1px solid gray;
 font-size: 1.2rem;
 font-weight: bold;
+transition: all 0.7s;
+  :hover {
+    transform: scale(0.9);
+  }
 `;
 
 const TextWrap = styled.div`
 display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-margin-top: 10px;
-gap: 0.7rem;
-border: 1px solid gray;
-font-size: 0.9rem;
-font-weight: bold;
-cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 0.7rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+  h5 {
+    transition: all 0.7s;
+    color: #105796;
+    font-size: 18px;
+    cursor: pointer;
+    :hover {
+      color: red;
+    }
+  }
+  p {
+    font-size: 16px;
+    text-overflow: ellipsis;
+    text-align: center;
+    width: 360px;
+    height: 20px;
+  }
 `;
 
