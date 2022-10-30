@@ -10,6 +10,7 @@ import Create from "../components/Create";
 import SearchDetail from "../components/SearchDetail";
 import Members from "../components/Members";
 import MembersEdit from "../components/MembersEdit";
+import CourseDetail from "../components/CourseDetail";
 
 const Router = () => {
   return (
@@ -21,9 +22,10 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/search" element={<SearchDetail />} />
+        <Route path="/allcourses" element={<AllCourses />} />
         <Route path="/members" element={<Members />} />
         <Route path="/membersEdit" element={<MembersEdit />} />
-        <Route path="/allcourses" element={<AllCourses />} />
+        <Route path="/course/:id" element={<CourseDetail />} />
         <Route path="/create" element={<Create />} />
       </Routes>
       <Footer />

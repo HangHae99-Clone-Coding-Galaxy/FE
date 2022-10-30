@@ -3,12 +3,14 @@ import AllCourses from "../../pages/AllCourses";
 import Review from "../Review";
 import styled from "styled-components";
 import ReviewListItem from "../ReviewListItem";
+import ReviewList from "../ReviewList";
 
 const Main = () => {
   return (
     <MainWrap>
        <AllCourses/>
       <Review></Review>
+      <ReviewList></ReviewList>
       {/* <ReviewListItem></ReviewListItem> */}
     </MainWrap>
   );

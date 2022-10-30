@@ -45,7 +45,9 @@ const Header = () => {
                 <Li>
                   <strong>HOME</strong>
                 </Li>
-                <Li>
+                <Li onClick={()=>{
+                  navigate("/allcourses");
+                }}>
                   <strong>교육과정</strong>
                 </Li>
                 <Li>

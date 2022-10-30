@@ -1,71 +1,95 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {addCreateApi, getCreateApi} from "./Api/addCreateApi"
-
+import { addCreateApi, getCreateApi, getCreateIdApi } from "./Api/addCreateApi";
 
 export const __addCreate = createAsyncThunk(
-    "addCreate",
-    async (payload, thunkAPI) => {
-      console.log(payload);
-      try{
-        const response = await addCreateApi(payload);
-        return thunkAPI.fulfillWithValue(response);
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error);
-      }
+  "addCreate",
+  async (payload, thunkAPI) => {
+    console.log(payload);
+    try {
+      const response = await addCreateApi(payload);
+      return thunkAPI.fulfillWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
-  );
+  }
+);
 
-  export const __getCreate = createAsyncThunk(
-    "getCreate",
-    async (payload, thunkAPI) => {
-      try{
-        const response = await getCreateApi(payload);
-        return thunkAPI.fulfillWithValue(response);
-      } catch (error) {
-        return thunkAPI.rejectWithValue(error);
-      }
+export const __getCreate = createAsyncThunk(
+  "getCreate",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await getCreateApi(payload);
+      return thunkAPI.fulfillWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
-  );
+  }
+);
 
-  export const addCreateSlice = createSlice({
-    name: "courses",
-    initialState:{
-        courses : [],
-        course:null,
-        isLoading: false,
-        error: null,
-    },
-    reducers: {},
-    extraReducers:{
-  
+export const __getCreateId = createAsyncThunk(
+  "getCreateId",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await getCreateIdApi(payload);
+      return thunkAPI.fulfillWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const addCreateSlice = createSlice({
+  name: "courses",
+  initialState: {
+    courses: [],
+    course: null,
+    isLoading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: {
     //   POST Request board Item
-      [__addCreate.pending]: (state) => {
-        state.isLoading = true;
-      },
-      [__addCreate.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        const classId = state.courses[state.courses.length - 1]?.id + 1 || 1;
-        state.courses.push(action.payload,classId);
-      },
-      [__addCreate.rejected]: (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      },
+    [__addCreate.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__addCreate.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const classId = state.courses[state.courses.length - 1]?.id + 1 || 1;
+      state.courses.push(classId, ...action.payload);
+    },
+    [__addCreate.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
 
-      [__getCreate.pending]: (state) => {
-        state.isLoading = true;
-        state.isDone = false;
-      },
-      [__getCreate.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        state.isDone = true;
-        state.courses = action.payload;
-      },
-      [__getCreate.rejected]: (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      },
-  
+    [__getCreate.pending]: (state) => {
+      state.isLoading = true;
+      state.isDone = false;
+    },
+    [__getCreate.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isDone = true;
+      state.courses = action.payload;
+    },
+    [__getCreate.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [__getCreateId.pending]: (state) => {
+      state.isLoading = true;
+      state.isDone = false;
+    },
+    [__getCreateId.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isDone = true;
+      state.course = action.payload;
+    },
+    [__getCreateId.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     //   // DELETE Request board Item
     //   [__delBoard.pending]: (state) => {
     //     state.isLoading = true;
@@ -79,7 +103,7 @@ export const __addCreate = createAsyncThunk(
     //     state.isLoading = false;
     //     state.error = action.payload;
     //   },
-  
+
     //   // EDIT Request board Item
     //   [__editBoard.pending]: (state) => {
     //     state.isLoading = true;
@@ -95,8 +119,8 @@ export const __addCreate = createAsyncThunk(
     //     state.isLoading = false;
     //     state.error = action.payload;
     //   }
-    }
-  });
-  
+  },
+});
+
 //   export const { addPost } = addCreateSlice.actions;
-  export default addCreateSlice.reducer;
+export default addCreateSlice.reducer;
