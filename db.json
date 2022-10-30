@@ -1,30 +1,25 @@
 {
-  "posts": [
+  "courses": [
     {
-      "title": "게시글 책이름",
-      "writer": "게시글 작성자",
-      "review": "게시글 감상평",
+      "title": "강의1",
+      "content": "강의1입니다.",
       "id": 1
     },
     {
-      "title": "ㅇㅇ",
-      "writer": "ㅇㅇ",
-      "review": "ㅇㅇ",
+      "title": "ddff",
+      "content": "ddfsdf",
       "id": 2
-    },
-    {
-      "title": "반가워 ",
-      "writer": "안녕",
-      "review": "ㅎㅎ",
-      "id": 3
-    },
-    {
-      "title": "ㅇㅇ",
-      "writer": "ㅇㅇ",
-      "review": "ㅇㅇㅇ",
-      "id": 4
     }
   ],
-  "comments": [],
-  "post": {}
+  "course": {},
+  "comments": [
+    {
+      "id": 1,
+      "comment": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // {
 //   "user": [
 //     {
@@ -9,3 +10,34 @@
 //     }
 //   ]
 // }
+=======
+{
+  "user": [
+    {
+      "userId": "오성은",
+      "password": "",
+      "id": 1
+    },
+    {
+      "userId": "nnmmaz95@gmail.com",
+      "password": "",
+      "id": 2
+    },
+    {
+      "userId": "",
+      "password": "",
+      "id": 3
+    }
+  ],
+  "signup": [
+    {
+      "userid": "nnmmaz",
+      "email": "nnmmaz95@gmail.com",
+      "password": "12341234!",
+      "passwordConfirm": "12341234!",
+      "username": "오성은",
+      "id": 1
+    }
+  ]
+}
+>>>>>>> origin/sohee

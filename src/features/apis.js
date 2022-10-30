@@ -1,10 +1,10 @@
 import axios from "axios";
 
 // user
-export const addUserApi = (users) => {
-  axios.post("http://localhost:3000/users/signup", users);
+export const addUserApi = async (payload) => {
+  await axios.post("http://localhost:3001/signup", payload);
 };
 
-export const setUserApi = (login) => {
-  axios.post("http://localhost:3000/user", login);
+export const setUserApi = async (login) => {
+  await axios.post("http://localhost:3001/user", login);
 };

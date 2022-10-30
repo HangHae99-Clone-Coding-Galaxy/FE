@@ -4,6 +4,10 @@ import userSlice from "../../features/userSlice";
 import addCreateSlice from "../modules/addCreateSlice";
 
 export const store = configureStore({
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/sohee
   reducer: {
     modalSlice,
     userSlice,
