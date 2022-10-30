@@ -11,6 +11,8 @@ import SearchDetail from "../components/SearchDetail";
 import Members from "../components/Members";
 import MembersEdit from "../components/MembersEdit";
 import CourseDetail from "../components/CourseDetail";
+import OrderList from "../components/OrderList";
+import MyReviewList from "../components/MyReviewList";
 
 const Router = () => {
   return (
@@ -25,6 +27,8 @@ const Router = () => {
         <Route path="/allcourses" element={<AllCourses />} />
         <Route path="/members" element={<Members />} />
         <Route path="/membersEdit" element={<MembersEdit />} />
+        <Route path="/orderList" element={<OrderList />} />
+        <Route path="/myReviewList" element={<MyReviewList />} />
         <Route path="/course/:id" element={<CourseDetail />} />
         <Route path="/create" element={<Create />} />
       </Routes>

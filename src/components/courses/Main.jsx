@@ -8,16 +8,12 @@ import ReviewList from "../ReviewList";
 const Main = () => {
   return (
     <MainWrap>
-       <AllCourses/>
-      <Review></Review>
-      <ReviewList></ReviewList>
-      {/* <ReviewListItem></ReviewListItem> */}
+      <AllCourses />
     </MainWrap>
   );
 };
 
 export default Main;
-
 
 const MainWrap = styled.div`
   margin-top: 30px;

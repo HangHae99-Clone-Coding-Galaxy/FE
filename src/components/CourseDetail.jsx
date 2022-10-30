@@ -8,6 +8,8 @@ import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
 
 const CourseDetail = () => {
+  <Review></Review>
+  <ReviewList></ReviewList>
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
