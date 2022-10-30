@@ -103,7 +103,6 @@ const Container = styled.div`
   margin-right: auto;
   margin-left: auto;
   max-width: 1410px;
-  margin: auto;
 `;
 const Row = styled.div``;
 const FooterTop = styled.div``;

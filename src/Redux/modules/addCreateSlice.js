@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addCreateApi, getCreateApi, getCreateIdApi } from "./Api/addCreateApi";
+import { addCreateApi, getCreateApi, getCreateIdApi,delCreateApi } from "./Api/addCreateApi";
 
 export const __addCreate = createAsyncThunk(
   "addCreate",
@@ -37,6 +37,19 @@ export const __getCreateId = createAsyncThunk(
     }
   }
 );
+
+export const __delCreate = createAsyncThunk(
+  "delCreate",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await delCreateApi(payload);
+      return thunkAPI.fulfillWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 
 export const addCreateSlice = createSlice({
   name: "courses",
@@ -90,19 +103,19 @@ export const addCreateSlice = createSlice({
       state.error = action.payload;
     },
 
-    //   // DELETE Request board Item
-    //   [__delBoard.pending]: (state) => {
-    //     state.isLoading = true;
-    //   },
-    //   [__delBoard.fulfilled]: (state, action) => {
-    //     state.isLoading = false;
-    //     state.boards = state.boards.filter((item)=>
-    //     item.id !== action.payload)
-    //   },
-    //   [__delBoard.rejected]: (state, action) => {
-    //     state.isLoading = false;
-    //     state.error = action.payload;
-    //   },
+      // DELETE Request board Item
+      [__delCreate.pending]: (state) => {
+        state.isLoading = true;
+      },
+      [__delCreate.fulfilled]: (state, action) => {
+        state.isLoading = false;
+        state.boards = state.boards.filter((item)=>
+        item.id !== action.payload)
+      },
+      [__delCreate.rejected]: (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      },
 
     //   // EDIT Request board Item
     //   [__editBoard.pending]: (state) => {
