@@ -3,8 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __getCreateId } from "../Redux/modules/addCreateSlice";
+import Review from "./Review";
+import ReviewList from "./ReviewList"
 
 const CourseDetail = () => {
+  <Review></Review>
+  <ReviewList></ReviewList>
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
