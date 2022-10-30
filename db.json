@@ -14,9 +14,44 @@
   "course": {},
   "comments": [
     {
-      "id": 1,
-      "comment": "some comment",
-      "postId": 1
+      "courseId": 1,
+      "comment": "ㄴㅇㄹㄴ",
+      "id": 1
+    },
+    {
+      "courseId": 1,
+      "comment": "ㅇㅇㅇㅇ",
+      "id": 2
+    },
+    {
+      "courseId": 1,
+      "comment": "ㅇㄹㄴㅇ",
+      "id": 3
+    },
+    {
+      "courseId": 1,
+      "comment": "ㄴㅇㄹㄴ",
+      "id": 4
+    },
+    {
+      "courseId": 1,
+      "comment": "ㄴㅇㄹㄴㅇㄹ",
+      "id": 5
+    },
+    {
+      "courseId": 1,
+      "comment": "sdfsdf",
+      "id": 6
+    },
+    {
+      "courseId": 1,
+      "comment": "sdfsdf",
+      "id": 7
+    },
+    {
+      "courseId": 1,
+      "comment": "dsfsf",
+      "id": 8
     }
   ],
   "profile": {

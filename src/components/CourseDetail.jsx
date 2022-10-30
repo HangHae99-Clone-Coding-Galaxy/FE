@@ -4,11 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { __getCreateId } from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
-import ReviewList from "./ReviewList"
+import ReviewList from "./ReviewList";
+import ReviewListItem from "./ReviewListItem";
 
 const CourseDetail = () => {
-  <Review></Review>
-  <ReviewList></ReviewList>
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,6 +15,8 @@ const CourseDetail = () => {
   const [edit, setEdit] = useState();
 
   const course = useSelector((state) => state.addCreateSlice.course);
+
+  const [pay, setPay] = useState(false);
 
   useEffect(() => {
     dispatch(__getCreateId(id));
@@ -32,6 +33,8 @@ const CourseDetail = () => {
     <div>
       <p>{course?.title}</p>
       <p>{course?.content}</p>
+      <ReviewList />
+      <Review />
     </div>
   );
 };
