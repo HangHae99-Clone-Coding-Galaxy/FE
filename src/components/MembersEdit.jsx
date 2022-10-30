@@ -1,17 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import MemberHeader from "./MemberHeader";
 
 const MembersEdit = () => {
-  const navigate = useNavigate();
-  const profile = () => {
-    navigate("/members");
-  };
-  const profileEdit = () => {
-    navigate("/membersEdit");
-  };
-
   // image preview useState
   const [previewImage, setPreviewImage] = useState("");
   const [uploadImageForm, setUploadImageForm] = useState(null);
@@ -32,27 +24,8 @@ const MembersEdit = () => {
   };
   return (
     <>
-      <Section>
-        <Container>
-          <Flex>
-            <Img
-              src="https://i.pinimg.com/originals/d2/4f/89/d24f89d6afaec9d3a55d47fed799800e.jpg"
-              alt=""
-            />
-            <H1>오성은</H1>
-          </Flex>
-        </Container>
-        <Row>
-          <ItemListOne>
-            <div>
-              <ul>
-                <li onClick={profile}>프로필</li>
-                <li onClick={profileEdit}>편집</li>
-                <li>설정</li>
-              </ul>
-            </div>
-          </ItemListOne>
-        </Row>
+      <MemberHeader />
+      <SectionTwo>
         <ItemListTwo>
           <ImageLayout>
             <ImageLabel htmlFor="file" />
@@ -77,72 +50,23 @@ const MembersEdit = () => {
             type="submit"
             name="profile-group-edit-submit"
             id="profile-group-edit-submit"
-            value="변경사항 저장 "
+            value="변경사항 저장"
           ></input>
         </ItemListTwo>
-      </Section>
+      </SectionTwo>
     </>
   );
 };
 
 export default MembersEdit;
 
-const Section = styled.div`
-  padding-bottom: 182px;
-`;
-const Container = styled.div`
-  width: 1410px;
-  display: flex;
-  padding: 30px 0;
-  margin: auto;
-`;
-const Row = styled.div`
-  width: 1410px;
-  display: flex;
-  margin: auto;
+const SectionTwo = styled.div`
+  padding-bottom: 281px;
 `;
 const Label = styled.div`
   font-size: 20px;
 `;
 
-const Flex = styled.div`
-  display: flex;
-`;
-const Img = styled.img`
-  border-radius: 100%;
-  width: 50px;
-  height: 50px;
-`;
-const H1 = styled.h1`
-  font-size: 20px;
-  color: #c9c9c9;
-  margin-top: 10px;
-  margin-left: 15px;
-  font-weight: 600;
-`;
-const ItemListOne = styled.div`
-  width: 1410px;
-  border-radius: 8px;
-  padding: 5px 0;
-  border: none;
-  background: #f7f7f7;
-  padding-left: 7px;
-  display: flex;
-  margin: auto;
-  & ul {
-    display: flex;
-  }
-  & li {
-    margin-right: 20px;
-    padding: 15px;
-    font-size: 11px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  & li:hover {
-    color: #ff4949;
-  }
-`;
 const ItemListTwo = styled.form`
   width: 1410px;
   padding: 30px 0;

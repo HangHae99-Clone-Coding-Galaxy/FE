@@ -1,71 +1,41 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { __addPost } from "../Redux/bookSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { __addComment } from "../Redux/commentSlice";
 import styled from "styled-components";
 // import Button from "./element/Button";
 
 function Review() {
   const init = {
-    title: "",
-    writer: "",
+    id: "",
+    comment: "",
     // review: "",
   };
   const dispatch = useDispatch();
-  const [post, setPost] = useState(init);
+  const [comment, setComment] = useState({ comment: "" });
+  const courseId = useSelector((state) => state?.addCreateSlice?.course?.id);
 
   const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    // console.log(post);
-    setPost({ ...post, [name]: value });
+   setComment({courseId:courseId,...comment,comment:e.target.value});
   };
 
   const onClickHandler = (e) => {
     e.preventDefault();
-    dispatch(__addPost(post));
-    setPost(init);
+    dispatch(__addComment(comment));
+    setComment({ comment: "" });
   };
 
   // 댓글 기능
 
   return (
     <Form onSubmit={onClickHandler}>
-      <h1>수강 댓글</h1>
-      <Wraper>
-        <input
-          type="text"
-          name="writer"
-          value={post.writer}
-          maxLength={10}
-          placeholder="작성자"
-          onChange={(e) => onChangeHandler(e)}
-        />
-        <input
-          type="text"
-          name="title"
-          value={post.title}
-          maxLength={50}
-          placeholder="강의 이름"
-          onChange={(e) => onChangeHandler(e)}
-        />
-      </Wraper>
-      {/* <textarea
-        cols="1"
-        rows="50"
-        name="review"
-        placeholder="강의평"
-        value={post.review}
-        maxLength={1000}
-        onChange={(e) => onChangeHandler(e)}
-      /> */}
-      <button
-        type={"submit"}
-        // disabled={!post.writer || !post.title || !post.review}
-        styles={{ color: "white" }}
-        theme={"black"}
-        size={"large"}
-      >
-        추가
-      </button>
+      <input
+        type="text"
+        name="comment"
+        value={comment?.comment}
+        placeholder="댓글 추가"
+        onChange={onChangeHandler}
+      />
+      <button>추가</button>
     </Form>
   );
 }

@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = process.env.REACT_APP_SERVER
 
-export const addPostApi = async (post) => {
-  await axios.post(`${BASE_URL}/posts`, post);
+export const addCommentApi = async (comment) => {
+  await axios.post(`${BASE_URL}/comments`, comment);
 };
 
-export const getPostApi = async () => {
-  const response = await axios.get(`${BASE_URL}/posts`);
+export const getCommentApi = async (payload) => {
+  const response = await axios.get(`${BASE_URL}/comments?courseId=${payload}`);
   return response.data;
 };
 
