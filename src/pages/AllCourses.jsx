@@ -4,11 +4,13 @@ import { useEffect } from 'react'
 import styled from "styled-components";
 import { useDispatch, useSelector } from 'react-redux'
 import { __getCreate } from '../Redux/modules/addCreateSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function AllCourses() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(()=>{
     dispatch(__getCreate());
@@ -27,7 +29,11 @@ export default function AllCourses() {
 
      {courses.map((course)=>{
       return(
-        <Card key={course.id}>
+        <Card key={course.id}
+        onClick={()=>{
+          navigate(`/course/${course.id}`)
+        }}
+        >
           <IMG src='https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png'/>
         {/* <img src={course.image} alt="test"/> */}
         <TextWrap>
