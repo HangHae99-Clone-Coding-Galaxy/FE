@@ -8,8 +8,6 @@ import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
 
 const CourseDetail = () => {
-  <Review></Review>
-  <ReviewList></ReviewList>
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,7 +16,7 @@ const CourseDetail = () => {
 
   const course = useSelector((state) => state.addCreateSlice.course);
 
-  const [pay,setPay] = useState(false);
+  const [pay, setPay] = useState(false);
 
   useEffect(() => {
     dispatch(__getCreateId(id));
@@ -36,8 +34,8 @@ const CourseDetail = () => {
       <img src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png" />
       <p>{course?.title}</p>
       <p>{course?.content}</p>
-      <ReviewList/>
-      <Review/>
+      <ReviewList />
+      <Review />
     </div>
   );
 };
