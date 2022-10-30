@@ -39,7 +39,7 @@ const Main = () => {
       <Guide>
         <img src="img/guide.png" alt="" />
       </Guide>
-      <AllCourses/>
+      <AllCourses />
       <Flex>
         <div>
           <h4>

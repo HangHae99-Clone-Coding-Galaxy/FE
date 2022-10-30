@@ -149,7 +149,7 @@ const LoginUl = styled.ul`
   margin: auto;
   list-style: none;
   & li:nth-child(2) {
-    margin-top: 28px;
+    margin-top: 30px;
     cursor: pointer;
   }
 `;
@@ -165,6 +165,6 @@ const Img = styled.img`
   width: 30px;
   height: 30px;
   margin-top: 5px;
-  margin-right: 15px;
+  margin-right: 10px;
   cursor: pointer;
 `;
