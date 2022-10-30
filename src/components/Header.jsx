@@ -32,7 +32,6 @@ const Header = () => {
   const mypage = () => {
     navigate("/members");
   };
-
   return (
     <>
       {isOpen && <Login />}
@@ -42,12 +41,14 @@ const Header = () => {
             <Logo src="img/logo2-3.png" onClick={main}></Logo>
             <Nav>
               <Ul>
-                <Li>
+                <Li onClick={main}>
                   <strong>HOME</strong>
                 </Li>
-                <Li onClick={()=>{
-                  navigate("/allcourses");
-                }}>
+                <Li
+                  onClick={() => {
+                    navigate("/allcourses");
+                  }}
+                >
                   <strong>교육과정</strong>
                 </Li>
                 <Li>
@@ -148,7 +149,7 @@ const LoginUl = styled.ul`
   margin: auto;
   list-style: none;
   & li:nth-child(2) {
-    margin-top: 26px;
+    margin-top: 28px;
     cursor: pointer;
   }
 `;
@@ -164,6 +165,6 @@ const Img = styled.img`
   width: 30px;
   height: 30px;
   margin-top: 5px;
-  margin-right: 10px;
+  margin-right: 15px;
   cursor: pointer;
 `;
