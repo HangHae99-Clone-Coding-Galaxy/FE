@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_SERVER;
+
 const initialState = {
   comments: [],
   isLoading: false,
@@ -10,8 +12,9 @@ const initialState = {
 export const __addComment = createAsyncThunk(
   "addComment",
   async (payload, thunkAPI) => {
+    console.log("add", payload);
     try {
-      await axios.post(process.env.REACT_APP_DB_HEROKU_COMMENTS, payload);
+      await axios.post(`${BASE_URL}/courses`, payload);
 
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
@@ -23,8 +26,9 @@ export const __addComment = createAsyncThunk(
 export const __getComment = createAsyncThunk(
   "getComment",
   async (payload, thunkAPI) => {
+    console.log("get", payload);
     try {
-      const data = await axios.get(process.env.REACT_APP_DB_HEROKU_COMMENTS);
+      const data = await axios.get(`${BASE_URL}/courses`);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

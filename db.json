@@ -1,24 +1,12 @@
 {
   "courses": [
     {
-      "title": "ddff",
-      "content": "ddfsdf",
-      "id": 2
+      "comment": "조아요",
+      "id": 1
     }
   ],
   "course": {},
-  "comments": [
-    {
-      "courseId": 2,
-      "comment": "재밌다!",
-      "id": 1
-    },
-    {
-      "courseId": 2,
-      "comment": "강의 또 올려주세요!",
-      "id": 2
-    }
-  ],
+  "comments": [],
   "profile": {
     "name": "typicode"
   }
