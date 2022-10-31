@@ -74,7 +74,7 @@ const Create = () => {
         placeholder="강좌명"
         onChange={onChangeInput}
       />
-      <input
+      <textarea
         type="text"
         autoComplete="off"
         id="content"
