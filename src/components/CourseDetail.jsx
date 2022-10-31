@@ -49,11 +49,11 @@ const CourseDetail = () => {
       {pay ? (
         <DetailWrap>
           <PayWrap>
-          <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
-          <AddWrap>
-          <ComButton>신청완료</ComButton>
-          <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
-          </AddWrap>
+            <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
+            <AddWrap>
+              <ComButton>신청완료</ComButton>
+              <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+            </AddWrap>
           </PayWrap>
           <TitleP>{course?.title}</TitleP>
           <ContentP>{course?.content}</ContentP>
@@ -71,15 +71,19 @@ const CourseDetail = () => {
       ) : (
         <DetailWrap>
           <PayWrap>
-          <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
-          <AddWrap>
-          <AddButton>신청하기</AddButton>
-          <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
-          </AddWrap>
+            <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
+            <AddWrap>
+              <AddButton>신청하기</AddButton>
+              <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+            </AddWrap>
           </PayWrap>
           <TitleP>{course?.title}</TitleP>
           <ContentP>{course?.content}</ContentP>
-          <VidepPaySpan>강의구매를 해야 해당강의를 수강할 수 있습니다.<br/>강의신청 바로가기 </VidepPaySpan>
+          <VidepPaySpan>
+            강의구매를 해야 해당강의를 수강할 수 있습니다.
+            <br />
+            강의신청 바로가기{" "}
+          </VidepPaySpan>
         </DetailWrap>
       )}
 
@@ -102,23 +106,22 @@ const CourseDetail = () => {
         </div>
       ) : null}
 
-
-        <ButtonWrap>
-      <ButtonTrans
-        onClick={() => {
-          setEdit(!edit);
-        }}
-      >
-        수정
-      </ButtonTrans>
-      <ButtonTrans
-        onClick={() => {
-          dispatch(__delCreate(id));
-          navigate("/allcourses");
-        }}
-      >
-        삭제
-      </ButtonTrans>
+      <ButtonWrap>
+        <ButtonTrans
+          onClick={() => {
+            setEdit(!edit);
+          }}
+        >
+          수정
+        </ButtonTrans>
+        <ButtonTrans
+          onClick={() => {
+            dispatch(__delCreate(id));
+            navigate("/allcourses");
+          }}
+        >
+          삭제
+        </ButtonTrans>
       </ButtonWrap>
 
       <ReviewList />
@@ -130,13 +133,13 @@ const CourseDetail = () => {
 export default CourseDetail;
 
 const DetailWrap = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 1320px;
   margin: 0 auto;
-  border: none; 
+  border: none;
 `;
 
 const PlayerWrapper = styled.div`
@@ -153,7 +156,7 @@ const PlayerWrapper = styled.div`
 `;
 
 const ButtonWrap = styled.div`
- display: flex;
+  display: flex;
   flex-direction: row;
   align-items: right;
   justify-content: right;
@@ -188,8 +191,8 @@ const IMG = styled.img`
   cursor: pointer;
 `;
 const PayWrap = styled.div`
- display: grid;
- grid-template-columns: repeat(2, 1fr);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   flex-direction: row;
   align-items: right;
   justify-content: right;
@@ -198,16 +201,16 @@ const PayWrap = styled.div`
   border: none;
 `;
 const AddButton = styled.button`
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: center;
-width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
   height: 80px;
-background-color:#ea4747;
-border-radius: 10px;
-color: white;
-flex-direction: row;
+  background-color: #ea4747;
+  border-radius: 10px;
+  color: white;
+  flex-direction: row;
   border: none;
   cursor: pointer;
   :hover {
@@ -221,61 +224,60 @@ const IssueSpan = styled.span`
     color: #50b1f1;
     transform: scale(0.9);
   }
-
 `;
 
-
 const AddWrap = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   width: 400px;
   height: 250px;
   background-color: #f3f3f3aa;
-  margin:  auto;
+  margin: auto;
   gap: 40px;
-  border: none; 
+  border: none;
 `;
 
 const TitleP = styled.p`
-display: flex;
-margin-top: 10px;
+  display: flex;
+  margin-top: 10px;
   flex-direction: column;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
   width: 1200px;
   height: 50px;
   border-radius: 20px;
   background-color: #f3f3f3aa;
   gap: 40px;
-  border: none; 
+  border: none;
   color: #105796;
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const ContentP = styled.p`
-display: flex;
-margin-top: 30px;
-margin-left: 60px;
+  display: flex;
+  margin-top: 30px;
+  margin-left: 60px;
   flex-direction: column;
   align-items: left;
-  justify-content: center;  
+  justify-content: center;
   width: 1200px;
   gap: 40px;
-  border: none; 
+  border: none;
   color: #2f3030;
-    font-size: 15px;
+  font-size: 15px;
+  white-space: pre-line;
 `;
 
 const VidepPaySpan = styled.span`
-   width: 400px;
+  width: 400px;
   height: 300px;
   display: flex;
   text-align: center;
-margin-top: 50px;
-margin-bottom: 30px;
+  margin-top: 50px;
+  margin-bottom: 30px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -283,22 +285,21 @@ margin-bottom: 30px;
   color: #0f4a70;
   cursor: pointer;
   :hover {
-      color: #803d3d;
-      text-decoration: underline;
-    }
-  
+    color: #803d3d;
+    text-decoration: underline;
+  }
 `;
 
 const ComButton = styled.button`
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: center;
-width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
   height: 80px;
-background-color:#a8b6f8;
-border-radius: 10px;
-color: #4f4b4b;
-flex-direction: row;
+  background-color: #a8b6f8;
+  border-radius: 10px;
+  color: #4f4b4b;
+  flex-direction: row;
   border: none;
 `;

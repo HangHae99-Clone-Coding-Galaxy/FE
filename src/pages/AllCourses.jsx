@@ -110,9 +110,11 @@ const TextWrap = styled.div`
     }
   }
   p {
-    font-size: 16px;
-    text-overflow: ellipsis;
+    font-size: 16px;   
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     width: 360px;
     height: 20px;
   }

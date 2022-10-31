@@ -220,15 +220,12 @@ const Create = () => {
 export default Create;
 
 const FormWrap = styled.form`
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 300px;
+  width: 500px;
   height: 400px;
   background: transparent;
   border: 1px solid black;
@@ -236,6 +233,17 @@ const FormWrap = styled.form`
   font-size: 13px;
   font-weight: 600;
   gap: 10px;
+  input{
+    width: 450px;
+    height: 30px;
+  }
+  textarea{
+    padding: 10px;
+    min-width: 450px;
+    max-width: 450px;
+    min-height: 300px;
+    max-height: 300px;
+  }
 `;
 
 const ImgSize = styled.img`
