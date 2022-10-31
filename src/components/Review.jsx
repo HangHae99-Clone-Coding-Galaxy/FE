@@ -15,7 +15,7 @@ function Review() {
   const courseId = useSelector((state) => state?.addCreateSlice?.course?.id);
 
   const onChangeHandler = (e) => {
-   setComment({courseId:courseId,...comment,comment:e.target.value});
+    setComment({ courseId: courseId, ...comment, comment: e.target.value });
   };
 
   const onClickHandler = (e) => {
@@ -27,20 +27,28 @@ function Review() {
   // 댓글 기능
 
   return (
-    <Form onSubmit={onClickHandler}>
-      <input
-        type="text"
-        name="comment"
-        value={comment?.comment}
-        placeholder="댓글 추가"
-        onChange={onChangeHandler}
-      />
-      <button>추가</button>
-    </Form>
+    <RepleWrap>
+      <Form onSubmit={onClickHandler}>
+        <h3>리뷰 작성</h3>
+        <input
+          type="text"
+          name="comment"
+          value={comment?.comment}
+          placeholder="댓글 추가"
+          onChange={onChangeHandler}
+        />
+        <button>추가</button>
+      </Form>
+    </RepleWrap>
   );
 }
 
 export default Review;
+
+const RepleWrap = styled.form`
+  box-sizing: border-box;
+  font-weight: 400;
+`;
 
 const Form = styled.form`
   display: flex;
