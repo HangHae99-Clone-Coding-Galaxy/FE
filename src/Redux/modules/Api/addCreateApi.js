@@ -19,3 +19,8 @@ await axios.post(`${BASE_URL}/courses`, payload);
   export const delCreateApi = async (courseId) => {
     await axios.delete(`${BASE_URL}/courses/${courseId}`);
       };
+
+
+export const editCreateApi = async (payload) => { 
+await axios.put(`${BASE_URL}/courses/${payload.id}`, payload.upData);
+};
