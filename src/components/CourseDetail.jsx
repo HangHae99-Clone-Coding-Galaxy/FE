@@ -124,8 +124,8 @@ const CourseDetail = () => {
         </ButtonTrans>
       </ButtonWrap>
 
-      <ReviewList />
       <Review />
+      <ReviewList />
     </DetailWrap>
   );
 };

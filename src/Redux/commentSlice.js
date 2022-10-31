@@ -14,7 +14,7 @@ export const __addComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("add", payload);
     try {
-      await axios.post(`${BASE_URL}/courses`, payload);
+      await axios.post(`${BASE_URL}/comments`, payload);
 
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
@@ -28,7 +28,7 @@ export const __getComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("get", payload);
     try {
-      const data = await axios.get(`${BASE_URL}/courses`);
+      const data = await axios.get(`${BASE_URL}/comments`);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

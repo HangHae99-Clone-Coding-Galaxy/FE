@@ -13,15 +13,20 @@ function ReviewList() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(__getComment(id));
-  }, [dispatch,id]);
+  }, [dispatch, id]);
   return (
     <div>
-      {commentList?.map((comment) => (
+      {commentList.map((comment) => (
         <div key={comment.id}>
-          <p>{comment.id}{comment.comment}</p>
+          <p>
+            {/* {comment.id} */}
+            {comment.title}
+            {comment.comment}
+          </p>
         </div>
       ))}
     </div>
+    
   );
 }
 
