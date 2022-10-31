@@ -15,7 +15,6 @@ export const __addComment = createAsyncThunk(
     console.log("add", payload);
     try {
       await axios.post(`${BASE_URL}/comments`, payload);
-
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
