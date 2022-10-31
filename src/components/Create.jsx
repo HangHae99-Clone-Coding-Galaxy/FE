@@ -4,8 +4,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { __addCreate } from "../Redux/modules/addCreateSlice";
+import { configure } from "@testing-library/react";
 
 const Create = () => {
+
+  const BASE_URL = process.env.REACT_APP_SERVER
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -13,68 +17,110 @@ const Create = () => {
     title: "",
     content: "",
   };
-
+  //폼데이터 전송 스테이트
   const [input, SetInput] = useState(init);
-  // const [thumbnail, setThumbnail] = useState(null);
-  // const [video, setVideo] = useState(null);
+  const [thumbNail, setThumbNail] = useState(null);
+  const [video, setVideo] = useState(null);
 
-  // const [imageSrc, setImageSrc] = useState("");
+  //이미지 미리보기 스테이트
+  const [imageSrc, setImageSrc] = useState("");
 
+  //텍스트데이터 스테이즈 저장
   const onChangeInput = (e) => {
     const { name, value } = e.target;
     SetInput({ ...input, [name]: value });
   };
 
-  // const onChangeImage = (e) => {
-  //   setThumbnail(e.target.files[0])
-  //      let reader = new FileReader();
-  //       if (e.target.files[0]) {
-  //         reader.readAsDataURL(e.target.files[0]);
-  //       }
-  //       reader.onloadend = () => {
-  //         const previewImgUrl = reader.result;
-  //         if (previewImgUrl) {
-  //           setImageSrc([...imageSrc, previewImgUrl]);
-  //         }
-  //       };
-  //     };
-
-  // const onChangeVideo = (e) =>{
-  //   setVideo(e.target.files[0])
-  // };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(__addCreate(input));
-    navigate("/");
+  //이미지 스테이트저장, 미리보기 온체인지 핸들러
+  const onChangeImage = (e) => {
+    setThumbNail(e.target.files[0]);
+    let reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    reader.onloadend = () => {
+      const previewImgUrl = reader.result;
+      if (previewImgUrl) {
+        setImageSrc([...imageSrc, previewImgUrl]);
+      }
+    };
+  };
+  //비디오 스테이트 저장
+  const onChangeVideo = (e) => {
+    setVideo(e.target.files[0]);
   };
 
   // const submitHandler = (e) => {
   //   e.preventDefault();
 
-  //   const formData = new FormData();
-  //   formData.append("title", input.title);
-  //   formData.append("content", input.content);
-  //   formData.append("thumbnail",thumbnail);
-  //   formData.append("video",video);
-
-  //   for(let pair of formData.entries()){
-  //         console.log(pair[0]+','+pair[1]);
-  //       };
-
-  //   dispatch(__addCreate(formData));
-  //   navigate("/")
+  //   axios
+  //       .post(`${BASE_URL}/api/courses/create`, input, {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       })
+  //       .then(function a(response) {
+  //         console.log(response);
+  //         alert("게시되었습니다.");
+  //         window.location.replace("/");
+  //       })
+  //       .catch(function () {
+  //         console.log("땡! 다음기회에 도전하세요!");
+  //       });
+  //     navigate("/");
   // };
 
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(__addCreate(input));
+  //   navigate("/");
+  // };
+
+  //스테이트 폼데이터 변환하고 통신연결
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("title", input.title);
+    formData.append("content", input.content);
+    formData.append("thumbNail", thumbNail);
+    formData.append("video", video);
+
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + "," + pair[1]);
+    }
+
+    axios
+      .post("http://3.35.218.131:8080/api/courses/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(function a(response) {
+        console.log(response);
+        alert("게시되었습니다.");
+        window.location.replace("/");
+      })
+      .catch(function () {
+        console.log("땡! 다음기회에 도전하세요!");
+      });
+    navigate("/");
+  };
+
   return (
-    <FormWrap onSubmit={submitHandler}>
+    <FormWrap
+      onSubmit={submitHandler}
+      Content-Type="multipart/form-data"
+      method="post"
+    >
       <input
         type="text"
         name="title"
         placeholder="강좌명"
         onChange={onChangeInput}
       />
-      <input
+      <textarea
         type="text"
         autoComplete="off"
         id="content"
@@ -82,24 +128,28 @@ const Create = () => {
         placeholder="내용"
         onChange={onChangeInput}
       />
-      {/* <ImgSize src={imageSrc} alt="" />
-       <input
-        type="file"
+      <ImgSize src={imageSrc} alt="" />
+      <input
+        htmlFor="file"
         autoComplete="off"
-        id="thumbnail"
+        id="thumbNail"
+        name="thumbNail"
+        type={"file"}
         accept="image/*"
         placeholder="이미지업로드"
         onChange={onChangeImage}
       />
-          <input
-        type="file"
+      <input
+        htmlFor="file"
         autoComplete="off"
         id="video"
+        name="video"
+        type={"file"}
         accept="video/mp4,video/mkv, video/x-m4v,video/*"
         placeholder="비디오업로드"
         onChange={onChangeVideo}
-      /> */}
-      
+      />
+
       <button>등록</button>
     </FormWrap>
   );
@@ -220,22 +270,30 @@ const Create = () => {
 export default Create;
 
 const FormWrap = styled.form`
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 400px;
+  width: 500px;
+  height: 800px;
   background: transparent;
   border: 1px solid black;
   border-radius: 10px;
   font-size: 13px;
   font-weight: 600;
   gap: 10px;
+  input {
+    width: 450px;
+    height: 30px;
+  }
+  textarea {
+    padding: 10px;
+    min-width: 450px;
+    max-width: 450px;
+    min-height: 300px;
+    max-height: 300px;
+  }
 `;
 
 const ImgSize = styled.img`
