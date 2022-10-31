@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { __delCreate, __getCreateId } from "../Redux/modules/addCreateSlice";
+import { __delCreate, __getCreateId,__editCreate } from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
 import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
@@ -37,12 +37,12 @@ const CourseDetail = () => {
     setUpData({ ...upData, [name]: value });
   };
 
-  //   useEffect(() => {
-  //     if(!!course?.title){
-  //       setEdit({title: course?.title,
-  //       content: course?.content})
-  //     }
-  //   }, [course]);
+    useEffect(() => {
+      if(!!course?.title){
+        setUpData({title: course?.title,
+        content: course?.content})
+      }
+    }, [course]);
 
   return (
     <DetailWrap>
@@ -92,37 +92,93 @@ const CourseDetail = () => {
           <input
             type="text"
             name="title"
-            placeholder="변경할 제목"
-            value={upData?.value}
+            placeholder="변경할 내용"
+            defaultValue={course?.title}
             onChange={onChangeHandler}
           />
           <textarea
             type="text"
             name="content"
             placeholder="변경할 내용"
-            value={upData?.value}
+            defaultValue={course?.content}
             onChange={onChangeHandler}
           />
+          <ButtonWrap>
+    <button
+      onClick={() => {
+        dispatch(__editCreate({upData,id}));
+        dispatch(__getCreateId(id))
+        setEdit(false);
+        window.location.reload();
+      }}
+    >완료
+    </button>
+    <ButtonTrans
+      onClick={() => {
+        dispatch(__delCreate(id));
+        navigate("/allcourses");
+      }}
+    >
+      삭제
+    </ButtonTrans>
+    </ButtonWrap>
         </div>
-      ) : null}
+      ) : <ButtonWrap>
+      <ButtonTrans
+        onClick={() => {
+          setEdit(!edit);
+        }}
+      >수정
+      </ButtonTrans>
+      <ButtonTrans
+        onClick={() => {
+          dispatch(__delCreate(id));
+          navigate("/allcourses");
+        }}
+      >
+        삭제
+      </ButtonTrans>
+      </ButtonWrap>}
 
-      <ButtonWrap>
-        <ButtonTrans
-          onClick={() => {
-            setEdit(!edit);
-          }}
-        >
-          수정
-        </ButtonTrans>
-        <ButtonTrans
-          onClick={() => {
-            dispatch(__delCreate(id));
-            navigate("/allcourses");
-          }}
-        >
-          삭제
-        </ButtonTrans>
-      </ButtonWrap>
+  {/* {edit?(
+    <ButtonWrap>
+    <ButtonTrans
+      onClick={() => {
+        dispatch(__editCreate())
+        setEdit(false);
+      }}
+    >완료
+    </ButtonTrans>
+    <ButtonTrans
+      onClick={() => {
+        dispatch(__delCreate(id));
+        navigate("/allcourses");
+      }}
+    >
+      삭제
+    </ButtonTrans>
+    </ButtonWrap>
+  ):(
+
+<ButtonWrap>
+<ButtonTrans
+  onClick={() => {
+    setEdit(!edit);
+  }}
+>수정
+</ButtonTrans>
+<ButtonTrans
+  onClick={() => {
+    dispatch(__delCreate(id));
+    navigate("/allcourses");
+  }}
+>
+  삭제
+</ButtonTrans>
+</ButtonWrap>
+  )} */}
+
+     
 
       <ReviewList />
       <Review />
