@@ -46,16 +46,16 @@ const CourseDetail = () => {
 
   return (
     <DetailWrap>
-      {pay ? (
+      {!pay ? (
         <DetailWrap>
+          <TitleP>{course?.title}</TitleP>
           <PayWrap>
             <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
             <AddWrap>
               <ComButton>신청완료</ComButton>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>
-          <TitleP>{course?.title}</TitleP>
+          </PayWrap>          
           <ContentP>{course?.content}</ContentP>
           <PlayerWrapper>
             <ReactPlayer
@@ -70,14 +70,14 @@ const CourseDetail = () => {
         </DetailWrap>
       ) : (
         <DetailWrap>
+          <TitleP>{course?.title}</TitleP>
           <PayWrap>
             <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
             <AddWrap>
               <AddButton>신청하기</AddButton>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>
-          <TitleP>{course?.title}</TitleP>
+          </PayWrap>          
           <ContentP>{course?.content}</ContentP>
           <VidepPaySpan>
             강의구매를 해야 해당강의를 수강할 수 있습니다.
@@ -88,7 +88,7 @@ const CourseDetail = () => {
       )}
 
       {edit ? (
-        <div>
+        <EditWrap>
           <input
             type="text"
             name="title"
@@ -113,16 +113,16 @@ const CourseDetail = () => {
       }}
     >완료
     </button>
-    <ButtonTrans
+    <button
       onClick={() => {
         dispatch(__delCreate(id));
         navigate("/allcourses");
       }}
     >
       삭제
-    </ButtonTrans>
+    </button>
     </ButtonWrap>
-        </div>
+        </EditWrap>
       ) : <ButtonWrap>
       <ButtonTrans
         onClick={() => {
@@ -130,14 +130,14 @@ const CourseDetail = () => {
         }}
       >수정
       </ButtonTrans>
-      <ButtonTrans
+      {/* <ButtonTrans
         onClick={() => {
           dispatch(__delCreate(id));
           navigate("/allcourses");
         }}
       >
         삭제
-      </ButtonTrans>
+      </ButtonTrans> */}
       </ButtonWrap>}
 
   {/* {edit?(
@@ -358,4 +358,31 @@ const ComButton = styled.button`
   color: #4f4b4b;
   flex-direction: row;
   border: none;
+`;
+
+const EditWrap = styled.div`
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 400px;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  gap: 10px;
+  input{
+    width: 450px;
+    height: 30px;
+  }
+  textarea{
+    padding: 10px;
+    min-width: 450px;
+    max-width: 450px;
+    min-height: 300px;
+    max-height: 300px;
+  }
 `;

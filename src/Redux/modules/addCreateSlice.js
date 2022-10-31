@@ -1,13 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addCreateApi, getCreateApi, getCreateIdApi,delCreateApi,editCreateApi } from "./Api/addCreateApi";
+import {
+  addCreateApi,
+  getCreateApi,
+  getCreateIdApi,
+  delCreateApi,
+  editCreateApi,
+} from "./Api/addCreateApi";
 
 export const __addCreate = createAsyncThunk(
   "addCreate",
   async (payload, thunkAPI) => {
     console.log(payload);
     try {
-      const response = await addCreateApi(payload);
-      return thunkAPI.fulfillWithValue(response);
+      await addCreateApi(payload);
+      console.log("제발...");
+      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -53,19 +60,14 @@ export const __delCreate = createAsyncThunk(
 export const __editCreate = createAsyncThunk(
   "editBoard",
   async (payload, thunkAPI) => {
-    try {    
-      const response = await editCreateApi(payload);    
+    try {
+      const response = await editCreateApi(payload);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
-
-
-
-
-
 
 export const addCreateSlice = createSlice({
   name: "courses",
@@ -83,8 +85,8 @@ export const addCreateSlice = createSlice({
     },
     [__addCreate.fulfilled]: (state, action) => {
       state.isLoading = false;
-      const classId = state.courses[state.courses.length - 1]?.id + 1 || 1;
-      state.courses.push(classId, ...action.payload);
+      console.log(action.payload)
+      state.courses.push(action.payload);
     },
     [__addCreate.rejected]: (state, action) => {
       state.isLoading = false;
@@ -119,35 +121,34 @@ export const addCreateSlice = createSlice({
       state.error = action.payload;
     },
 
-      // DELETE Request board Item
-      [__delCreate.pending]: (state) => {
-        state.isLoading = true;
-      },
-      [__delCreate.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        state.boards = state.boards.filter((item)=>
-        item.id !== action.payload)
-      },
-      [__delCreate.rejected]: (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      },
+    // DELETE Request board Item
+    [__delCreate.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__delCreate.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.boards = state.boards.filter((item) => item.id !== action.payload);
+    },
+    [__delCreate.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
 
-      // EDIT Request board Item
-      [__editCreate.pending]: (state) => {
-        state.isLoading = true;
-      },
-      [__editCreate.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        console.log(action.payload);
-        state.courses = state.courses.map((courses)=>{
-          return courses.id === action.payload.id ? action.payload : courses
-        });
-      },
-      [__editCreate.rejected]: (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-      }
+    // EDIT Request board Item
+    [__editCreate.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__editCreate.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+      state.courses = state.courses.map((courses) => {
+        return courses.id === action.payload.id ? action.payload : courses;
+      });
+    },
+    [__editCreate.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
