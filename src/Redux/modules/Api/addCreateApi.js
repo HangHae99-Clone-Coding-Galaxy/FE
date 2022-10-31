@@ -22,5 +22,5 @@ await axios.post(`${BASE_URL}/courses`, payload);
 
 
 export const editCreateApi = async (payload) => { 
-await axios.put(`${BASE_URL}/courses/${payload.id}`, payload.update);
+await axios.put(`${BASE_URL}/courses/${payload.id}`, payload.upData);
 };

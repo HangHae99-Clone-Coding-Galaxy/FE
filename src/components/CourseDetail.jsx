@@ -93,21 +93,23 @@ const CourseDetail = () => {
             type="text"
             name="title"
             placeholder="변경할 내용"
-            defaultValue={upData?.value}
+            defaultValue={course?.title}
             onChange={onChangeHandler}
           />
           <textarea
             type="text"
             name="content"
             placeholder="변경할 내용"
-            defaultValue={upData?.value}
+            defaultValue={course?.content}
             onChange={onChangeHandler}
           />
           <ButtonWrap>
     <button
       onClick={() => {
-        dispatch(__editCreate(upData,id))
+        dispatch(__editCreate({upData,id}));
+        dispatch(__getCreateId(id))
         setEdit(false);
+        window.location.reload();
       }}
     >완료
     </button>
