@@ -10,7 +10,8 @@ import {
 export const __addCreate = createAsyncThunk(
   "addCreate",
   async (payload, thunkAPI) => {
-      
+    console.log(payload)
+
     const formData = new FormData();
 
     Object.entries(payload).forEach(([key, value]) => {
