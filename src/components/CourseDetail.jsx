@@ -181,8 +181,8 @@ const CourseDetail = () => {
 
      
 
-      <ReviewList />
       <Review />
+      <ReviewList />
     </DetailWrap>
   );
 };
