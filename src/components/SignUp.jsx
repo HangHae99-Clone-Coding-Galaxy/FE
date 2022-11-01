@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { __addUser } from "../features/userSlice";
-import Header from "./Header";
 
-const Register = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -13,35 +12,26 @@ const Register = () => {
     navigate("/");
   };
 
-  const [user, setUser] = useState({
-    username: "",
-    userId: "",
+  const init = {
+    userid: "",
     email: "",
     password: "",
-    passwordCheck: "",
-  });
+    passwordConfirm: "",
+    username: "",
+  };
+
+  const [user, setUser] = useState(init);
   console.log(user);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setUser((prev) => {
-      return { ...prev, [name]: value };
-    });
+    setUser({ ...user, [name]: value });
   };
 
-  const handleAddUsers = (e) => {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(__addUser(user));
-    setUser({
-      username: "",
-      userId: "",
-      email: "",
-      password: "",
-      passwordCheck: "",
-    });
-  };
-  const close = () => {
-    navigate("/");
+    setUser(init);
   };
   return (
     <>
@@ -58,32 +48,51 @@ const Register = () => {
       <Container>
         <Page>
           <p>(주의) 이메일주소 잘 입력하십시오 오타나면 큰일남</p>
-          <SignUpForm>
-            <label for="signup_username">아이디 * </label>
+          <SignUpForm onSubmit={onSubmitHandler}>
+            <label htmlFor="signup_username">아이디 * </label>
             <input
               type="text"
-              name="signup_username"
-              id="signup_username"
+              name="userid"
+              id="userid"
               required
+              value={user.userid}
+              onChange={(e) => onChangeHandler(e)}
             ></input>
-            <label for="signup_username">이메일 주소 * </label>
+            <label htmlFor="signup_username">이메일 주소 * </label>
             <input
               type="email"
-              name="signup_email"
-              id="signup_email"
+              name="email"
+              id="email"
               required
+              value={user.email}
+              onChange={(e) => onChangeHandler(e)}
             />
-            <label for="signup_username">비밀번호 입력 * </label>
-            <input type="password" name="password" id="password" required />
-            <label for="signup_username">비밀번호 재입력 * </label>
+            <label htmlFor="signup_username">비밀번호 입력 * </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              onChange={(e) => onChangeHandler(e)}
+            />
+            <label htmlFor="signup_username">비밀번호 재입력 * </label>
             <input
               type="password"
               name="passwordConfirm"
               id="passwordConfirm"
               required
+              value={user.passwordConfirm}
+              onChange={(e) => onChangeHandler(e)}
             />
-            <label for="nickname">이름 * </label>
-            <input id="nickname" name="nickname" type="text" required />
+            <label htmlFor="nickname">이름 * </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              required
+              value={user.username}
+              onChange={(e) => onChangeHandler(e)}
+            />
             <br />
             <input
               type="submit"
@@ -98,7 +107,7 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;
 
 const Section = styled.div`
   background: #fafafa;

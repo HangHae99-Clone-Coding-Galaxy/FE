@@ -1,77 +1,66 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __addComment } from "../Redux/commentSlice";
+import styled from "styled-components";
+// import Button from "./element/Button";
 
-const Review = () => {
+function Review() {
   const init = {
-    name: "",
-    ment: "",
+    id: "",
+    comment: "",
+    // review: "",
   };
-
-  const [comment, setComment] = useState(init);
   const dispatch = useDispatch();
-  // const postid = useSelector((state) => state.commentSlice.post.id);
+  const [comment, setComment] = useState({ comment: "" });
+  const courseId = useSelector((state) => state?.addCreateSlice?.course?.id);
 
   const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    // setComment({ postid: postid, ...comment, [name]: value });
-    setComment({ ...comment, [name]: value });
+   setComment({courseId:courseId,...comment,comment:e.target.value});
   };
 
-  const onSubmitHandler = (e) => {
+  const onClickHandler = (e) => {
     e.preventDefault();
     dispatch(__addComment(comment));
-    setComment(init);
+    setComment({ comment: "" });
   };
 
+  // 댓글 기능
+
   return (
-    <Form onSubmit={onSubmitHandler}>
-      <Container>
-        <input
-          type="text"
-          name="name"
-          value={comment.name}
-          maxLength={10}
-          placeholder="닉네임"
-          onChange={(e) => onChangeHandler(e)}
-        />
-        <input
-          type="text"
-          name="ment"
-          value={comment.ment}
-          maxLength={200}
-          placeholder="댓글 추가"
-          onChange={(e) => onChangeHandler(e)}
-        />
-        <button type={"submit"}>+</button>
-      </Container>
+    <Form onSubmit={onClickHandler}>
+      <input
+        type="text"
+        name="comment"
+        value={comment?.comment}
+        placeholder="댓글 추가"
+        onChange={onChangeHandler}
+      />
+      <button>추가</button>
     </Form>
   );
-};
+}
 
 export default Review;
 
-const Container = styled.div`
-  display: flex;
-  align-items: left;
-  gap: 20px;
-  height: 20px;
-  margin: 20px 10px 10px 20px;
-`;
-
 const Form = styled.form`
-  /* display: flex; */
+  display: flex;
   width: 500px;
-  height: 50px;
+  height: 200px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
-  /* flex-direction: column; */
-  /* padding: 50px; */
+  flex-direction: column;
+  padding: 50px;
   justify-content: space-between;
-
-  /* font-size: 20px; */
-  font-weight: bold;
-  margin: 10px auto 0 auto;
   align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 100px auto 0 auto;
+`;
+
+const Wraper = styled.div`
+  display: flex;
+  width: 420px;
+  justify-content: space-between;
+  gap: 50px;
+  margin: 20px;
 `;

@@ -1,24 +1,43 @@
-// import React, { useEffect } from "react";
-// import ReviewListItem from "./ReviewListItem";
-// import { useSelector, useDispatch } from "react-redux";
-// import { __getComment } from "../slice";
-// import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+// import Review from "./Review";
+import ReviewListItem from "./ReviewListItem";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { __getComment } from "../Redux/commentSlice";
+import { useParams } from "react-router-dom";
 
-// function ReviewList() {
-//   const commentList = useSelector((state) => state.commentSlice.comment);
-//   const dispatch = useDispatch();
-//   const { id } = useParams();
-//   useEffect(() => {
-//     dispatch(__getComment(id));
-//   }, [dispatch, id]);
+function ReviewList() {
+  const commentList = useSelector((state) => state.commentSlice.comments);
+  console.log(commentList);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(__getComment(id));
+  }, [dispatch,id]);
+  return (
+    <div>
+      {commentList?.map((comment) => (
+        <div key={comment.id}>
+          <p>{comment.id}{comment.comment}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-//   return (
-//     <div>
-//       {commentList.map((comment) => (
-//         <ReviewListItem key={comment.id} comment={comment} />
-//       ))}
-//     </div>
-//   );
-// }
+export default ReviewList;
 
-// export default ReviewList;
+const PL = styled.form`
+  width: 550px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto 0 auto;
+`;
+
+const LT = styled.div`
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+`;

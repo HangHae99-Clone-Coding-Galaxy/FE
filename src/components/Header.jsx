@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "../features/modalSlice";
+import { openModal, openSearchModal } from "../features/modalSlice";
 import Login from "./Login";
+import Search from "./Search";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("accessToken");
   const isOpen = useSelector((state) => state.modalSlice.isOpen);
+  const searchOpen = useSelector((state) => state.modalSlice.searchOpen);
 
   const toLogin = () => {
     if (token) {
@@ -24,6 +26,12 @@ const Header = () => {
   const cart = () => {
     navigate("/cart");
   };
+  const search = () => {
+    navigate("/search");
+  };
+  const mypage = () => {
+    navigate("/members");
+  };
   return (
     <>
       {isOpen && <Login />}
@@ -33,18 +41,33 @@ const Header = () => {
             <Logo src="img/logo2-3.png" onClick={main}></Logo>
             <Nav>
               <Ul>
-                <Li>
+                <Li onClick={main}>
                   <strong>HOME</strong>
                 </Li>
-                <Li>
+                <Li
+                  onClick={() => {
+                    navigate("/allcourses");
+                  }}
+                >
                   <strong>교육과정</strong>
                 </Li>
                 <Li>
-                  <strong onClick={()=>{navigate("/create")}}>등록하기</strong>
+                  <strong
+                    onClick={() => {
+                      navigate("/create");
+                    }}
+                  >
+                    등록하기
+                  </strong>
                 </Li>
                 <Li>
                   <strong>
-                    <FaSearch />
+                    <FaSearch
+                      onClick={() => {
+                        dispatch(openSearchModal());
+                        search();
+                      }}
+                    />
                   </strong>
                 </Li>
               </Ul>
@@ -52,20 +75,24 @@ const Header = () => {
             <div>
               <LoginUl>
                 <Li>
-                  <Span
-                    onClick={() => {
-                      dispatch(openModal());
-                      toLogin();
-                    }}
-                  >
-                    {token ? "로그아웃" : "로그인"}
-                  </Span>
+                  <Flex>
+                    <Img
+                      src="https://i.pinimg.com/originals/d2/4f/89/d24f89d6afaec9d3a55d47fed799800e.jpg"
+                      alt=""
+                      onClick={mypage}
+                    />
+                    <Span
+                      onClick={() => {
+                        dispatch(openModal());
+                        toLogin();
+                      }}
+                    >
+                      {token ? "로그아웃" : "로그인"}
+                    </Span>
+                  </Flex>
                 </Li>
                 <Li onClick={cart}>
                   <FaCartPlus />
-                  {/* <CartQuantity> */}
-                  {/* <span>3</span> */}
-                  {/* </CartQuantity> */}
                 </Li>
               </LoginUl>
             </div>
@@ -88,12 +115,10 @@ const Headers = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 1380px;
+  max-width: 1410px;
   height: 74.563px;
   margin: auto;
-  @media (min-width: 1200px) {
-    width: 1170px;
-  }
+  margin-top: 8px;
 `;
 const Logo = styled.img`
   margin-top: 24px;
@@ -106,6 +131,9 @@ const Nav = styled.nav`
   margin-left: 400px;
   width: 252.984px;
   height: 74.563;
+  & li :hover {
+    color: #ff4949;
+  }
 `;
 const Flex = styled.nav`
   display: flex;
@@ -126,21 +154,17 @@ const LoginUl = styled.ul`
   }
 `;
 const Li = styled.li`
-  margin: 17px;
+  margin: 13px;
 `;
 const Span = styled.div`
   cursor: pointer;
-  margin-top: 14px;
+  margin-top: 15px;
 `;
-// const CartQuantity = styled.div`
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   height: 16px;
-//   width: 12px;
-//   background: #ff4949;
-//   border-radius: 2px;
-//   & span {
-//     color: #fff;
-//   }
-// `;
+const Img = styled.img`
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  margin-top: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+`;

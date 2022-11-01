@@ -2,9 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   addCommentApi,
   getCommentApi,
-  delCommentApi,
-  editCommentApi,
-} from "../Redux/PostApi";
+  getPostIdApi,
+  delPostApi,
+  editPostApi,
+} from "./commentApi";
 
 export const __addComment = createAsyncThunk(
   "addComment",
@@ -22,37 +23,22 @@ export const __getComment = createAsyncThunk(
   }
 );
 
-export const __delComment = createAsyncThunk(
-  "delComment",
-  async (payload, thunkAPI) => {
-    await delCommentApi(payload);
-    thunkAPI.dispatch(delComment(payload));
-  }
-);
-
-export const __editComment = createAsyncThunk(
-  "editComment",
-  async (payload, thunkAPI) => {
-    await editCommentApi(payload);
-    thunkAPI.dispatch(editComment(payload));
-  }
-);
 
 export const commentSlice = createSlice({
   name: "comments",
   initialState: {
-    comment: [],
+    comments: [],
   },
   reducers: {
     addComment: (state, action) => {
-      const id = state.comment[state.comment.length - 1]?.id + 1 || 1;
-      state.comment.push({ id, ...action.payload });
+      const id = state.comments[state.comments.length - 1]?.id + 1 || 1;
+      state.comments.push({ id, ...action.payload });
     },
     // setPost: () => {
 
     // },
     getComment: (state, action) => {
-      state.comment = action.payload;
+      state.comments = action.payload;
     },
     // getPost_Id: (state, action) => {
     //   state.post =  action.payload;
@@ -61,20 +47,20 @@ export const commentSlice = createSlice({
       // state.comment = [{}, {}]  배열에서 filter를 사용
       // action.payload = {comment} 에서 id를 빼서 사용
       //...state.comet = {}, {}, {} 전개연사자를 쓰면 배열이 아니게 되니까 filter 사용 x!
-      state.comment = state.comment.filter(
-        (item) => item.id !== action.payload.id
-      );
+      state.comment = state.comment.filter((item) => 
+        item.id !== action.payload.id
+      )
     },
 
     editComment: (state, action) => {
-      state.comment = state.comment.map((item) => {
+      state.comment = state.comment.map((item)=>{
         return item.id === action.payload.id ? action.payload : item;
-      });
+      })     
     },
   },
 });
 
-export const { addComment, getComment, delComment, editComment } =
-  commentSlice.actions;
+export const { addComment, getComment, delComment,editComment } = commentSlice.actions;
 
 export default commentSlice.reducer;
+

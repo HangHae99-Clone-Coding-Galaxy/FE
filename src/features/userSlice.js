@@ -1,12 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-const initialState = {
-  users: [],
-  isLoading: false,
-  error: null,
-  isLogin: null,
-};
+import { addUserApi } from "./apis";
 
 //HG
 const instance = axios.create({
@@ -24,7 +18,7 @@ export const __getUsers = createAsyncThunk(
   "post/getUser",
   async (payload, thunkAPI) => {
     try {
-      const users = await axios.get("http://localhost:3000");
+      const users = await axios.get("http://localhost:3001");
       return thunkAPI.fulfillWithValue(users.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -33,24 +27,25 @@ export const __getUsers = createAsyncThunk(
 );
 // 유저 추가하기
 export const __addUser = createAsyncThunk(
-  "post/addUser",
+  "addUser",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
-      await axios.post("http://localhost:3000/users/signup", payload);
+      await addUserApi(payload);
+      alert(payload.username + "님 환영합니다!");
+      window.location.replace("/");
       return thunkAPI.fulfillWithValue(payload);
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err);
+    } catch (error) {
+      alert("회원가입에 실패했습니다.");
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
 export const __setUser = createAsyncThunk(
-  "post/setUser",
+  "setUser",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
-      await axios.post("http://localhost:3000/user", payload);
+      await axios.post("http://localhost:3001/user", payload);
       // const accessToken = response.headers.authorization;
       // const refreshToken = response.headers["refresh-token"];
       // if (response.status === 200 || response.status === 201) {
@@ -84,7 +79,9 @@ export const __login = createAsyncThunk(
 
 export const userSlice = createSlice({
   name: "userSlice",
-  initialState,
+  initialState: {
+    users: [],
+  },
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
@@ -94,16 +91,9 @@ export const userSlice = createSlice({
   },
   extraReducers: {
     // ADD User
-    [__addUser.pending]: (state) => {
-      state.isLoading = true;
-    },
     [__addUser.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.users.push(action.payload);
-    },
-    [__addUser.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
     },
   },
 });
