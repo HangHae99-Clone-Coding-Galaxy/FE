@@ -9,8 +9,14 @@ import {
 
 export const __addCreate = createAsyncThunk(
   "addCreate",
-  async (payload, thunkAPI) => {  
-    console.log("제발...");
+  async (payload, thunkAPI) => {
+      
+    const formData = new FormData();
+
+    Object.entries(payload).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
     try {
       await addCreateApi(payload);     
       return thunkAPI.fulfillWithValue(payload);

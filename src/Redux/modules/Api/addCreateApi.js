@@ -2,10 +2,11 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_SERVER;
 
 export const addCreateApi = async (payload) => {
-  for (let pair of payload.entries()) {
-    console.log(pair[0] + "," + pair[1]);
-  }
-  await axios.post(`${BASE_URL}/api/courses/create`, payload);
+  await axios.post(`${BASE_URL}/api/courses/create`, payload,{
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export const getCreateApi = async () => {
