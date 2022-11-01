@@ -49,21 +49,23 @@ const CourseDetail = () => {
     <DetailWrap>
       {!pay ? (
         <DetailWrap>
-          <TitleP>{course?.title}</TitleP>
+          <TitleH1>{course?.title}</TitleH1>
           <PayWrap>
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <ComButton>신청완료</ComButton>
+              <Price>금액:10,000원</Price>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
           </PayWrap>          
           <ContentP>{course?.content}</ContentP>
+          <TitleP>{course?.title}</TitleP>
           <PlayerWrapper>
             <ReactPlayer
-              url={course.video}
+              url="https://youtu.be/MAg5-YQK0BY"
               width="100%"
               height="100%"
-              muted={true}
+              muted={false}
               playing={false}
               loop={true}
             />
@@ -282,6 +284,9 @@ const IssueSpan = styled.span`
     transform: scale(0.9);
   }
 `;
+const Price = styled.span`
+  color:grey  
+`;
 
 const AddWrap = styled.div`
   display: flex;
@@ -298,7 +303,7 @@ const AddWrap = styled.div`
 
 const TitleP = styled.p`
   display: flex;
-  margin-top: 10px;
+  margin-top: 100px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -310,6 +315,22 @@ const TitleP = styled.p`
   border: none;
   color: #105796;
   font-size: 18px;
+  font-weight: bold;
+`;
+
+const TitleH1 = styled.p`
+  display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 1200px;
+  height: 50px;
+  gap: 40px;
+  border: none;
+  color: #000000;
+  font-size: 30px;
   font-weight: bold;
 `;
 

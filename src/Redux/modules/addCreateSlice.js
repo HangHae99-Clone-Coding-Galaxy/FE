@@ -9,11 +9,10 @@ import {
 
 export const __addCreate = createAsyncThunk(
   "addCreate",
-  async (payload, thunkAPI) => {
-  
+  async (payload, thunkAPI) => {  
+    console.log("제발...");
     try {
-      await addCreateApi(payload);
-      console.log("제발...");
+      await addCreateApi(payload);     
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
