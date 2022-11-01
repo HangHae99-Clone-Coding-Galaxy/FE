@@ -113,11 +113,14 @@ const TextWrap = styled.div`
   p {
     font-size: 16px;
     text-align: center;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 360px;
-    height: 20px;
+    height: 32px;
   }
 `;
 
