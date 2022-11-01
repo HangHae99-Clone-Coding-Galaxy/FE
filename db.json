@@ -10,72 +10,35 @@
   "comment": {},
   "comments": [
     {
-      "courseId": 2,
-      "comment": "재밌다!",
       "id": 1
     },
     {
-      "courseId": 2,
-      "comment": "강의 또 올려주세요!",
-      "id": 2
-    },
-    {
-      "courseId": 4,
-      "comment": "강의 재밌어요!!",
+      "title": "",
+      "comment": "",
       "id": 3
     },
     {
-      "courseId": 4,
-      "comment": "이해가 잘되요!! 꿀설명!!!",
-      "id": 4
-    },
-    {
-      "courseId": 2,
-      "title": "반가워요",
-      "comment": "안녕",
       "id": 5
     },
     {
-      "courseId": 2,
-      "title": "제목",
-      "comment": "내용",
       "id": 6
     },
     {
-      "courseId": 2,
-      "title": "안녕하세요",
-      "comment": "ㄱㄱ",
-      "id": 7
-    },
-    {
-      "courseId": 2,
-      "title": "안녕",
-      "comment": "하세요",
-      "id": 8
-    },
-    {
-      "courseId": 2,
-      "title": "ㅇㅇ",
-      "comment": "ㅇㅇ",
-      "id": 9
-    },
-    {
-      "courseId": 2,
-      "title": "제목",
-      "comment": "내용",
+      "title": "",
+      "comment": "",
       "id": 10
     },
     {
       "courseId": 2,
-      "title": "안녕하세요",
-      "comment": "반갑습니다",
-      "id": 11
+      "title": "제목",
+      "comment": "내용",
+      "id": 14
     },
     {
       "courseId": 2,
-      "title": "제목제목",
-      "comment": "내용내용",
-      "id": 12
+      "title": "안녕하세요",
+      "comment": "반가워요",
+      "id": 15
     }
   ],
   "profile": {

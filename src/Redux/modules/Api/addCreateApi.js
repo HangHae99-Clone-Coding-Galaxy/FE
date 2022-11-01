@@ -3,11 +3,11 @@ const BASE_URL = process.env.REACT_APP_SERVER;
 
 export const addCreateApi = async (payload) => {
   console.log(payload);
-  await axios.post("http://3.35.218.131:8080/api/courses/create", payload);
+  await axios.post(`${BASE_URL}/courses`, payload);
 };
 
 export const getCreateApi = async () => {
-  const response = await axios.get(`${BASE_URL}/api/courses`);
+  const response = await axios.get(`${BASE_URL}/courses`);
   return response.data;
 };
 

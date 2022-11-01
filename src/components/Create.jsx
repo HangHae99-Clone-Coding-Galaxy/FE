@@ -7,8 +7,7 @@ import { __addCreate } from "../Redux/modules/addCreateSlice";
 import { configure } from "@testing-library/react";
 
 const Create = () => {
-
-  const BASE_URL = process.env.REACT_APP_SERVER
+  const BASE_URL = process.env.REACT_APP_SERVER;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

@@ -41,7 +41,7 @@ function Review() {
         />
         <p>내용</p>
         <input
-          type="text"
+          type="textarea"
           name="comment"
           value={comment.comment}
           placeholder="댓글 추가"
@@ -49,8 +49,8 @@ function Review() {
         />
       </RepleWrap>
       <button>추가</button>
-      <button>수정</button>
-      <button>삭제</button>
+      {/* <button onClick={()=>{setEdit(!edit)}}>수정</button>
+      <button onClick={() => dispatch(__delComment(comment))}>삭제</button> */}
     </Form>
   );
 }
