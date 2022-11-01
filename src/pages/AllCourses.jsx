@@ -110,7 +110,7 @@ const TextWrap = styled.div`
     }
   }
   p {
-    font-size: 16px;   
+    font-size: 16px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;

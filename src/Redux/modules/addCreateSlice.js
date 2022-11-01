@@ -10,7 +10,6 @@ import {
 export const __addCreate = createAsyncThunk(
   "addCreate",
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       await addCreateApi(payload);
       return thunkAPI.fulfillWithValue(payload);
