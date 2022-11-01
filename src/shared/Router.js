@@ -13,6 +13,7 @@ import MembersEdit from "../components/MembersEdit";
 import CourseDetail from "../components/CourseDetail";
 import OrderList from "../components/OrderList";
 import MyReviewList from "../components/MyReviewList";
+import KakaoLogin from "../components/KakaoLogin";
 
 const Router = () => {
   return (
@@ -31,6 +32,7 @@ const Router = () => {
         <Route path="/myReviewList" element={<MyReviewList />} />
         <Route path="/course/:id" element={<CourseDetail />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/kakaoLogin" element={<KakaoLogin />} />
       </Routes>
       <Footer />
     </BrowserRouter>
