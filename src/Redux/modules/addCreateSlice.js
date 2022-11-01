@@ -10,10 +10,17 @@ import {
 export const __addCreate = createAsyncThunk(
   "addCreate",
   async (payload, thunkAPI) => {
-    console.log(payload);
+
+    console.log(payload)
+
+    const formData = new FormData();
+
+    Object.entries(payload).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
     try {
-      await addCreateApi(payload);
-      console.log("제발...");
+      await addCreateApi(payload);     
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -85,7 +92,7 @@ export const addCreateSlice = createSlice({
     },
     [__addCreate.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload)
+      console.log(action.payload);
       state.courses.push(action.payload);
     },
     [__addCreate.rejected]: (state, action) => {

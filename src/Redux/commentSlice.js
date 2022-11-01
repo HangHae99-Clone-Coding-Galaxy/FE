@@ -27,7 +27,7 @@ export const __getComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("get", payload);
     try {
-      const data = await axios.get(`${BASE_URL}/comments`);
+      const data = await axios.get(`${BASE_URL}/comments?courseId=${payload}`);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -35,16 +35,31 @@ export const __getComment = createAsyncThunk(
   }
 );
 
+// export const __fixComment = createAsyncThunk(
+//   "fixComment",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const data = await axios.put(`${BASE_URL}/comments/${payload.id}`, {
+//         desc: payload.desc,
+//       });
+
+//       return thunkAPI.fulfillWithValue(data.data);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
+
 export const __fixComment = createAsyncThunk(
-  "fixComment",
+  "Comments/fixComment",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.patch(
-        `${process.env.REACT_APP_DB_HEROKU_COMMENTS}/${payload.id}`,
-        { desc: payload.desc }
+      console.log("payload =>", payload);
+      await axios.patch(
+        `http://localhost:3001/comments/${payload.id}`,
+        payload.fixComment
       );
-
-      return thunkAPI.fulfillWithValue(data.data);
+      return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -55,9 +70,7 @@ export const __delComment = createAsyncThunk(
   "delComment",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_DB_HEROKU_COMMENTS}/${payload}`
-      );
+      await axios.delete(`${BASE_URL}/comments/${payload.id}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -65,17 +78,17 @@ export const __delComment = createAsyncThunk(
   }
 );
 
-const fixCommentFulfilledMethod = (payload, comments) => {
-  const newComments = comments.map((comment) => {
-    if (comment.id === payload.id) {
-      return { ...comment, desc: payload.desc };
-    } else {
-      return comment;
-    }
-  });
+// const fixCommentFulfilledMethod = (payload, comments) => {
+//   const newComments = comments.map((comment) => {
+//     if (comment.id === payload.id) {
+//       return { ...comment, desc: payload.desc };
+//     } else {
+//       return comment;
+//     }
+//   });
 
-  return newComments;
-};
+//   return newComments;
+// };
 
 export const commentsSlice = createSlice({
   name: "comments",
@@ -126,13 +139,21 @@ export const commentsSlice = createSlice({
     [__fixComment.pending]: (state) => {
       state.isLoading = true;
     },
+    // [__fixComment.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.comments = state.comments.map((item) => {
+    //     return item.id === action.payload.id ? action.payload : item;
+    //   });
+    // },
     [__fixComment.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.comments = fixCommentFulfilledMethod(
-        action.payload,
-        state.comments
+      state.comments = state.comments.map((comment) =>
+        comment.id === action.payload.id
+          ? { ...action.payload.editComment, id: action.payload.id }
+          : comment
       );
     },
+
     [__fixComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;

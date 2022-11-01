@@ -19,11 +19,12 @@ const CourseDetail = () => {
     content: "",
   };
 
+
   const [upData, setUpData] = useState(init);
 
   const course = useSelector((state) => state.addCreateSlice.course);
 
-  const [pay, setPay] = useState(true);
+  const [pay, setPay] = useState(false);
 
   const [edit, setEdit] = useState(false);
 
@@ -48,21 +49,23 @@ const CourseDetail = () => {
     <DetailWrap>
       {!pay ? (
         <DetailWrap>
-          <TitleP>{course?.title}</TitleP>
+          <TitleH1>{course?.title}</TitleH1>
           <PayWrap>
-            <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
+            <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <ComButton>신청완료</ComButton>
+              <Price>금액:10,000원</Price>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
           </PayWrap>          
           <ContentP>{course?.content}</ContentP>
+          <TitleP>{course?.title}</TitleP>
           <PlayerWrapper>
             <ReactPlayer
-              url="https://youtu.be/nxi1EXmPHRs"
+              url="https://youtu.be/MAg5-YQK0BY"
               width="100%"
               height="100%"
-              muted={true}
+              muted={false}
               playing={false}
               loop={true}
             />
@@ -72,7 +75,7 @@ const CourseDetail = () => {
         <DetailWrap>
           <TitleP>{course?.title}</TitleP>
           <PayWrap>
-            <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
+          <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <AddButton>신청하기</AddButton>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
@@ -281,6 +284,9 @@ const IssueSpan = styled.span`
     transform: scale(0.9);
   }
 `;
+const Price = styled.span`
+  color:grey  
+`;
 
 const AddWrap = styled.div`
   display: flex;
@@ -297,7 +303,7 @@ const AddWrap = styled.div`
 
 const TitleP = styled.p`
   display: flex;
-  margin-top: 10px;
+  margin-top: 100px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -309,6 +315,22 @@ const TitleP = styled.p`
   border: none;
   color: #105796;
   font-size: 18px;
+  font-weight: bold;
+`;
+
+const TitleH1 = styled.p`
+  display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 1200px;
+  height: 50px;
+  gap: 40px;
+  border: none;
+  color: #000000;
+  font-size: 30px;
   font-weight: bold;
 `;
 

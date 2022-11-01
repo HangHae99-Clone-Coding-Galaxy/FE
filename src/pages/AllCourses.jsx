@@ -15,6 +15,7 @@ export default function AllCourses() {
   }, [dispatch]);
 
   const courses = useSelector((state) => state?.addCreateSlice?.courses);
+  console.log(courses);
 
   if (courses.length === 0) {
     return <p>아직 생성된 게시물이 없습니다.</p>;
@@ -25,13 +26,13 @@ export default function AllCourses() {
       {courses.map((course) => {
         return (
           <Card
-            key={course.id}
+            key={course.courseId}
             onClick={() => {
-              navigate(`/course/${course.id}`);
+              navigate(`/course/${course.courseId}`);
             }}
           >
-            <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png" />
-            {/* {/* <IMG src={course.thumbnail} alt="test"/> */}
+            {/* <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png" /> */}
+            <IMG src={course.thumbNail} alt="test" />
             <TextWrap>
               <h5>{course.title}</h5>
               <p>{course.content}</p>
@@ -110,13 +111,16 @@ const TextWrap = styled.div`
     }
   }
   p {
-    font-size: 16px;   
+    font-size: 16px;
     text-align: center;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 360px;
-    height: 20px;
+    height: 32px;
   }
 `;
 
