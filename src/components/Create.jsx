@@ -45,10 +45,10 @@ const Create = () => {
   //     }
   //   };
   // };
-  //비디오 스테이트 저장
-  // const onChangeVideo = (e) => {
-  //   setVideo(e.target.files[0]);
-  // };
+  // 비디오 스테이트 저장
+  const onChangeVideo = (e) => {
+    setVideo(e.target.files[0]);
+  };
 
 
   const submitHandler = (e) => {
