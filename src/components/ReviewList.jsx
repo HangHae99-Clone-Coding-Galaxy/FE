@@ -1,25 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // import Review from "./Review";
 import ReviewListItem from "./ReviewListItem";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { __getComment } from "../Redux/commentSlice";
+import {
+  __getComment,
+  __delComment,
+  __fixComment,
+  commentsSlice,
+} from "../Redux/commentSlice";
 import { useParams } from "react-router-dom";
 
 function ReviewList() {
   const commentList = useSelector((state) => state.commentSlice.comments);
-  console.log(commentList);
-  const { id } = useParams();
   const dispatch = useDispatch();
+  const { id } = useParams();
   useEffect(() => {
     dispatch(__getComment(id));
-  }, [dispatch,id]);
+  }, [dispatch, id]);
+
   return (
     <div>
-      {commentList?.map((comment) => (
-        <div key={comment.id}>
-          <p>{comment.id}{comment.comment}</p>
-        </div>
+      {commentList.map((comment) => (
+        <ReviewListItem key={comment.id} comment={comment} />
       ))}
     </div>
   );

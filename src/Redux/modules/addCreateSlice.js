@@ -10,6 +10,7 @@ import {
 export const __addCreate = createAsyncThunk(
   "addCreate",
   async (payload, thunkAPI) => {
+
     console.log(payload)
 
     const formData = new FormData();
@@ -91,7 +92,7 @@ export const addCreateSlice = createSlice({
     },
     [__addCreate.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.payload)
+      console.log(action.payload);
       state.courses.push(action.payload);
     },
     [__addCreate.rejected]: (state, action) => {

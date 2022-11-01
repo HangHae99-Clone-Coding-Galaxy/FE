@@ -24,7 +24,7 @@ export const addCreateApi = async (payload) => {
 };
 
 export const getCreateApi = async () => {
-  const response = await axios.get(`${BASE_URL}/api/courses`);
+  const response = await axios.get(`${BASE_URL}/courses`);
   return response.data;
 };
 

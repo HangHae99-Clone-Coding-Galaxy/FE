@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { __addCreate } from "../Redux/modules/addCreateSlice";
 
 const Create = () => {
-  
+
+
   const dispatch = useDispatch();
 
   const init = {
@@ -17,10 +18,12 @@ const Create = () => {
   //폼데이터 전송 스테이트
   const [input, SetInput] = useState(init);
   // const [thumbNail, setThumbNail] = useState(null);
+
   const [video, setVideo] = useState(null);
 
   // 이미지 미리보기 스테이트
   // const [imageSrc, setImageSrc] = useState("");
+
 
   //텍스트데이터 스테이즈 저장
   const onChangeInput = (e) => {
@@ -43,14 +46,47 @@ const Create = () => {
   //   };
   // };
   //비디오 스테이트 저장
-  const onChangeVideo = (e) => {
-    setVideo(e.target.files[0]);
-  };
+  // const onChangeVideo = (e) => {
+  //   setVideo(e.target.files[0]);
+  // };
+
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(__addCreate({ ...input, video}));
   };
+
+  //스테이트 폼데이터 변환하고 통신연결
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+
+  //   const formData = new FormData();
+
+  //   formData.append("title", input.title);
+  //   formData.append("content", input.content);
+  //   formData.append("thumbNail", thumbNail);
+  //   formData.append("video", video);
+
+  //   for (let pair of formData.entries()) {
+  //     console.log(pair[0] + "," + pair[1]);
+  //   }
+
+  //   axios
+  //     .post("http://3.35.218.131:8080/api/courses/create", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     })
+  //     .then(function a(response) {
+  //       console.log(response);
+  //       alert("게시되었습니다.");
+  //       window.location.replace("/");
+  //     })
+  //     .catch(function () {
+  //       console.log("땡! 다음기회에 도전하세요!");
+  //     });
+  //   navigate("/");
+  // };
 
   return (
     <FormWrap onSubmit={submitHandler}>
@@ -88,7 +124,9 @@ const Create = () => {
         accept={"video/*"}
         placeholder="비디오업로드"
         onChange={onChangeVideo}
+
       />
+
       <button>등록</button>
     </FormWrap>
   );
