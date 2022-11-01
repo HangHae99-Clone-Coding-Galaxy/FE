@@ -22,8 +22,9 @@ const Create = () => {
   // const [thumbNail, setThumbNail] = useState(null);
   // const [video, setVideo] = useState(null);
 
-  //이미지 미리보기 스테이트
-  // const [imageSrc, setImageSrc] = useState("");
+
+  // 이미지 미리보기 스테이트
+  const [imageSrc, setImageSrc] = useState("");
 
   //텍스트데이터 스테이즈 저장
   const onChangeInput = (e) => {
@@ -72,7 +73,29 @@ const Create = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(__addCreate(input));
+    
+    const formData = new FormData();
+
+    formData.append("title", input.title);
+    formData.append("content", input.content);
+    formData.append("thumbNail", thumbNail);
+    formData.append("video", video);
+
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + "," + pair[1]);
+    }
+    // dispatch(__addCreate(formData));
+
+    axios
+      .post("http://43.201.75.53:8080/api/courses/create", formData)
+      .then(function a(response) {
+        console.log(response);
+        alert("게시되었습니다.");
+        window.location.replace("/");
+      })
+      .catch(function () {
+        console.log("땡! 다음기회에 도전하세요!");
+      });
     navigate("/");
   };
 
