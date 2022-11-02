@@ -1,13 +1,9 @@
-import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal, openSearchModal } from "../features/modalSlice";
 import Login from "./Login";
-import Search from "./Search";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

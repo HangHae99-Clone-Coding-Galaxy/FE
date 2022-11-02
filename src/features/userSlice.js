@@ -7,10 +7,9 @@ const instance = axios.create({
   baseURL: "",
 });
 
-export const loginApi = async (userInfo) => {
-  const response = await instance.post("users/login", userInfo);
-
-  return response;
+export const kakaoAuthApi = (payload) => {
+  console.log(payload);
+  return axios.get(`/api/member/kakao/callback?code=${payload}`);
 };
 
 //유저 조회하기
@@ -18,7 +17,7 @@ export const __getUsers = createAsyncThunk(
   "post/getUser",
   async (payload, thunkAPI) => {
     try {
-      const users = await axios.get("http://localhost:3001");
+      const users = await axios.get("http://43.201.75.53:8080");
       return thunkAPI.fulfillWithValue(users.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -42,19 +41,23 @@ export const __addUser = createAsyncThunk(
 );
 
 export const __setUser = createAsyncThunk(
-  "setUser",
+  "post/setUser",
   async (payload, thunkAPI) => {
+    console.log(payload);
     try {
-      await axios.post("http://localhost:3001/user", payload);
-      // const accessToken = response.headers.authorization;
-      // const refreshToken = response.headers["refresh-token"];
-      // if (response.status === 200 || response.status === 201) {
-      //   window.localStorage.setItem("accessToken", accessToken);
-      //   window.localStorage.setItem("refreshToken", refreshToken);
-      alert("로그인 성공");
-      window.location.replace("/");
-      return thunkAPI.fulfillWithValue(payload);
-      // }
+      const response = await axios.post(
+        "http://43.201.75.53:8080/api/member/login",
+        payload
+      );
+      const Authorization = response.headers.Authorization;
+      const RefreshToken = response.headers["RefreshToken"];
+      if (response.status === 200 || response.status === 201) {
+        window.localStorage.setItem("Authorization", Authorization);
+        window.localStorage.setItem("RefreshToken", RefreshToken);
+        alert("로그인 성공");
+        window.location.replace("/");
+        return thunkAPI.fulfillWithValue(response.data);
+      }
     } catch (error) {
       if (400 < error.response.status && error.response.status < 500) {
         window.location.reload();
@@ -69,7 +72,7 @@ export const __login = createAsyncThunk(
   "post/login",
   async (payload, thunkAPI) => {
     try {
-      const response = await loginApi(payload);
+      const response = await kakaoAuthApi(payload);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       console.log(error);
@@ -91,10 +94,10 @@ export const userSlice = createSlice({
   },
   extraReducers: {
     // ADD User
-    [__addUser.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.users.push(action.payload);
-    },
+    // [__addUser.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.users.push(action.payload);
+    // },
   },
 });
 

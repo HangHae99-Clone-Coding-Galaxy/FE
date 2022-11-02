@@ -21,7 +21,7 @@ const Login = () => {
   };
 
   const [login, setLogin] = useState({
-    userId: "",
+    email: "",
     password: "",
   });
 
@@ -36,24 +36,16 @@ const Login = () => {
     e.preventDefault();
     dispatch(__setUser(login));
     setLogin({
-      userId: "",
+      email: "",
       password: "",
     });
   };
 
-  // const REST_API_KEY = "fdda33954998532f3179db62556d362f";
-  // const REDIRECT_URI = "http://localhost:3000/api/member/kakao/callback";
-  // const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-
-  const restApiKey = "fdda33954998532f3179db62556d362f";
-
-  const redirectUrl = "http://localhost:3000/api/member/kakao/callback";
-
-  const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${restApiKey}&redirect_uri=${redirectUrl}&response_type=code`;
-
-  function loginHandler() {
-    window.location.href = kakaoAuthUrl;
-  }
+  const KAKAO_REST_API_KEY = "7b6fd467ed016c6c6aee497ce7fa664a";
+  const KAKAO_REDIRECT_URI = "http://localhost:3000/api/member/kakao/callback";
+  // const restApiKey = "fdda33954998532f3179db62556d362f";
+  // const redirectUrl = "http://localhost:3000/api/member/kakao/callback";
+  // const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${restApiKey}&redirect_uri=${redirectUrl}&response_type=code`;
 
   return (
     <>
@@ -72,8 +64,8 @@ const Login = () => {
                 </Close>
               </Flex>
               <Input
-                id="userId"
-                name="userId"
+                id="email"
+                name="email"
                 type="email"
                 placeholder="아이디"
                 onClick={onChangeHandler}
@@ -100,7 +92,11 @@ const Login = () => {
                   10초 회원가입
                 </RegisterButton>
               </li>
-              <Kakao onClick={loginHandler}>
+              <Kakao
+                onClick={() => {
+                  window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+                }}
+              >
                 {/* <a href={KAKAO_AUTH_URL}> */}
                 <img src="../img/kakao.png"></img>
                 {/* </a> */}
