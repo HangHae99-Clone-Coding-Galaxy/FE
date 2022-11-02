@@ -2,6 +2,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 const BASE_URL = process.env.REACT_APP_SERVER;
+const authorization = localStorage.getItem("Authorization");
 
 export const setCookie = (name, value, option) => {
   return Cookies.set(name, value, { ...option });
@@ -20,19 +21,23 @@ export const addCreateApi = async (payload) => {
 };
 
 export const getCreateApi = async () => {
-  const response = await axios.get(`${BASE_URL}/courses`);
+  const response = await axios.get(`${BASE_URL}/api/courses`);
   return response.data;
 };
 
-export const getCreateIdApi = async (id) => {
-  const response = await axios.get(`${BASE_URL}/api/courses?id=${id}`);
+export const getCreateIdApi = async (id, payload) => {
+  const response = await axios.get(
+    `${BASE_URL}/api/courses?course_id=${id}`,
+    payload,
+    { headers: { Authorization: authorization } }
+  );
   return response.data[0];
 };
 
 export const delCreateApi = async (courseId) => {
-  await axios.delete(`${BASE_URL}/courses/${courseId}`);
+  await axios.delete(`${BASE_URL}/api/courses/${courseId}`);
 };
 
 export const editCreateApi = async (payload) => {
-  await axios.put(`${BASE_URL}/courses/${payload.id}`, payload.upData);
+  await axios.put(`${BASE_URL}/api/courses/${payload.id}`, payload.upData);
 };
