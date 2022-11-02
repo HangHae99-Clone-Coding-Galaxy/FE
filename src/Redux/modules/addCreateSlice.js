@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import {
   addCreateApi,
   getCreateApi,
@@ -6,6 +7,9 @@ import {
   delCreateApi,
   editCreateApi,
 } from "./Api/addCreateApi";
+
+
+const BASE_URL = process.env.REACT_APP_SERVER;
 
 export const __addCreate = createAsyncThunk(
   "addCreate",
@@ -44,7 +48,7 @@ export const __getCreateId = createAsyncThunk(
   "getCreateId",
   async (payload, thunkAPI) => {
     try {
-      const response = await getCreateIdApi(payload);
+      const response = await getCreateIdApi(payload)
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -80,7 +84,7 @@ export const addCreateSlice = createSlice({
   name: "courses",
   initialState: {
     courses: [],
-    course: null,
+    course:null,
     isLoading: false,
     error: null,
   },
