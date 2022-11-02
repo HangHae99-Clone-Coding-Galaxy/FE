@@ -15,9 +15,8 @@ import ReviewListItem from "./ReviewListItem";
 import axios from "axios";
 
 const CourseDetail = () => {
+  const { id } = useParams();
 
-  const {id} = useParams();
- 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,19 +26,17 @@ const CourseDetail = () => {
     content: "",
   };
 
-
   const [upData, setUpData] = useState(init);
 
   const course = useSelector((state) => state?.addCreateSlice?.course);
 
   const [pay, setPay] = useState(false);
-  
 
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     dispatch(__getCreateId(id));
-  }, [dispatch,id]);
+  }, [dispatch, id]);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -62,7 +59,7 @@ const CourseDetail = () => {
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <ComButton>신청완료</ComButton>
-              <Price>금액:{course?.price}원</Price>              
+              <Price>금액:{course?.price}원</Price>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
           </PayWrap>
@@ -83,7 +80,7 @@ const CourseDetail = () => {
         <DetailWrap>
           <TitleP>{course?.title}</TitleP>
           <PayWrap>
-          <IMG src={course?.thumbNail} alt="test"></IMG>
+            <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <AddButton>신청하기</AddButton>
               <Price>금액:{course?.price}원</Price>
@@ -116,24 +113,24 @@ const CourseDetail = () => {
             onChange={onChangeHandler}
           />
           <ButtonWrap>
-
-    <button
-      onClick={() => {
-        dispatch(__editCreate({upData, course:course?.course_id}));
-        dispatch(__getCreateId(course?.course_id))
-        setEdit(false);
-      }}
-    >완료
-    </button>
-    <button
-      onClick={() => {
-        dispatch(__delCreate(course?.course_id));
-        navigate("/allcourses");
-      }}
-    >
-      삭제
-    </button>
-    </ButtonWrap>
+            <button
+              onClick={() => {
+                dispatch(__editCreate({ upData, course: course?.course_id }));
+                dispatch(__getCreateId(course?.course_id));
+                setEdit(false);
+              }}
+            >
+              완료
+            </button>
+            <button
+              onClick={() => {
+                dispatch(__delCreate(course?.course_id));
+                navigate("/allcourses");
+              }}
+            >
+              삭제
+            </button>
+          </ButtonWrap>
         </EditWrap>
       ) : (
         <ButtonWrap>
@@ -192,7 +189,7 @@ const CourseDetail = () => {
 </ButtonTrans>
 </ButtonWrap>
   )} */}
-      <StarRating />
+      {/* <StarRating /> */}
       <Review />
       <ReviewList />
     </DetailWrap>
@@ -295,7 +292,7 @@ const IssueSpan = styled.span`
   }
 `;
 const Price = styled.span`
-  color:grey  
+  color: grey;
 `;
 
 const AddWrap = styled.div`
