@@ -34,7 +34,6 @@ const Router = () => {
         <Route path="/courses/:{course_id}" element={<CourseDetail />} />
         <Route path="/create" element={<Create />} />
         <Route path="/api/member/kakao/callback" element={<Kakao />} />
-        <Route path="/api/order" element={<KakaoPay />} />
       </Routes>
       <Footer />
     </BrowserRouter>
