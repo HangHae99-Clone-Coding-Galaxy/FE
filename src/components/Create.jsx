@@ -29,22 +29,6 @@ const Create = () => {
   };
 
   //이미지 스테이트저장, 미리보기 온체인지 핸들러
-<<<<<<< HEAD
-  // const onChangeImage = (e) => {
-  //   setThumbNail(e.target.files[0]);
-  //   let reader = new FileReader();
-  //   if (e.target.files[0]) {
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   }
-  //   reader.onloadend = () => {
-  //     const previewImgUrl = reader.result;
-  //     if (previewImgUrl) {
-  //       setImageSrc([...imageSrc, previewImgUrl]);
-  //     }
-  //   };
-  // };
-
-=======
   const onChangeImage = (e) => {
     setThumbNail(e.target.files[0]);
     let reader = new FileReader();
@@ -58,7 +42,6 @@ const Create = () => {
       }
     };
   };
->>>>>>> origin/sohee
   // 비디오 스테이트 저장
   const onChangeVideo = (e) => {
     setVideo(e.target.files[0]);
