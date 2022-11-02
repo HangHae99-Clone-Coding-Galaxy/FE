@@ -14,6 +14,7 @@ import CourseDetail from "../components/CourseDetail";
 import OrderList from "../components/OrderList";
 import MyReviewList from "../components/MyReviewList";
 import Kakao from "../utils/kakao";
+import KakaoPay from "../components/KakaoPay";
 
 const Router = () => {
   return (
