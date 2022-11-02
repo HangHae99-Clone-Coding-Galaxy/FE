@@ -71,6 +71,8 @@ const MainWrap = styled.div`
     display: flex;
     justify-content: center;
     margin: auto;
+    max-width: 1410px;
+    width: 98%;
   }
 `;
 const H3 = styled.h3`

@@ -1,9 +1,22 @@
 import axios from "axios";
+import Cookies from "universal-cookie";
+
 const BASE_URL = process.env.REACT_APP_SERVER;
 
+export const setCookie = (name, value, option) => {
+  return Cookies.set(name, value, { ...option });
+};
+
+export const getCookie = (name) => {
+  return Cookies.get(name);
+};
+
 export const addCreateApi = async (payload) => {
-  console.log(payload);
-  await axios.post(`${BASE_URL}/courses`, payload);
+  await axios.post(`${BASE_URL}/api/courses/create`, payload, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export const getCreateApi = async () => {
@@ -12,8 +25,7 @@ export const getCreateApi = async () => {
 };
 
 export const getCreateIdApi = async (id) => {
-  console.log(id);
-  const response = await axios.get(`${BASE_URL}/courses?id=${id}`);
+  const response = await axios.get(`${BASE_URL}/api/courses?id=${id}`);
   return response.data[0];
 };
 
