@@ -15,6 +15,7 @@ export const getCookie = (name) => {
 export const addCreateApi = async (payload) => {
   await axios.post(`${BASE_URL}/api/courses/create`, payload, {
     headers: {
+      authorization,
       "Content-Type": "multipart/form-data",
     },
   });

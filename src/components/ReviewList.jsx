@@ -22,7 +22,7 @@ function ReviewList() {
 
   return (
     <div>
-      {commentList?.map((comment, idx) => {
+      {commentList?.map((comment) => {
         return <ReviewListItem key={comment.id} comment={comment} />;
       })}
     </div>
