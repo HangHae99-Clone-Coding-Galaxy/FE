@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { __addCreate } from "../Redux/modules/addCreateSlice";
 
 const Create = () => {
-
-
   const dispatch = useDispatch();
 
   const init = {
@@ -23,7 +21,6 @@ const Create = () => {
 
   // 이미지 미리보기 스테이트
   // const [imageSrc, setImageSrc] = useState("");
-
 
   //텍스트데이터 스테이즈 저장
   const onChangeInput = (e) => {
@@ -45,15 +42,15 @@ const Create = () => {
   //     }
   //   };
   // };
-  //비디오 스테이트 저장
-  // const onChangeVideo = (e) => {
-  //   setVideo(e.target.files[0]);
-  // };
 
+  // 비디오 스테이트 저장
+  const onChangeVideo = (e) => {
+    setVideo(e.target.files[0]);
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(__addCreate({ ...input, video}));
+    dispatch(__addCreate({ ...input, video }));
   };
 
   //스테이트 폼데이터 변환하고 통신연결
@@ -124,7 +121,6 @@ const Create = () => {
         accept={"video/*"}
         placeholder="비디오업로드"
         onChange={onChangeVideo}
-
       />
 
       <button>등록</button>
