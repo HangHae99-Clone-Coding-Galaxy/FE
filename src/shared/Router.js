@@ -13,7 +13,7 @@ import MembersEdit from "../components/MembersEdit";
 import CourseDetail from "../components/CourseDetail";
 import OrderList from "../components/OrderList";
 import MyReviewList from "../components/MyReviewList";
-import KakaoLogin from "../components/KakaoLogin";
+import Kakao from "../utils/kakao";
 
 const Router = () => {
   return (
@@ -32,7 +32,7 @@ const Router = () => {
         <Route path="/myReviewList" element={<MyReviewList />} />
         <Route path="/course/:id" element={<CourseDetail />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/kakaoLogin" element={<KakaoLogin />} />
+        <Route path="/api/member/kakao/callback" element={<Kakao />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -1,24 +1,17 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../Redux/modules/user";
 
-import useMemberStore from "../zustand/member";
+const Kakao = (props) => {
+  const dispatch = useDispatch();
 
-const Kakao = () => {
-  const navigate = useNavigate();
-  const kakaoAuth = useMemberStore((state) => state.kakaoAuth);
-  const authorization_code = new URL(window.location.href).searchParams.get(
-    "code"
-  );
+  // 인가코드
+  let code = new URL(window.location.href).searchParams.get("code");
 
-  useEffect(() => {
-    const fetchCode = (code) => {
-      kakaoAuth(code).then((res) => {
-        if (res) {
-          navigate("/");
-        }
-      });
-    };
-    fetchCode(authorization_code);
+  // localStorage.setItem("token", code);
+
+  useEffect(async () => {
+    await dispatch(userActions.kakaoLogin(code));
   }, []);
 
   return <div>로딩중입니다...</div>;
