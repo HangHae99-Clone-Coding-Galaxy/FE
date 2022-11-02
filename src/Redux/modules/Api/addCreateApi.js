@@ -5,13 +5,13 @@ import Cookies from "universal-cookie";
 const BASE_URL = process.env.REACT_APP_SERVER;
 
 
-export const setCookie = (name, value, option) => {
-  return cookies.set(name, value, { ...option });
-}
+// export const setCookie = (name, value, option) => {
+//   return cookies.set(name, value, { ...option });
+// }
 
-export const getCookie = (name) => {
-  return cookies.get(name);
-}
+// export const getCookie = (name) => {
+//   return cookies.get(name);
+// }
 
 
 
