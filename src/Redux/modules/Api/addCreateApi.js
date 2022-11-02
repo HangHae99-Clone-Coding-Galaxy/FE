@@ -24,13 +24,13 @@ export const addCreateApi = async (payload) => {
 };
 
 export const getCreateApi = async () => {
-  const response = await axios.get(`${BASE_URL}/courses`);
+  const response = await axios.get(`${BASE_URL}/api/courses`);
   return response.data;
 };
 
 export const getCreateIdApi = async (id) => {
-  const response = await axios.get(`${BASE_URL}/api/courses?id=${id}`);
-  return response.data[0];
+  const response = await axios.get(`${BASE_URL}/api/courses/${id}`);
+  return response.data;
 };
 
 export const delCreateApi = async (courseId) => {

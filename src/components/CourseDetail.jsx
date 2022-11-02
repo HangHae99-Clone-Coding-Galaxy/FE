@@ -7,9 +7,13 @@ import { __delCreate, __getCreateId,__editCreate } from "../Redux/modules/addCre
 import Review from "./Review";
 import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
+import axios from "axios";
+
 
 const CourseDetail = () => {
-  const { id } = useParams();
+
+  const {id} = useParams();
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,15 +26,16 @@ const CourseDetail = () => {
 
   const [upData, setUpData] = useState(init);
 
-  const course = useSelector((state) => state.addCreateSlice.course);
+  const course = useSelector((state) => state?.addCreateSlice?.course);
 
   const [pay, setPay] = useState(false);
+  
 
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     dispatch(__getCreateId(id));
-  }, [dispatch, id]);
+  }, [dispatch,id]);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -54,7 +59,7 @@ const CourseDetail = () => {
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <ComButton>신청완료</ComButton>
-              <Price>금액:10,000원</Price>
+              <Price>금액:{course?.price}원</Price>              
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
           </PayWrap>          
@@ -62,7 +67,7 @@ const CourseDetail = () => {
           <TitleP>{course?.title}</TitleP>
           <PlayerWrapper>
             <ReactPlayer
-              url="https://youtu.be/MAg5-YQK0BY"
+              url={course?.video}
               width="100%"
               height="100%"
               muted={false}
@@ -78,6 +83,7 @@ const CourseDetail = () => {
           <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <AddButton>신청하기</AddButton>
+              <Price>금액:{course?.price}원</Price>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
           </PayWrap>          
@@ -109,16 +115,15 @@ const CourseDetail = () => {
           <ButtonWrap>
     <button
       onClick={() => {
-        dispatch(__editCreate({upData,id}));
-        dispatch(__getCreateId(id))
+        dispatch(__editCreate({upData, course:course?.course_id}));
+        dispatch(__getCreateId(course?.course_id))
         setEdit(false);
-        window.location.reload();
       }}
     >완료
     </button>
     <button
       onClick={() => {
-        dispatch(__delCreate(id));
+        dispatch(__delCreate(course?.course_id));
         navigate("/allcourses");
       }}
     >
