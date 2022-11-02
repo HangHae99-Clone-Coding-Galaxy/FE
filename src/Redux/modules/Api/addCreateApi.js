@@ -25,13 +25,9 @@ export const getCreateApi = async () => {
   return response.data;
 };
 
-export const getCreateIdApi = async (id, payload) => {
-  const response = await axios.get(
-    `${BASE_URL}/api/courses?course_id=${id}`,
-    payload,
-    { headers: { Authorization: authorization } }
-  );
-  return response.data[0];
+export const getCreateIdApi = async (id) => {
+  const response = await axios.get(`${BASE_URL}/api/courses/${id}`);
+  return response.data;
 };
 
 export const delCreateApi = async (courseId) => {
