@@ -28,7 +28,7 @@ export default function AllCourses() {
           <Card
             key={course.courseId}
             onClick={() => {
-              navigate(`/course/${course.courseId}`);
+              navigate(`/courses/${course.courseId}`);
             }}
           >
             {/* <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png" /> */}

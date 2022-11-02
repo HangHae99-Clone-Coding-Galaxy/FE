@@ -30,7 +30,7 @@ const Router = () => {
         <Route path="/membersEdit" element={<MembersEdit />} />
         <Route path="/orderList" element={<OrderList />} />
         <Route path="/myReviewList" element={<MyReviewList />} />
-        <Route path="/course/:id" element={<CourseDetail />} />
+        <Route path="/courses/:{course_id}" element={<CourseDetail />} />
         <Route path="/create" element={<Create />} />
         <Route path="/api/member/kakao/callback" element={<Kakao />} />
       </Routes>
