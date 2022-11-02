@@ -19,6 +19,7 @@ const Create = () => {
 
   const [video, setVideo] = useState(null);
 
+
   // 이미지 미리보기 스테이트
   const [imageSrc, setImageSrc] = useState("");
 
@@ -47,9 +48,10 @@ const Create = () => {
     setVideo(e.target.files[0]);
   };
 
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(__addCreate({ ...input, video }));
+    dispatch(__addCreate({ ...input, video,thumbNail }));
   };
 
   //스테이트 폼데이터 변환하고 통신연결
