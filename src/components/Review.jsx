@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { __addComment } from "../Redux/commentSlice";
+// import { __addComment } from "../Redux/commentSlice";
+import { __addCreate } from "../Redux/modules/addCreateSlice";
 import styled from "styled-components";
 // import StarRating from "./StarRating";
 // import Button from "./element/Button";
@@ -22,7 +23,7 @@ function Review() {
 
   const onClickHandler = (e) => {
     e.preventDefault();
-    dispatch(__addComment(comment));
+    dispatch(__addCreate(comment));
     setComment(init);
   };
 
