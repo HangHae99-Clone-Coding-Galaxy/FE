@@ -8,40 +8,5 @@
   ],
   "course": {},
   "comment": {},
-  "comments": [
-    {
-      "id": 1
-    },
-    {
-      "title": "",
-      "comment": "",
-      "id": 3
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "title": "",
-      "comment": "",
-      "id": 10
-    },
-    {
-      "courseId": 2,
-      "title": "제목",
-      "comment": "내용",
-      "id": 14
-    },
-    {
-      "courseId": 2,
-      "title": "안녕하세요",
-      "comment": "반가워요",
-      "id": 15
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  "comments": []
 }

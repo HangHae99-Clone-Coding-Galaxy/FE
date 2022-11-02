@@ -14,8 +14,9 @@ export const __addComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("add", payload);
     try {
-      await axios.post(`${BASE_URL}/comments`, payload);
-      return thunkAPI.fulfillWithValue(payload);
+      const data = await axios.post(`${BASE_URL}/comments`, payload);
+      console.log("data", data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -28,6 +29,7 @@ export const __getComment = createAsyncThunk(
     console.log("get", payload);
     try {
       const data = await axios.get(`${BASE_URL}/comments?courseId=${payload}`);
+      console.log("페이로드", payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -54,10 +56,9 @@ export const __fixComment = createAsyncThunk(
   "Comments/fixComment",
   async (payload, thunkAPI) => {
     try {
-      console.log("payload =>", payload);
       await axios.patch(
         `http://localhost:3001/comments/${payload.id}`,
-        payload.fixComment
+        payload
       );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
@@ -71,7 +72,8 @@ export const __delComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       await axios.delete(`${BASE_URL}/comments/${payload.id}`);
-      return thunkAPI.fulfillWithValue(payload);
+      console.log("delete_payload", payload.id);
+      return thunkAPI.fulfillWithValue(payload.id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -126,6 +128,11 @@ export const commentsSlice = createSlice({
     },
     [__delComment.fulfilled]: (state, action) => {
       state.isLoading = false;
+      console.log("action.payload =>", action.payload);
+      console.log(
+        "필터",
+        state.comments.filter((comment) => comment.id !== action.payload)
+      );
       state.comments = state.comments.filter(
         (comment) => comment.id !== action.payload
       );
