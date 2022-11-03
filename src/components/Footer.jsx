@@ -40,7 +40,7 @@ const Footer = () => {
                   <p>ⓒ Codingapple, 강의 예제 복사 금지 </p>
                 </div>
                 <a href="https://pf.kakao.com/_DLZzd">
-                  <Img src="img/info1.png" />
+                  <Img />
                 </a>
               </FooterBottom>
             </FooterTop>
@@ -114,6 +114,10 @@ const Span = styled.span`
   }
 `;
 const Img = styled.img`
+  background-image: url(img/info1.png);
+  outline: 1px solid white;
+  outline-offset: -1px;
+  background-size: cover;
   width: 360px;
   height: 60px;
 `;
