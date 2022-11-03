@@ -25,13 +25,16 @@ const CourseDetail = () => {
 
   const [upData, setUpData] = useState(init);
 
+
   const { id } = useParams();
+
 
   useEffect(() => {
     dispatch(__getCreateId(id));
   }, [dispatch, id]);
 
   const course = useSelector((state) => state?.addCreateSlice?.course);
+
 
   const postCourseId = () => {
     dispatch(__postCourseId(course?.course_id));
@@ -57,6 +60,7 @@ const CourseDetail = () => {
 
   return (
     <DetailWrap>
+
       {pay ? (
         <DetailWrap>
           <TitleH1>{course?.title}</TitleH1>
@@ -84,6 +88,7 @@ const CourseDetail = () => {
           <PayWrap>
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
+
               <AddButton 
               // onClick={()=>{
               //   setPay(!pay);
@@ -203,8 +208,8 @@ const CourseDetail = () => {
 </ButtonWrap>
   )} */}
       {/* <StarRating /> */}
-      {/* <Review />
-      <ReviewList /> */}
+      <Review courseId={id} />
+      <ReviewList />
     </DetailWrap>
   );
 };
