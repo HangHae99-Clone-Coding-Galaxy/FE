@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { __delComment, __fixComment } from "../Redux/commentSlice";
+// import { __delComment, __fixComment } from "../Redux/commentSlice";
+import { __editCreate, __delCreate } from "../Redux/modules/addCreateSlice";
 import styled from "styled-components";
 
 function ReviewListItem(props) {
@@ -29,7 +30,7 @@ function ReviewListItem(props) {
               onClick={(e) => {
                 e.preventDefault();
                 const edit = { ...origin, comment: reviewEdit };
-                dispatch(__fixComment(edit));
+                dispatch(__editCreate(edit));
 
                 setOrigin(edit);
                 setEdit(false);
@@ -54,7 +55,7 @@ function ReviewListItem(props) {
               type="button"
               onClick={() => {
                 console.log("커맨트", comment);
-                dispatch(__delComment(comment));
+                dispatch(__delCreate(comment));
               }}
             >
               삭제

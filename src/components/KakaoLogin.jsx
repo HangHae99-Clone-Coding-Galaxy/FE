@@ -15,6 +15,7 @@ const KakaoLogin = () => {
 
         .then((res) => {
           setCookie("token", res.headers.authorization);
+          console.log(res.headers);
           navigate("/");
         })
         .catch((error) => {

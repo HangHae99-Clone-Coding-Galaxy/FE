@@ -6,16 +6,15 @@ import {
   getCreateIdApi,
   delCreateApi,
   editCreateApi,
+  postCourseIdApi,
 } from "./Api/addCreateApi";
-
 
 const BASE_URL = process.env.REACT_APP_SERVER;
 
 export const __addCreate = createAsyncThunk(
   "addCreate",
   async (payload, thunkAPI) => {
-
-    console.log(payload)
+    console.log(payload);
 
     const formData = new FormData();
 
@@ -24,7 +23,8 @@ export const __addCreate = createAsyncThunk(
     });
 
     try {
-      await addCreateApi(payload);     
+      await addCreateApi(payload);
+      alert("강의등록이 완료되었습니다");
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -48,7 +48,20 @@ export const __getCreateId = createAsyncThunk(
   "getCreateId",
   async (payload, thunkAPI) => {
     try {
-      const response = await getCreateIdApi(payload)
+      const response = await getCreateIdApi(payload);
+      return thunkAPI.fulfillWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __postCourseId = createAsyncThunk(
+  "getCreateId",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await postCourseIdApi(payload);
+      alert("강의신청이 완료되었습니다");
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -60,6 +73,7 @@ export const __delCreate = createAsyncThunk(
   "delCreate",
   async (payload, thunkAPI) => {
     try {
+      alert("삭제가 완료되었습니다.");
       const response = await delCreateApi(payload);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
@@ -84,7 +98,7 @@ export const addCreateSlice = createSlice({
   name: "courses",
   initialState: {
     courses: [],
-    course:null,
+    course: null,
     isLoading: false,
     error: null,
   },
@@ -100,6 +114,20 @@ export const addCreateSlice = createSlice({
       state.courses.push(action.payload);
     },
     [__addCreate.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    //post pay
+    [__postCourseId.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__postCourseId.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+      state.courses.push(action.payload);
+    },
+    [__postCourseId.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

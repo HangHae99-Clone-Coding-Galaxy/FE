@@ -27,14 +27,34 @@ export const getCreateApi = async () => {
 };
 
 export const getCreateIdApi = async (id) => {
-  const response = await axios.get(`${BASE_URL}/api/courses/${id}`);
+  const response = await axios.get(`${BASE_URL}/api/courses/${id}`, {
+    headers: {
+      authorization,
+    },
+  });
   return response.data;
 };
 
-export const delCreateApi = async (courseId) => {
-  await axios.delete(`${BASE_URL}/api/courses/${courseId}`);
+export const postCourseIdApi = async (id) => {
+  await axios.post(`${BASE_URL}/api/courses/${id}/order`, {
+    headers: {
+      authorization,
+    },
+  });
+};
+
+export const delCreateApi = async (id) => {
+  await axios.delete(`${BASE_URL}/api/courses/${id}/remove`, {
+    headers: {
+      authorization,
+    },
+  });
 };
 
 export const editCreateApi = async (payload) => {
-  await axios.put(`${BASE_URL}/api/courses/${payload.id}`, payload.upData);
+  await axios.put(`${BASE_URL}/api/courses/${payload.id}`, payload.upData, {
+    headers: {
+      authorization,
+    },
+  });
 };

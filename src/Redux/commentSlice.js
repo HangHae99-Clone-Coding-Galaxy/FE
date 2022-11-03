@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_SERVER;
+const authorization = localStorage.getItem("Authorization");
 
 const initialState = {
   reviewList: [],
@@ -12,9 +13,20 @@ const initialState = {
 export const __addComment = createAsyncThunk(
   "addComment",
   async (payload, thunkAPI) => {
-    console.log("add", payload);
     try {
-      const data = await axios.post(`${BASE_URL}/api/courses/reviews`, payload);
+      console.log("addComment payload => ", payload);
+      // jwt토큰을 header에 함께 넣어 보내야 하는지?
+      const { comment, courseId } = payload;
+      const course_id = courseId;
+      const data = await axios.post(
+        `${BASE_URL}/api/courses/${+course_id}/reviews/create`,
+        { comment },
+        {
+          headers: {
+            authorization,
+          },
+        }
+      );
       console.log("data", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -40,47 +52,32 @@ export const __getComment = createAsyncThunk(
 );
 
 // export const __fixComment = createAsyncThunk(
-//   "fixComment",
+//   "Comments/fixComment",
 //   async (payload, thunkAPI) => {
 //     try {
-//       const data = await axios.put(`${BASE_URL}/comments/${payload.id}`, {
-//         desc: payload.desc,
-//       });
-
-//       return thunkAPI.fulfillWithValue(data.data);
+//       await axios.patch(
+//         `${BASE_URL}/api/courses/comments/${payload.id}`,
+//         payload
+//       );
+//       return thunkAPI.fulfillWithValue(payload);
 //     } catch (error) {
 //       return thunkAPI.rejectWithValue(error);
 //     }
 //   }
 // );
 
-export const __fixComment = createAsyncThunk(
-  "Comments/fixComment",
-  async (payload, thunkAPI) => {
-    try {
-      await axios.patch(
-        `${BASE_URL}/api/courses/comments/${payload.id}`,
-        payload
-      );
-      return thunkAPI.fulfillWithValue(payload);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-export const __delComment = createAsyncThunk(
-  "delComment",
-  async (payload, thunkAPI) => {
-    try {
-      await axios.delete(`${BASE_URL}/api/courses/comments/${payload.id}`);
-      console.log("delete_payload", payload.id);
-      return thunkAPI.fulfillWithValue(payload.id);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error);
-    }
-  }
-);
+// export const __delComment = createAsyncThunk(
+//   "delComment",
+//   async (payload, thunkAPI) => {
+//     try {
+//       await axios.delete(`${BASE_URL}/api/courses/comments/${payload.id}`);
+//       console.log("delete_payload", payload.id);
+//       return thunkAPI.fulfillWithValue(payload.id);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
 
 // const fixCommentFulfilledMethod = (payload, comments) => {
 //   const newComments = comments.map((comment) => {
@@ -99,7 +96,7 @@ export const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    // Get Comment
+    // // Get Comment
     [__getComment.pending]: (state) => {
       state.isLoading = true;
     },
@@ -124,45 +121,40 @@ export const commentsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    // Delete Comment
-    [__delComment.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__delComment.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      console.log("action.payload =>", action.payload);
-      state.comments = state.comments.filter(
-        (comment) => comment.id !== action.payload
-      );
-    },
-    [__delComment.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+    // // Delete Comment
+    // [__delComment.pending]: (state) => {
+    //   state.isLoading = true;
+    // },
+    // [__delComment.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+    //   console.log("action.payload =>", action.payload);
+    //   state.comments = state.comments.filter(
+    //     (comment) => comment.id !== action.payload
+    //   );
+    // },
+    // [__delComment.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
 
-    // Fix Comment
-    [__fixComment.pending]: (state) => {
-      state.isLoading = true;
-    },
+    // // Fix Comment
+    // [__fixComment.pending]: (state) => {
+    //   state.isLoading = true;
+    // },
+
     // [__fixComment.fulfilled]: (state, action) => {
     //   state.isLoading = false;
-    //   state.comments = state.comments.map((item) => {
-    //     return item.id === action.payload.id ? action.payload : item;
-    //   });
+    //   state.comments = state.comments.map((comment) =>
+    //     comment.id === action.payload.id
+    //       ? { ...action.payload.editComment, id: action.payload.id }
+    //       : comment
+    //   );
     // },
-    [__fixComment.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.comments = state.comments.map((comment) =>
-        comment.id === action.payload.id
-          ? { ...action.payload.editComment, id: action.payload.id }
-          : comment
-      );
-    },
 
-    [__fixComment.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+    // [__fixComment.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
   },
 });
 

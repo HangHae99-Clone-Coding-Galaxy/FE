@@ -6,6 +6,7 @@ import { __addCreate } from "../Redux/modules/addCreateSlice";
 
 const Create = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const init = {
     title: "",
@@ -49,7 +50,7 @@ const Create = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(__addCreate({ ...input, video }));
+    dispatch(__addCreate({ ...input, video, thumbNail }));
   };
 
   //스테이트 폼데이터 변환하고 통신연결
