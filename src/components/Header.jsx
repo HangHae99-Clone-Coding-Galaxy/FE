@@ -44,7 +44,7 @@ const Header = () => {
       <Headers>
         <Container>
           <Flex>
-            <Logo src="img/logo2-3.png" onClick={main}></Logo>
+            <Logo onClick={main}></Logo>
             <Nav>
               <Ul className="header__menulist">
                 <Li onClick={main}>
@@ -127,6 +127,10 @@ const Container = styled.div`
   margin-top: 8px;
 `;
 const Logo = styled.img`
+  background-image: url(img/logo2-3.png);
+  outline: 1px solid white;
+  outline-offset: -1px;
+  background-size: cover;
   margin-top: 24px;
   width: 136px;
   height: 24px;
