@@ -8,7 +8,6 @@ import styled from "styled-components";
 
 function Review({ courseId }) {
   const init = {
-    title: "",
     comment: "",
   };
   const dispatch = useDispatch();

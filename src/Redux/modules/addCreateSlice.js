@@ -10,14 +10,12 @@ import {
   getReviewListApi
 } from "./Api/addCreateApi";
 
-
 const BASE_URL = process.env.REACT_APP_SERVER;
 
 export const __addCreate = createAsyncThunk(
   "addCreate",
   async (payload, thunkAPI) => {
-
-    console.log(payload)
+    console.log(payload);
 
     const formData = new FormData();
 
@@ -26,8 +24,8 @@ export const __addCreate = createAsyncThunk(
     });
 
     try {
-      await addCreateApi(payload);  
-      alert("강의등록이 완료되었습니다")   
+      await addCreateApi(payload);
+      alert("강의등록이 완료되었습니다");
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -64,7 +62,7 @@ export const __getCreateId = createAsyncThunk(
   "getCreateId",
   async (payload, thunkAPI) => {
     try {
-      const response = await getCreateIdApi(payload)
+      const response = await getCreateIdApi(payload);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -72,14 +70,13 @@ export const __getCreateId = createAsyncThunk(
   }
 );
 
-
 export const __postCourseId = createAsyncThunk(
   "getCreateId",
   async (payload, thunkAPI) => {
     try {
-      const response = await postCourseIdApi(payload)
-      alert("강의신청이 완료되었습니다")
-      return thunkAPI.fulfillWithValue(response)      
+      const response = await postCourseIdApi(payload);
+      alert("강의신청이 완료되었습니다");
+      return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -115,8 +112,10 @@ export const addCreateSlice = createSlice({
   name: "courses",
   initialState: {
     courses: [],
+
     course:null,
     review:{},
+
     isLoading: false,
     error: null,
   },

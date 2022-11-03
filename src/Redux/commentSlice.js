@@ -15,19 +15,22 @@ export const __addComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("addComment payload => ", payload);
+      console.log("authorization =>", authorization);
       // jwt토큰을 header에 함께 넣어 보내야 하는지?
       const { comment, courseId } = payload;
       const course_id = courseId;
       const data = await axios.post(
-        `${BASE_URL}/api/courses/${+course_id}/reviews/create`,
+        `${BASE_URL}/api/courses/${course_id}/reviews/create`,
         { comment },
         {
           headers: {
             authorization,
+            contentType: "application/json",
           },
         }
       );
-      console.log("data", data);
+      console.log("data =>", data);
+      console.log("comment =>", comment);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

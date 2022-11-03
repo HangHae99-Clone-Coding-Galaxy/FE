@@ -26,9 +26,7 @@ const CourseDetail = () => {
 
   const [upData, setUpData] = useState(init);
 
-
   const { id } = useParams();
-
 
   useEffect(() => {
     dispatch(__getCreateId(id));
@@ -49,6 +47,7 @@ const CourseDetail = () => {
     console.log(id);
   };
   
+
   const [pay, setPay] = useState(false);
 
   const [edit, setEdit] = useState(false);
@@ -67,7 +66,6 @@ const CourseDetail = () => {
 
   return (
     <DetailWrap>
-
       {pay ? (
         <DetailWrap>
           <TitleH1>{course?.title}</TitleH1>
@@ -76,9 +74,13 @@ const CourseDetail = () => {
             <AddWrap>
               <ComButton>신청완료</ComButton>
               <Price>금액:{course?.price}원</Price>
-              <IssueSpan onClick={()=>{
-                 alert("버퍼링 관련 내용을 test@test로 문의바랍니다.")
-              }}>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+              <IssueSpan
+                onClick={() => {
+                  alert("버퍼링 관련 내용을 test@test로 문의바랍니다.");
+                }}
+              >
+                영상 버퍼링이슈가 있다면▶️
+              </IssueSpan>
             </AddWrap>
           </PayWrap>
           <ContentP>{course?.content}</ContentP>
@@ -91,27 +93,31 @@ const CourseDetail = () => {
         </DetailWrap>
       ) : (
         <DetailWrap>
-           <TitleH1>{course?.title}</TitleH1>
+          <TitleH1>{course?.title}</TitleH1>
           <PayWrap>
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
+              <AddButton
+                onClick={() => {
+                  setPay(!pay);
+                  alert("강의신청이 완료되었습니다");
+                }}
+                // onClick={postCourseId}
+              >
+                신청하기
+              </AddButton>
 
-              <AddButton 
-              onClick={()=>{
-                setPay(!pay);
-                alert("강의신청이 완료되었습니다")
-              }}
-              // onClick={postCourseId}
-              >신청하기</AddButton>
               <Price>금액:{course?.price}원</Price>
               <IssueSpan
-              onClick={()=>{
-                alert("버퍼링 관련 내용을 test@test로 문의바랍니다.")
-              }}
-              >영상 버퍼링이슈가 있다면▶️</IssueSpan>
+                onClick={() => {
+                  alert("버퍼링 관련 내용을 test@test로 문의바랍니다.");
+                }}
+              >
+                영상 버퍼링이슈가 있다면▶️
+              </IssueSpan>
             </AddWrap>
           </PayWrap>
-          <ContentP>{course?.content}</ContentP> 
+          <ContentP>{course?.content}</ContentP>
           <TitleP>{course?.title}</TitleP>
           <VidepPaySpan>
             강의신청을 해야 해당강의를 수강할 수 있습니다.
@@ -228,8 +234,8 @@ onClick={()=>{
 </ButtonWrap>
   )} */}
       {/* <StarRating /> */}
-      {/* <Review courseId={id} />
-      <ReviewList /> */}
+      <Review courseId={id} />
+      <ReviewList />
     </DetailWrap>
   );
 };

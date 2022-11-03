@@ -34,20 +34,19 @@ export const getReviewListApi = async (id) => {
 export const getCreateIdApi = async (id) => {
   const response = await axios.get(`${BASE_URL}/api/courses/${id}`, {
     headers: {
-     authorization,
+      authorization,
     },
   });
   return response.data;
 };
 
 export const postCourseIdApi = async (id) => {
- await axios.post(`${BASE_URL}/api/courses/${id}/order`, {
+  await axios.post(`${BASE_URL}/api/courses/${id}/order`, {
     headers: {
       authorization,
     },
   });
 };
-
 
 export const delCreateApi = async (id) => {
   await axios.delete(`${BASE_URL}/api/courses/${id}/remove`, {
@@ -58,9 +57,9 @@ export const delCreateApi = async (id) => {
 };
 
 export const editCreateApi = async (payload) => {
-  await axios.put(`${BASE_URL}/api/courses/${payload.id}`, payload.upData,{
-    headers:{
+  await axios.put(`${BASE_URL}/api/courses/${payload.id}`, payload.upData, {
+    headers: {
       authorization,
-    }
+    },
   });
 };
