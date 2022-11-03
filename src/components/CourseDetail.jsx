@@ -32,16 +32,12 @@ const CourseDetail = () => {
   }, [dispatch, id]);
 
   const course = useSelector((state) => state?.addCreateSlice?.course);
- 
-
-
 
   // const postCourseId = () => {
   //   dispatch(__postCourseId(course?.course_id));
   //   navigate(`/course/${id}`)
   //   console.log(id);
   // };
-  
 
   const [pay, setPay] = useState(false);
 
@@ -92,15 +88,15 @@ const CourseDetail = () => {
           <PayWrap>
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
-
-
-              <AddButton 
-              onClick={()=>{
-                setPay(!pay);
-                alert("강의신청이 완료되었습니다")
-              }}
-              // onClick={postCourseId}
-              >신청하기</AddButton>
+              <AddButton
+                onClick={() => {
+                  setPay(!pay);
+                  alert("강의신청이 완료되었습니다");
+                }}
+                // onClick={postCourseId}
+              >
+                신청하기
+              </AddButton>
 
               <Price>금액:{course?.price}원</Price>
               <IssueSpan
@@ -218,8 +214,8 @@ const CourseDetail = () => {
 </ButtonWrap>
   )} */}
       {/* <StarRating /> */}
-      {/* <Review courseId={id} />
-      <ReviewList /> */}
+      <Review courseId={id} />
+      <ReviewList />
     </DetailWrap>
   );
 };
