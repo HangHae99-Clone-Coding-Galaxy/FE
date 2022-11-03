@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../Redux/modules/user";
+import "../App.css";
 
 const Kakao = (props) => {
   const dispatch = useDispatch();
@@ -14,6 +15,6 @@ const Kakao = (props) => {
     await dispatch(userActions.kakaoLogin(code));
   }, []);
 
-  return <div>로딩중입니다...</div>;
+  return <div class="loader"></div>;
 };
 export default Kakao;

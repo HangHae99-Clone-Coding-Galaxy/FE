@@ -3,27 +3,29 @@ import React, { useState, useEffect } from "react";
 import ReviewListItem from "./ReviewListItem";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  __getComment,
-  __delComment,
-  __fixComment,
-  commentsSlice,
-} from "../Redux/commentSlice";
+// import {
+//   __getComment,
+//   __delComment,
+//   __fixComment,
+//   commentsSlice,
+// } from "../Redux/commentSlice";
+import { __getCreate } from "../Redux/modules/addCreateSlice";
 import { useParams } from "react-router-dom";
 
 function ReviewList() {
-  const commentList = useSelector((state) => state.commentSlice.comments);
+  const commentList = useSelector((state) => state.addCreateSlice?.review);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
-    dispatch(__getComment(id));
+    dispatch(__getCreate(id));
   }, [dispatch, id]);
+  console.log("코멘트리스트", commentList);
 
   return (
     <div>
-      {commentList.map((comment) => (
-        <ReviewListItem key={comment.id} comment={comment} />
-      ))}
+      {commentList?.map((comment) => {
+        return <ReviewListItem key={comment.id} comment={comment} />;
+      })}
     </div>
   );
 }

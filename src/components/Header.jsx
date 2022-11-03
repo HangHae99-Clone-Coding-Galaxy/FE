@@ -9,8 +9,15 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("accessToken");
+  const nick = localStorage.getItem("Nickname");
   const isOpen = useSelector((state) => state.modalSlice.isOpen);
   const searchOpen = useSelector((state) => state.modalSlice.searchOpen);
+
+  const addClass = () => {
+    if(nick === "admin"){
+      navigate("/create");
+    }
+  }
 
   const toLogin = () => {
     if (token) {
@@ -52,9 +59,7 @@ const Header = () => {
                 </Li>
                 <Li>
                   <strong
-                    onClick={() => {
-                      navigate("/create");
-                    }}
+                    onClick={addClass}
                   >
                     등록하기
                   </strong>

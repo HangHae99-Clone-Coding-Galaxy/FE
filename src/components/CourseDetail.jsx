@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { __delCreate, __getCreateId,__editCreate } from "../Redux/modules/addCreateSlice";
+import {
+  __delCreate,
+  __getCreateId,
+  __editCreate,
+  __postCourseId,
+} from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
 import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
+import axios from "axios";
 
 const CourseDetail = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,18 +23,29 @@ const CourseDetail = () => {
     content: "",
   };
 
-
   const [upData, setUpData] = useState(init);
 
-  const course = useSelector((state) => state.addCreateSlice.course);
 
-  const [pay, setPay] = useState(false);
+  const { id } = useParams();
 
-  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     dispatch(__getCreateId(id));
   }, [dispatch, id]);
+
+  const course = useSelector((state) => state?.addCreateSlice?.course);
+  console.log(course)
+
+
+  // const postCourseId = () => {
+  //   dispatch(__postCourseId(course?.course_id));
+  //   navigate(`/course/${id}`)
+  //   console.log(id);
+  // };
+  
+  const [pay, setPay] = useState(false);
+
+  const [edit, setEdit] = useState(false);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -38,57 +53,69 @@ const CourseDetail = () => {
     setUpData({ ...upData, [name]: value });
   };
 
-    useEffect(() => {
-      if(!!course?.title){
-        setUpData({title: course?.title,
-        content: course?.content})
-      }
-    }, [course]);
+  useEffect(() => {
+    if (!!course?.title) {
+      setUpData({ title: course?.title, content: course?.content });
+    }
+  }, [course]);
 
   return (
     <DetailWrap>
-      {!pay ? (
+
+      {pay ? (
         <DetailWrap>
           <TitleH1>{course?.title}</TitleH1>
           <PayWrap>
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <ComButton>신청완료</ComButton>
-              <Price>금액:10,000원</Price>
-              <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+              <Price>금액:{course?.price}원</Price>
+              <IssueSpan onClick={()=>{
+                 alert("버퍼링 관련 내용을 test@test로 문의바랍니다.")
+              }}>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>          
+          </PayWrap>
           <ContentP>{course?.content}</ContentP>
           <TitleP>{course?.title}</TitleP>
-          <PlayerWrapper>
-            <ReactPlayer
-              url="https://youtu.be/MAg5-YQK0BY"
-              width="100%"
-              height="100%"
-              muted={false}
-              playing={false}
-              loop={true}
-            />
-          </PlayerWrapper>
+          <div style={{ backgroundColor: "red" }}>
+            <video controls width={640}>
+              <source src={course?.video} />
+            </video>
+          </div>
         </DetailWrap>
       ) : (
         <DetailWrap>
-          <TitleP>{course?.title}</TitleP>
+           <TitleH1>{course?.title}</TitleH1>
           <PayWrap>
-          <IMG src={course?.thumbNail} alt="test"></IMG>
+            <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
-              <AddButton>신청하기</AddButton>
-              <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+
+              <AddButton 
+              onClick={()=>{
+                setPay(!pay);
+                alert("강의신청이 완료되었습니다")
+              }}
+              // onClick={postCourseId}
+              >신청하기</AddButton>
+              <Price>금액:{course?.price}원</Price>
+              <IssueSpan
+              onClick={()=>{
+                alert("버퍼링 관련 내용을 test@test로 문의바랍니다.")
+              }}
+              >영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>          
-          <ContentP>{course?.content}</ContentP>
+          </PayWrap>
+          <ContentP>{course?.content}</ContentP> 
+          <TitleP>{course?.title}</TitleP>
           <VidepPaySpan>
-            강의구매를 해야 해당강의를 수강할 수 있습니다.
+            강의신청을 해야 해당강의를 수강할 수 있습니다.
             <br />
-            강의신청 바로가기{" "}
+            우측 상단의 '신청하기'를 클릭해주세요!
           </VidepPaySpan>
         </DetailWrap>
       )}
+      {/* {주석} */}
+      {/* <p>{course?.reviewList}</p> */}
 
       {edit ? (
         <EditWrap>
@@ -107,33 +134,35 @@ const CourseDetail = () => {
             onChange={onChangeHandler}
           />
           <ButtonWrap>
-    <button
-      onClick={() => {
-        dispatch(__editCreate({upData,id}));
-        dispatch(__getCreateId(id))
-        setEdit(false);
-        window.location.reload();
-      }}
-    >완료
-    </button>
-    <button
-      onClick={() => {
-        dispatch(__delCreate(id));
-        navigate("/allcourses");
-      }}
-    >
-      삭제
-    </button>
-    </ButtonWrap>
+            <button
+              onClick={() => {
+                dispatch(__editCreate({ upData, course: course?.course_id }));
+                dispatch(__getCreateId(course?.course_id));
+                setEdit(false);
+              }}
+            >
+              완료
+            </button>
+            <button
+              onClick={() => {
+                dispatch(__delCreate(course?.course_id));
+                navigate("/allcourses");
+              }}
+            >
+              삭제
+            </button>
+          </ButtonWrap>
         </EditWrap>
-      ) : <ButtonWrap>
-      <ButtonTrans
-        onClick={() => {
-          setEdit(!edit);
-        }}
-      >수정
-      </ButtonTrans>
-      {/* <ButtonTrans
+      ) : (
+        <ButtonWrap>
+          <ButtonTrans
+            onClick={() => {
+              setEdit(!edit);
+            }}
+          >
+            수정
+          </ButtonTrans>
+          {/* <ButtonTrans
         onClick={() => {
           dispatch(__delCreate(id));
           navigate("/allcourses");
@@ -141,9 +170,10 @@ const CourseDetail = () => {
       >
         삭제
       </ButtonTrans> */}
-      </ButtonWrap>}
+        </ButtonWrap>
+      )}
 
-  {/* {edit?(
+      {/* {edit?(
     <ButtonWrap>
     <ButtonTrans
       onClick={() => {
@@ -180,11 +210,9 @@ const CourseDetail = () => {
 </ButtonTrans>
 </ButtonWrap>
   )} */}
-
-     
-
-      <Review />
-      <ReviewList />
+      {/* <StarRating /> */}
+      {/* <Review courseId={id} />
+      <ReviewList /> */}
     </DetailWrap>
   );
 };
@@ -228,6 +256,7 @@ const ButtonTrans = styled.button`
   background-color: transparent;
   color: transparent;
   border: none;
+  cursor: pointer;
   :hover {
     color: grey;
   }
@@ -285,7 +314,7 @@ const IssueSpan = styled.span`
   }
 `;
 const Price = styled.span`
-  color:grey  
+  color: grey;
 `;
 
 const AddWrap = styled.div`
@@ -353,6 +382,7 @@ const VidepPaySpan = styled.span`
   width: 400px;
   height: 300px;
   display: flex;
+  gap: 20px;
   text-align: center;
   margin-top: 50px;
   margin-bottom: 30px;
@@ -361,11 +391,11 @@ const VidepPaySpan = styled.span`
   justify-content: center;
   background-color: #c6c3c3;
   color: #0f4a70;
-  cursor: pointer;
+  /* cursor: pointer;
   :hover {
     color: #803d3d;
     text-decoration: underline;
-  }
+  } */
 `;
 
 const ComButton = styled.button`
@@ -396,11 +426,11 @@ const EditWrap = styled.div`
   font-size: 13px;
   font-weight: 600;
   gap: 10px;
-  input{
+  input {
     width: 450px;
     height: 30px;
   }
-  textarea{
+  textarea {
     padding: 10px;
     min-width: 450px;
     max-width: 450px;

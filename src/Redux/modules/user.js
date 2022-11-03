@@ -11,19 +11,23 @@ const kakaoLogin = (code) => {
         console.log(res);
 
         const ACCESS_TOKEN = res.headers.authorization;
+        const RefreshToken = res.headers.refreshtoken;
+        const Nickname = res.headers.nickname;
         console.log(ACCESS_TOKEN);
 
         //local store (temp)
         localStorage.setItem("Authorization", ACCESS_TOKEN);
+        localStorage.setItem("RefreshToken", RefreshToken);
+        localStorage.setItem("Nickname", Nickname);
 
         window.alert("로그인 성공!!!");
         //get token -> change page to HOME
-        //history.replace("/home");
+        window.location.replace("/");
       })
       .catch((err) => {
         console.log("Login error", err);
         window.alert("로그인 실패...");
-        //history.replace("/home");
+        window.location.replace("/");
       });
   };
 };

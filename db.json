@@ -47,9 +47,9 @@
     {
       "courseId": 2,
       "title": "안녕하세요",
-      "comment": "반가워요",
+      "comment": "반가워",
       "id": 15
-    },
+    }
   ],
   "profile": {
     "name": "typicode"

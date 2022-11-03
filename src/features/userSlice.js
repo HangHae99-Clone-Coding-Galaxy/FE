@@ -17,7 +17,7 @@ export const __getUsers = createAsyncThunk(
   "post/getUser",
   async (payload, thunkAPI) => {
     try {
-      const users = await axios.get("http://localhost:3001");
+      const users = await axios.get("http://43.201.75.53:8080");
       return thunkAPI.fulfillWithValue(users.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

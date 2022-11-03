@@ -26,9 +26,9 @@ export default function AllCourses() {
       {courses.map((course) => {
         return (
           <Card
-            key={course.courseId}
+            key={course.course_id}
             onClick={() => {
-              navigate(`/course/${course.courseId}`);
+              navigate(`/course/${course.course_id}`);
             }}
           >
             {/* <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png" /> */}

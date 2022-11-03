@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { __delComment, __fixComment } from "../Redux/commentSlice";
+// import { __delComment, __fixComment } from "../Redux/commentSlice";
+import { __editCreate, __delCreate } from "../Redux/modules/addCreateSlice";
 import styled from "styled-components";
 
 function ReviewListItem(props) {
   const dispatch = useDispatch();
   const { comment } = props;
   const [edit, setEdit] = useState(false);
-  const [reviewEdit, setReviewEdit] = useState(comment);
+  const [reviewEdit, setReviewEdit] = useState(null);
 
-  // console.log("프롭스", comment);
+  const [origin, setOrigin] = useState(comment);
 
   return (
     <Wraper key={comment.id}>
@@ -21,14 +22,17 @@ function ReviewListItem(props) {
               type="text"
               name="comment"
               required
-              default_value={comment.comment}
+              defaultValue={comment.comment}
               onChange={(e) => setReviewEdit(e.target.value)}
             />
 
             <button
               onClick={(e) => {
                 e.preventDefault();
-                dispatch(__fixComment({ ...comment, comment: reviewEdit }));
+                const edit = { ...origin, comment: reviewEdit };
+                dispatch(__editCreate(edit));
+
+                setOrigin(edit);
                 setEdit(false);
               }}
               type="submit"
@@ -38,8 +42,8 @@ function ReviewListItem(props) {
           </div>
         ) : (
           <div>
-            <p>{comment.title}</p>
-            <p>{comment.comment}</p>
+            <p>{origin.title}</p>
+            <p>{origin.comment}</p>
             <button
               onClick={() => {
                 setEdit(!edit);
@@ -47,7 +51,13 @@ function ReviewListItem(props) {
             >
               수정
             </button>
-            <button onClick={() => dispatch(__delComment(comment))}>
+            <button
+              type="button"
+              onClick={() => {
+                console.log("커맨트", comment);
+                dispatch(__delCreate(comment));
+              }}
+            >
               삭제
             </button>
           </div>
@@ -59,7 +69,7 @@ function ReviewListItem(props) {
 
 export default ReviewListItem;
 
-const Wraper = styled.div`
+const Wraper = styled.form`
   margin: 20px;
   gap: 30px;
   display: flex;

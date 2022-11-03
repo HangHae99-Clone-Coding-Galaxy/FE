@@ -6,6 +6,7 @@ import { __addCreate } from "../Redux/modules/addCreateSlice";
 
 const Create = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const init = {
     title: "",
@@ -15,12 +16,13 @@ const Create = () => {
 
   //폼데이터 전송 스테이트
   const [input, SetInput] = useState(init);
-  // const [thumbNail, setThumbNail] = useState(null);
+  const [thumbNail, setThumbNail] = useState(null);
 
   const [video, setVideo] = useState(null);
 
+
   // 이미지 미리보기 스테이트
-  // const [imageSrc, setImageSrc] = useState("");
+  const [imageSrc, setImageSrc] = useState("");
 
   //텍스트데이터 스테이즈 저장
   const onChangeInput = (e) => {
@@ -29,28 +31,28 @@ const Create = () => {
   };
 
   //이미지 스테이트저장, 미리보기 온체인지 핸들러
-  // const onChangeImage = (e) => {
-  //   setThumbNail(e.target.files[0]);
-  //   let reader = new FileReader();
-  //   if (e.target.files[0]) {
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   }
-  //   reader.onloadend = () => {
-  //     const previewImgUrl = reader.result;
-  //     if (previewImgUrl) {
-  //       setImageSrc([...imageSrc, previewImgUrl]);
-  //     }
-  //   };
-  // };
-
+  const onChangeImage = (e) => {
+    setThumbNail(e.target.files[0]);
+    let reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    reader.onloadend = () => {
+      const previewImgUrl = reader.result;
+      if (previewImgUrl) {
+        setImageSrc([...imageSrc, previewImgUrl]);
+      }
+    };
+  };
   // 비디오 스테이트 저장
   const onChangeVideo = (e) => {
     setVideo(e.target.files[0]);
   };
 
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(__addCreate({ ...input, video }));
+    dispatch(__addCreate({ ...input, video,thumbNail }));
   };
 
   //스테이트 폼데이터 변환하고 통신연결
@@ -107,14 +109,14 @@ const Create = () => {
         placeholder="내용"
         onChange={onChangeInput}
       />
-      {/* <ImgSize src={imageSrc} alt="" />
+      <ImgSize src={imageSrc} alt="" />
       <input
         name="thumbNail"
         type={"file"}
         accept={"image/*"}
         placeholder="이미지업로드"
         onChange={onChangeImage}
-      /> */}
+      />
       <input
         name="video"
         type={"file"}

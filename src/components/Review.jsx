@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __addComment } from "../Redux/commentSlice";
+// import { __addCreate } from "../Redux/modules/addCreateSlice";
 import styled from "styled-components";
+// import StarRating from "./StarRating";
 // import Button from "./element/Button";
 
-function Review() {
+function Review({ courseId }) {
   const init = {
     title: "",
     comment: "",
   };
   const dispatch = useDispatch();
   const [comment, setComment] = useState(init);
-  const courseId = useSelector((state) => state?.addCreateSlice?.course?.id);
+  // const courseId = useSelector((state) => state?.addCreateSlice?.course?.id);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
@@ -31,24 +33,25 @@ function Review() {
     <Form onSubmit={onClickHandler}>
       <h3>리뷰 작성</h3>
       <RepleWrap>
-        <p>제목</p>
+        {/* <p>제목</p>
         <input
           type="text"
           name="title"
           value={comment.title}
           placeholder="제목 추가"
           onChange={onChangeHandler}
-        />
-        <p>내용</p>
+        /> */}
+        <p>리뷰</p>
         <input
           type="textarea"
           name="comment"
           value={comment.comment}
-          placeholder="댓글 추가"
+          placeholder="리뷰 추가"
           onChange={onChangeHandler}
         />
       </RepleWrap>
       <button>추가</button>
+
       {/* <button onClick={()=>{setEdit(!edit)}}>수정</button>
       <button onClick={() => dispatch(__delComment(comment))}>삭제</button> */}
     </Form>
