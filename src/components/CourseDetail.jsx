@@ -34,7 +34,7 @@ const CourseDetail = () => {
   }, [dispatch, id]);
 
   const course = useSelector((state) => state?.addCreateSlice?.course);
-  console.log(course)
+ 
 
 
   // const postCourseId = () => {
