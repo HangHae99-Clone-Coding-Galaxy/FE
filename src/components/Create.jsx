@@ -6,6 +6,7 @@ import { __addCreate } from "../Redux/modules/addCreateSlice";
 
 const Create = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const init = {
     title: "",
