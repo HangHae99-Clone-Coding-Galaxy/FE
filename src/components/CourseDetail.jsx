@@ -11,7 +11,6 @@ import {
 import Review from "./Review";
 import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
-
 import axios from "axios";
 
 const CourseDetail = () => {

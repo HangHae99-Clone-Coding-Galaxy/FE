@@ -4,7 +4,7 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_SERVER;
 
 const initialState = {
-  comments: [],
+  reviewList: [],
   isLoading: false,
   error: null,
 };
@@ -14,10 +14,7 @@ export const __addComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     console.log("add", payload);
     try {
-      const data = await axios.post(
-        `${BASE_URL}/api/courses/comments`,
-        payload
-      );
+      const data = await axios.post(`${BASE_URL}/api/courses/reviews`, payload);
       console.log("data", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
