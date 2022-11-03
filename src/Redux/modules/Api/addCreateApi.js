@@ -26,6 +26,11 @@ export const getCreateApi = async () => {
   return response.data;
 };
 
+export const getReviewListApi = async (id) => {
+  const response = await axios.get(`${BASE_URL}/api/courses/${id}/reviews`);
+  return response.data;
+};
+
 export const getCreateIdApi = async (id) => {
   const response = await axios.get(`${BASE_URL}/api/courses/${id}`, {
     headers: {

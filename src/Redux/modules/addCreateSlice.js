@@ -7,6 +7,7 @@ import {
   delCreateApi,
   editCreateApi,
   postCourseIdApi,
+  getReviewListApi
 } from "./Api/addCreateApi";
 
 const BASE_URL = process.env.REACT_APP_SERVER;
@@ -43,6 +44,19 @@ export const __getCreate = createAsyncThunk(
     }
   }
 );
+
+export const __getReviewList = createAsyncThunk(
+  "getReviewList",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await getReviewListApi(payload);
+      return thunkAPI.fulfillWithValue(response);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 
 export const __getCreateId = createAsyncThunk(
   "getCreateId",
@@ -98,7 +112,10 @@ export const addCreateSlice = createSlice({
   name: "courses",
   initialState: {
     courses: [],
-    course: null,
+
+    course:null,
+    review:{},
+
     isLoading: false,
     error: null,
   },
@@ -156,6 +173,20 @@ export const addCreateSlice = createSlice({
       state.course = action.payload;
     },
     [__getCreateId.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+//리뷰 겟요청
+    [__getReviewList.pending]: (state) => {
+      state.isLoading = true;
+      state.isDone = false;
+    },
+    [__getReviewList.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isDone = true;
+      state.review = action.payload;
+    },
+    [__getReviewList.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },

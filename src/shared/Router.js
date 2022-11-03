@@ -14,6 +14,7 @@ import CourseDetail from "../components/CourseDetail";
 import OrderList from "../components/OrderList";
 import MyReviewList from "../components/MyReviewList";
 import Kakao from "../utils/kakao";
+import ReviewListPage from "../components/ReviewListPage";
 
 const Router = () => {
   return (
@@ -33,6 +34,7 @@ const Router = () => {
         {/* <Route path="/courses/:{course_id}" element={<CourseDetail />} /> */}
         <Route path="/courses/:id" element={<CourseDetail />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/reviewList/:id" element={<ReviewListPage />} />
         <Route path="/api/member/kakao/callback" element={<Kakao />} />
       </Routes>
       <Footer />

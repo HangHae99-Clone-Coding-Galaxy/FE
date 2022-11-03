@@ -7,6 +7,7 @@ import {
   __getCreateId,
   __editCreate,
   __postCourseId,
+  __getReviewList
 } from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
 import ReviewList from "./ReviewList";
@@ -31,13 +32,21 @@ const CourseDetail = () => {
     dispatch(__getCreateId(id));
   }, [dispatch, id]);
 
-  const course = useSelector((state) => state?.addCreateSlice?.course);
+  useEffect(() => {
+    dispatch(__getReviewList(id));
+  }, [dispatch, id]);
 
-  // const postCourseId = () => {
-  //   dispatch(__postCourseId(course?.course_id));
-  //   navigate(`/course/${id}`)
-  //   console.log(id);
-  // };
+  const course = useSelector((state) => state?.addCreateSlice?.course);
+  const reviews = useSelector((state) => state?.addCreateSlice?.review);
+ 
+
+
+  const postCourseId = () => {
+    dispatch(__postCourseId(course?.course_id));
+    navigate(`/course/${id}`)
+    console.log(id);
+  };
+  
 
   const [pay, setPay] = useState(false);
 
@@ -117,8 +126,19 @@ const CourseDetail = () => {
           </VidepPaySpan>
         </DetailWrap>
       )}
-      {/* {주석} */}
-      {/* <p>{course?.reviewList}</p> */}
+<button
+onClick={()=>{
+  navigate(`/reviewList/${id}`)
+}}
+>리뷰작성,리뷰보기 클릭</button>
+      {/* <p>{reviews && reviews?.comment?.map((item)=>{
+        return (
+          <div key={item?.review_id}>
+            {item?.comment}
+          </div>
+        )
+      })}</p> */}
+
 
       {edit ? (
         <EditWrap>
