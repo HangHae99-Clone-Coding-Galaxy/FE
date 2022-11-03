@@ -20,7 +20,7 @@ export default function AllCourses() {
   if (courses.length === 0) {
     return <p>아직 생성된 게시물이 없습니다.</p>;
   }
-
+  // 테스트 주석
   return (
     <CoursesWrap>
       {courses.map((course) => {
