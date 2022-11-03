@@ -37,11 +37,11 @@ const CourseDetail = () => {
  
 
 
-  // const postCourseId = () => {
-  //   dispatch(__postCourseId(course?.course_id));
-  //   navigate(`/course/${id}`)
-  //   console.log(id);
-  // };
+  const postCourseId = () => {
+    dispatch(__postCourseId(course?.course_id));
+    navigate(`/course/${id}`)
+    console.log(id);
+  };
   
   const [pay, setPay] = useState(false);
 
