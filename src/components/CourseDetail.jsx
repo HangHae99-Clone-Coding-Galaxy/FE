@@ -7,6 +7,7 @@ import {
   __getCreateId,
   __editCreate,
   __postCourseId,
+  __getReviewList
 } from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
 import ReviewList from "./ReviewList";
@@ -33,7 +34,12 @@ const CourseDetail = () => {
     dispatch(__getCreateId(id));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    dispatch(__getReviewList(id));
+  }, [dispatch, id]);
+
   const course = useSelector((state) => state?.addCreateSlice?.course);
+  const reviews = useSelector((state) => state?.addCreateSlice?.review);
  
 
 
@@ -114,6 +120,14 @@ const CourseDetail = () => {
           </VidepPaySpan>
         </DetailWrap>
       )}
+
+      <p>{reviews && reviews?.comment?.map((item)=>{
+        return (
+          <div key={item?.review_id}>
+            {item?.comment}
+          </div>
+        )
+      })}</p>
       {/* {주석} */}
       {/* <p>{course?.reviewList}</p> */}
 
