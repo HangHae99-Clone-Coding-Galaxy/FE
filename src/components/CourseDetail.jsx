@@ -37,11 +37,11 @@ const CourseDetail = () => {
   console.log(course)
 
 
-  const postCourseId = () => {
-    dispatch(__postCourseId(course?.course_id));
-    navigate(`/course/${id}`)
-    console.log(id);
-  };
+  // const postCourseId = () => {
+  //   dispatch(__postCourseId(course?.course_id));
+  //   navigate(`/course/${id}`)
+  //   console.log(id);
+  // };
   
   const [pay, setPay] = useState(false);
 
@@ -114,7 +114,7 @@ const CourseDetail = () => {
           </VidepPaySpan>
         </DetailWrap>
       )}
-
+      {/* {주석} */}
       {/* <p>{course?.reviewList}</p> */}
 
       {edit ? (
