@@ -3,13 +3,19 @@ import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { __delCreate, __getCreateId,__editCreate } from "../Redux/modules/addCreateSlice";
+import {
+  __delCreate,
+  __getCreateId,
+  __editCreate,
+} from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
 import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
+import axios from "axios";
 
 const CourseDetail = () => {
   const { id } = useParams();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,9 +27,9 @@ const CourseDetail = () => {
 
   const [upData, setUpData] = useState(init);
 
-  const course = useSelector((state) => state.addCreateSlice.course);
+  const course = useSelector((state) => state?.addCreateSlice?.course);
 
-  const [pay, setPay] = useState(true);
+  const [pay, setPay] = useState(false);
 
   const [edit, setEdit] = useState(false);
 
@@ -37,32 +43,33 @@ const CourseDetail = () => {
     setUpData({ ...upData, [name]: value });
   };
 
-    useEffect(() => {
-      if(!!course?.title){
-        setUpData({title: course?.title,
-        content: course?.content})
-      }
-    }, [course]);
+  useEffect(() => {
+    if (!!course?.title) {
+      setUpData({ title: course?.title, content: course?.content });
+    }
+  }, [course]);
 
   return (
     <DetailWrap>
       {!pay ? (
         <DetailWrap>
-          <TitleP>{course?.title}</TitleP>
+          <TitleH1>{course?.title}</TitleH1>
           <PayWrap>
-            <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
+            <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <ComButton>신청완료</ComButton>
+              <Price>금액:{course?.price}원</Price>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>          
+          </PayWrap>
           <ContentP>{course?.content}</ContentP>
+          <TitleP>{course?.title}</TitleP>
           <PlayerWrapper>
             <ReactPlayer
-              url="https://youtu.be/nxi1EXmPHRs"
+              url={course?.video}
               width="100%"
               height="100%"
-              muted={true}
+              muted={false}
               playing={false}
               loop={true}
             />
@@ -72,12 +79,13 @@ const CourseDetail = () => {
         <DetailWrap>
           <TitleP>{course?.title}</TitleP>
           <PayWrap>
-            <IMG src="https://codingapple.com/wp-content/uploads/2020/02/%EC%83%81%ED%92%88%EC%82%AC%EC%A7%84-6-1-1.png"></IMG>
+            <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <AddButton>신청하기</AddButton>
+              <Price>금액:{course?.price}원</Price>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>          
+          </PayWrap>
           <ContentP>{course?.content}</ContentP>
           <VidepPaySpan>
             강의구매를 해야 해당강의를 수강할 수 있습니다.
@@ -104,33 +112,35 @@ const CourseDetail = () => {
             onChange={onChangeHandler}
           />
           <ButtonWrap>
-    <button
-      onClick={() => {
-        dispatch(__editCreate({upData,id}));
-        dispatch(__getCreateId(id))
-        setEdit(false);
-        window.location.reload();
-      }}
-    >완료
-    </button>
-    <button
-      onClick={() => {
-        dispatch(__delCreate(id));
-        navigate("/allcourses");
-      }}
-    >
-      삭제
-    </button>
-    </ButtonWrap>
+            <button
+              onClick={() => {
+                dispatch(__editCreate({ upData, course: course?.course_id }));
+                dispatch(__getCreateId(course?.course_id));
+                setEdit(false);
+              }}
+            >
+              완료
+            </button>
+            <button
+              onClick={() => {
+                dispatch(__delCreate(course?.course_id));
+                navigate("/allcourses");
+              }}
+            >
+              삭제
+            </button>
+          </ButtonWrap>
         </EditWrap>
-      ) : <ButtonWrap>
-      <ButtonTrans
-        onClick={() => {
-          setEdit(!edit);
-        }}
-      >수정
-      </ButtonTrans>
-      {/* <ButtonTrans
+      ) : (
+        <ButtonWrap>
+          <ButtonTrans
+            onClick={() => {
+              setEdit(!edit);
+            }}
+          >
+            수정
+          </ButtonTrans>
+          {/* <ButtonTrans
         onClick={() => {
           dispatch(__delCreate(id));
           navigate("/allcourses");
@@ -138,9 +148,10 @@ const CourseDetail = () => {
       >
         삭제
       </ButtonTrans> */}
-      </ButtonWrap>}
+        </ButtonWrap>
+      )}
 
-  {/* {edit?(
+      {/* {edit?(
     <ButtonWrap>
     <ButtonTrans
       onClick={() => {
@@ -177,9 +188,7 @@ const CourseDetail = () => {
 </ButtonTrans>
 </ButtonWrap>
   )} */}
-
-     
-
+      {/* <StarRating /> */}
       <Review />
       <ReviewList />
     </DetailWrap>
@@ -281,6 +290,9 @@ const IssueSpan = styled.span`
     transform: scale(0.9);
   }
 `;
+const Price = styled.span`
+  color: grey;
+`;
 
 const AddWrap = styled.div`
   display: flex;
@@ -297,7 +309,7 @@ const AddWrap = styled.div`
 
 const TitleP = styled.p`
   display: flex;
-  margin-top: 10px;
+  margin-top: 100px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -309,6 +321,22 @@ const TitleP = styled.p`
   border: none;
   color: #105796;
   font-size: 18px;
+  font-weight: bold;
+`;
+
+const TitleH1 = styled.p`
+  display: flex;
+  margin-top: 10px;
+  margin-left: 20px;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  width: 1200px;
+  height: 50px;
+  gap: 40px;
+  border: none;
+  color: #000000;
+  font-size: 30px;
   font-weight: bold;
 `;
 
@@ -374,11 +402,11 @@ const EditWrap = styled.div`
   font-size: 13px;
   font-weight: 600;
   gap: 10px;
-  input{
+  input {
     width: 450px;
     height: 30px;
   }
-  textarea{
+  textarea {
     padding: 10px;
     min-width: 450px;
     max-width: 450px;

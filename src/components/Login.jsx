@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { IoIosClose } from "react-icons/io";
@@ -15,14 +15,13 @@ const Login = () => {
   };
 
   const logins = useSelector((state) => state.userSlice.users);
-  console.log(logins);
 
   const signup = () => {
     navigate("/signup");
   };
 
   const [login, setLogin] = useState({
-    userId: "",
+    email: "",
     password: "",
   });
 
@@ -37,62 +36,76 @@ const Login = () => {
     e.preventDefault();
     dispatch(__setUser(login));
     setLogin({
-      userId: "",
+      email: "",
       password: "",
     });
   };
-  console.log(login);
+
+  const KAKAO_REST_API_KEY = "7b6fd467ed016c6c6aee497ce7fa664a";
+  const KAKAO_REDIRECT_URI = "http://localhost:3000/api/member/kakao/callback";
+  // const restApiKey = "fdda33954998532f3179db62556d362f";
+  // const redirectUrl = "http://localhost:3000/api/member/kakao/callback";
+  // const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${restApiKey}&redirect_uri=${redirectUrl}&response_type=code`;
+
   return (
-    <ModalContainer>
-      <Modal>
-        <Box onSubmit={(e) => handleAddUsers(e)}>
-          <Div>
-            <Flex>
-              <H3>로그인</H3>
-              <Close
+    <>
+      <ModalContainer>
+        <Modal>
+          <Box onSubmit={(e) => handleAddUsers(e)}>
+            <Div>
+              <Flex>
+                <H3>로그인</H3>
+                <Close
+                  onClick={() => {
+                    dispatch(closeModal());
+                  }}
+                >
+                  <IoIosClose />
+                </Close>
+              </Flex>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="아이디"
+                onClick={onChangeHandler}
+              />
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="비밀번호"
+                onClick={onChangeHandler}
+              />
+            </Div>
+            <ul>
+              <li>
+                <LoginButton type="submit">로그인</LoginButton>
+              </li>
+              <li>
+                <RegisterButton
+                  onClick={() => {
+                    dispatch(closeModal());
+                    signup();
+                  }}
+                >
+                  10초 회원가입
+                </RegisterButton>
+              </li>
+              <Kakao
                 onClick={() => {
-                  dispatch(closeModal());
+                  window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
                 }}
               >
-                <IoIosClose />
-              </Close>
-            </Flex>
-            <Input
-              id="userId"
-              name="userId"
-              type="email"
-              placeholder="아이디"
-              onClick={onChangeHandler}
-            />
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="비밀번호"
-              onClick={onChangeHandler}
-            />
-          </Div>
-          <ul>
-            <li>
-              <LoginButton type="submit">로그인</LoginButton>
-            </li>
-            <li>
-              <RegisterButton
-                onClick={() => {
-                  dispatch(closeModal());
-                  signup();
-                }}
-              >
-                10초 회원가입
-              </RegisterButton>
-            </li>
-            <Kakao>
-              <img src="../img/kakao.png"></img>
-            </Kakao>
-          </ul>
-        </Box>
-      </Modal>
-    </ModalContainer>
+                {/* <a href={KAKAO_AUTH_URL}> */}
+                <img src="../img/kakao.png"></img>
+                {/* </a> */}
+              </Kakao>
+            </ul>
+          </Box>
+        </Modal>
+      </ModalContainer>
+    </>
   );
 };
 

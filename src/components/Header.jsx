@@ -1,11 +1,9 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal, openSearchModal } from "../features/modalSlice";
 import Login from "./Login";
-import Search from "./Search";
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,15 +30,16 @@ const Header = () => {
   const mypage = () => {
     navigate("/members");
   };
+
   return (
     <>
       {isOpen && <Login />}
-      <Headers className="sleek">
+      <Headers>
         <Container>
           <Flex>
             <Logo src="img/logo2-3.png" onClick={main}></Logo>
             <Nav>
-              <Ul>
+              <Ul className="header__menulist">
                 <Li onClick={main}>
                   <strong>HOME</strong>
                 </Li>
@@ -92,7 +91,9 @@ const Header = () => {
                   </Flex>
                 </Li>
                 <Li onClick={cart}>
-                  <FaCartPlus />
+                  <Cart>
+                    <FaCartPlus />
+                  </Cart>
                 </Li>
               </LoginUl>
             </div>
@@ -125,6 +126,18 @@ const Logo = styled.img`
   width: 136px;
   height: 24px;
   cursor: pointer;
+  @media screen and (max-width: 1450px) {
+    max-width: 1450px;
+    margin: 22px 50px;
+  }
+  @media screen and (max-width: 1100px) {
+    max-width: 1100px;
+    margin: 22px 50px;
+  }
+  @media screen and (max-width: 750px) {
+    max-width: 750px;
+    margin: 22px 50px;
+  }
 `;
 const Nav = styled.nav`
   margin-top: 12px;
@@ -133,6 +146,12 @@ const Nav = styled.nav`
   height: 74.563;
   & li :hover {
     color: #ff4949;
+  }
+  @media screen and (max-width: 1450px) {
+    margin-left: 200px;
+  }
+  @media screen and (max-width: 800px) {
+    margin-left: 0px;
   }
 `;
 const Flex = styled.nav`
@@ -143,13 +162,30 @@ const Ul = styled.ul`
   display: flex;
   margin: auto;
   list-style: none;
+  @media screen and (max-width: 650px) {
+    display: none;
+    .header__menulist {
+      display: ${(props) => (props.isToggled ? "flex" : "none")};
+      flex-direction: column;
+      width: 100%;
+      background-color: black;
+    }
+  }
 `;
 const LoginUl = styled.ul`
   display: flex;
   margin: auto;
   list-style: none;
+  & div:nth-child(2) {
+    margin: 14px;
+    cursor: pointer;
+  }
   & li:nth-child(2) {
-    margin-top: 30px;
+    margin-top: 28px;
+    cursor: pointer;
+  }
+  & li:nth-child(3) {
+    margin-top: 28px;
     cursor: pointer;
   }
 `;
@@ -159,6 +195,9 @@ const Li = styled.li`
 const Span = styled.div`
   cursor: pointer;
   margin-top: 15px;
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
 `;
 const Img = styled.img`
   border-radius: 100%;
@@ -167,4 +206,9 @@ const Img = styled.img`
   margin-top: 5px;
   margin-right: 10px;
   cursor: pointer;
+`;
+const Cart = styled.div`
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
 `;
