@@ -13,11 +13,11 @@ const Header = () => {
   const isOpen = useSelector((state) => state.modalSlice.isOpen);
   const searchOpen = useSelector((state) => state.modalSlice.searchOpen);
 
-  // const addClass = () => {
-  //   if(nick === "ㅣ으ㅏㅏ>ㅁ으"){
-  //     navigate("/create");
-  //   }
-  // }
+  const addClass = () => {
+    if(nick === "admin"){
+      navigate("/create");
+    }
+  }
 
   const toLogin = () => {
     if (token) {
@@ -59,9 +59,7 @@ const Header = () => {
                 </Li>
                 <Li>
                   <strong
-                    onClick={()=>{
-                      navigate("/create");
-                    }}
+                    onClick={addClass}
                   >
                     등록하기
                   </strong>

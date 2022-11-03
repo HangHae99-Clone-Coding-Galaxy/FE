@@ -34,6 +34,7 @@ const CourseDetail = () => {
   }, [dispatch, id]);
 
   const course = useSelector((state) => state?.addCreateSlice?.course);
+  console.log(course)
 
 
   const postCourseId = () => {
@@ -90,11 +91,11 @@ const CourseDetail = () => {
             <AddWrap>
 
               <AddButton 
-              // onClick={()=>{
-              //   setPay(!pay);
-              //   alert("강의신청이 완료되었습니다")
-              // }}
-              onClick={postCourseId}
+              onClick={()=>{
+                setPay(!pay);
+                alert("강의신청이 완료되었습니다")
+              }}
+              // onClick={postCourseId}
               >신청하기</AddButton>
               <Price>금액:{course?.price}원</Price>
               <IssueSpan
@@ -113,6 +114,8 @@ const CourseDetail = () => {
           </VidepPaySpan>
         </DetailWrap>
       )}
+
+      {/* <p>{course?.reviewList}</p> */}
 
       {edit ? (
         <EditWrap>
@@ -208,8 +211,8 @@ const CourseDetail = () => {
 </ButtonWrap>
   )} */}
       {/* <StarRating /> */}
-      <Review courseId={id} />
-      <ReviewList />
+      {/* <Review courseId={id} />
+      <ReviewList /> */}
     </DetailWrap>
   );
 };
