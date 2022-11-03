@@ -27,7 +27,7 @@ function Review({ courseId }) {
     setComment(init);
   };
 
-  // 댓글 기능
+  // 댓글 기능 구현
 
   return (
     <Form onSubmit={onClickHandler}>

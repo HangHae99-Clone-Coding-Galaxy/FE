@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+//..
 
 const BASE_URL = process.env.REACT_APP_SERVER;
 const authorization = localStorage.getItem("Authorization");
@@ -15,7 +16,7 @@ export const __addComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       console.log("addComment payload => ", payload);
-      // jwt토큰을 header에 함께 넣어 보내야 하는지?
+      // jwt토큰을 header에 함께 넣어 보내야 하는지??
       const { comment, courseId } = payload;
       const course_id = courseId;
       const data = await axios.post(
