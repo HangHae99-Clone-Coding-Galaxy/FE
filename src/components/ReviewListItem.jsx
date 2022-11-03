@@ -7,9 +7,9 @@ function ReviewListItem(props) {
   const dispatch = useDispatch();
   const { comment } = props;
   const [edit, setEdit] = useState(false);
-  const [reviewEdit, setReviewEdit] = useState(null);
+  const [reviewEdit, setReviewEdit] = useState(comment);
 
-  const [origin, setOrigin] = useState(comment);
+  // console.log("프롭스", comment);
 
   return (
     <Wraper key={comment.id}>
@@ -21,17 +21,14 @@ function ReviewListItem(props) {
               type="text"
               name="comment"
               required
-              defaultValue={comment.comment}
+              default_value={comment.comment}
               onChange={(e) => setReviewEdit(e.target.value)}
             />
 
             <button
               onClick={(e) => {
                 e.preventDefault();
-                const edit = { ...origin, comment: reviewEdit };
-                dispatch(__fixComment(edit));
-
-                setOrigin(edit);
+                dispatch(__fixComment({ ...comment, comment: reviewEdit }));
                 setEdit(false);
               }}
               type="submit"
@@ -41,8 +38,8 @@ function ReviewListItem(props) {
           </div>
         ) : (
           <div>
-            <p>{origin.title}</p>
-            <p>{origin.comment}</p>
+            <p>{comment.title}</p>
+            <p>{comment.comment}</p>
             <button
               onClick={() => {
                 setEdit(!edit);
@@ -50,13 +47,7 @@ function ReviewListItem(props) {
             >
               수정
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                console.log("커맨트", comment);
-                dispatch(__delComment(comment));
-              }}
-            >
+            <button onClick={() => dispatch(__delComment(comment))}>
               삭제
             </button>
           </div>
@@ -68,7 +59,7 @@ function ReviewListItem(props) {
 
 export default ReviewListItem;
 
-const Wraper = styled.form`
+const Wraper = styled.div`
   margin: 20px;
   gap: 30px;
   display: flex;

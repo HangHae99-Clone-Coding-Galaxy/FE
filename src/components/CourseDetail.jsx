@@ -3,15 +3,10 @@ import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import {
-  __delCreate,
-  __getCreateId,
-  __editCreate,
-} from "../Redux/modules/addCreateSlice";
+import { __delCreate, __getCreateId,__editCreate } from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
 import ReviewList from "./ReviewList";
 import ReviewListItem from "./ReviewListItem";
-import StarRating from "./StarRating";
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -42,11 +37,12 @@ const CourseDetail = () => {
     setUpData({ ...upData, [name]: value });
   };
 
-  useEffect(() => {
-    if (!!course?.title) {
-      setUpData({ title: course?.title, content: course?.content });
-    }
-  }, [course]);
+    useEffect(() => {
+      if(!!course?.title){
+        setUpData({title: course?.title,
+        content: course?.content})
+      }
+    }, [course]);
 
   return (
     <DetailWrap>
@@ -59,7 +55,7 @@ const CourseDetail = () => {
               <ComButton>신청완료</ComButton>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>
+          </PayWrap>          
           <ContentP>{course?.content}</ContentP>
           <PlayerWrapper>
             <ReactPlayer
@@ -81,7 +77,7 @@ const CourseDetail = () => {
               <AddButton>신청하기</AddButton>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
-          </PayWrap>
+          </PayWrap>          
           <ContentP>{course?.content}</ContentP>
           <VidepPaySpan>
             강의구매를 해야 해당강의를 수강할 수 있습니다.
@@ -108,36 +104,33 @@ const CourseDetail = () => {
             onChange={onChangeHandler}
           />
           <ButtonWrap>
-            <button
-              onClick={() => {
-                dispatch(__editCreate({ upData, id }));
-                dispatch(__getCreateId(id));
-                setEdit(false);
-                // window.location.reload();
-              }}
-            >
-              완료
-            </button>
-            <button
-              onClick={() => {
-                dispatch(__delCreate(id));
-                navigate("/allcourses");
-              }}
-            >
-              삭제
-            </button>
-          </ButtonWrap>
+    <button
+      onClick={() => {
+        dispatch(__editCreate({upData,id}));
+        dispatch(__getCreateId(id))
+        setEdit(false);
+        window.location.reload();
+      }}
+    >완료
+    </button>
+    <button
+      onClick={() => {
+        dispatch(__delCreate(id));
+        navigate("/allcourses");
+      }}
+    >
+      삭제
+    </button>
+    </ButtonWrap>
         </EditWrap>
-      ) : (
-        <ButtonWrap>
-          <ButtonTrans
-            onClick={() => {
-              setEdit(!edit);
-            }}
-          >
-            수정
-          </ButtonTrans>
-          {/* <ButtonTrans
+      ) : <ButtonWrap>
+      <ButtonTrans
+        onClick={() => {
+          setEdit(!edit);
+        }}
+      >수정
+      </ButtonTrans>
+      {/* <ButtonTrans
         onClick={() => {
           dispatch(__delCreate(id));
           navigate("/allcourses");
@@ -145,10 +138,9 @@ const CourseDetail = () => {
       >
         삭제
       </ButtonTrans> */}
-        </ButtonWrap>
-      )}
+      </ButtonWrap>}
 
-      {/* {edit?(
+  {/* {edit?(
     <ButtonWrap>
     <ButtonTrans
       onClick={() => {
@@ -185,7 +177,9 @@ const CourseDetail = () => {
 </ButtonTrans>
 </ButtonWrap>
   )} */}
-      <StarRating />
+
+     
+
       <Review />
       <ReviewList />
     </DetailWrap>
@@ -380,11 +374,11 @@ const EditWrap = styled.div`
   font-size: 13px;
   font-weight: 600;
   gap: 10px;
-  input {
+  input{
     width: 450px;
     height: 30px;
   }
-  textarea {
+  textarea{
     padding: 10px;
     min-width: 450px;
     max-width: 450px;

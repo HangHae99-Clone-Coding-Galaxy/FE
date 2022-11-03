@@ -18,13 +18,12 @@ function ReviewList() {
   useEffect(() => {
     dispatch(__getComment(id));
   }, [dispatch, id]);
-  console.log("코멘트리스트", commentList);
 
   return (
     <div>
-      {commentList?.map((comment, idx) => {
-        return <ReviewListItem key={comment.id} comment={comment} />;
-      })}
+      {commentList.map((comment) => (
+        <ReviewListItem key={comment.id} comment={comment} />
+      ))}
     </div>
   );
 }

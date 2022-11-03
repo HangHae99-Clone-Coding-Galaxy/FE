@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __addComment } from "../Redux/commentSlice";
 import styled from "styled-components";
-// import StarRating from "./StarRating";
 // import Button from "./element/Button";
 
 function Review() {
@@ -50,7 +49,6 @@ function Review() {
         />
       </RepleWrap>
       <button>추가</button>
-
       {/* <button onClick={()=>{setEdit(!edit)}}>수정</button>
       <button onClick={() => dispatch(__delComment(comment))}>삭제</button> */}
     </Form>
