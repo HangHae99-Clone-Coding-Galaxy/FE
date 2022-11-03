@@ -26,19 +26,17 @@ const CourseDetail = () => {
   };
 
   const [upData, setUpData] = useState(init);
-  
+
   useEffect(() => {
     dispatch(__getCreateId(id));
   }, [dispatch, id]);
 
   const course = useSelector((state) => state?.addCreateSlice?.course);
-  console.log(course)
+  console.log(course);
 
   const [pay, setPay] = useState(false);
 
   const [edit, setEdit] = useState(false);
-
- 
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -56,39 +54,39 @@ const CourseDetail = () => {
     <DetailWrap>
       {/* {구매 했을 때 보이는 페이지} */}
 
-      {pay?(
+      {pay ? (
         <DetailWrap>
-        <TitleH1>{course?.title}</TitleH1>
-        <PayWrap>
-          <IMG src={course?.thumbNail} alt="test"></IMG>
-          <AddWrap>
-            <ComButton>신청완료</ComButton>
-            <Price>금액:{course?.price}원</Price>
-            <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
-          </AddWrap>
-        </PayWrap>
-        <ContentP>{course?.content}</ContentP>
-        <TitleP>{course?.title}</TitleP>
-        <div style={{ backgroundColor: "red" }}>
-        <video controls width={640}>
-          <source
-            src={course?.video}
-          />
-        </video>
-      </div>
-      </DetailWrap>
-      ):(
+          <TitleH1>{course?.title}</TitleH1>
+          <PayWrap>
+            <IMG src={course?.thumbNail} alt="test"></IMG>
+            <AddWrap>
+              <ComButton>신청완료</ComButton>
+              <Price>금액:{course?.price}원</Price>
+              <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+            </AddWrap>
+          </PayWrap>
+          <ContentP>{course?.content}</ContentP>
+          <TitleP>{course?.title}</TitleP>
+          <div style={{ backgroundColor: "red" }}>
+            <video controls width={640}>
+              <source src={course?.video} />
+            </video>
+          </div>
+        </DetailWrap>
+      ) : (
         <DetailWrap>
           <TitleP>{course?.title}</TitleP>
           <PayWrap>
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
               <AddButton
-              onClick={()=>{
-                dispatch(__getCreateId(id));
-                alert("강의신청이 완료되었습니다.")                
-              }}
-              >신청하기</AddButton>
+                onClick={() => {
+                  dispatch(__getCreateId(id));
+                  alert("강의신청이 완료되었습니다.");
+                }}
+              >
+                신청하기
+              </AddButton>
               <Price>금액:{course?.price}원</Price>
               <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
@@ -101,7 +99,7 @@ const CourseDetail = () => {
           </VidepPaySpan>
         </DetailWrap>
       )}
-          
+
       {edit ? (
         <EditWrap>
           <input
@@ -196,8 +194,8 @@ const CourseDetail = () => {
 </ButtonWrap>
   )} */}
       {/* <StarRating /> */}
-      {/* <Review />
-      <ReviewList /> */}
+      <Review courseId={id} />
+      <ReviewList />
     </DetailWrap>
   );
 };

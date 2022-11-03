@@ -15,7 +15,7 @@ export default function AllCourses() {
   }, [dispatch]);
 
   const courses = useSelector((state) => state?.addCreateSlice?.courses);
-  console.log(courses)
+  console.log(courses);
 
   if (courses.length === 0) {
     return <p>아직 생성된 게시물이 없습니다.</p>;
