@@ -120,14 +120,18 @@ const CourseDetail = () => {
           </VidepPaySpan>
         </DetailWrap>
       )}
-
-      <p>{reviews && reviews?.comment?.map((item)=>{
+<button
+onClick={()=>{
+  navigate(`/reviewList/${id}`)
+}}
+>리뷰작성,리뷰보기 클릭</button>
+      {/* <p>{reviews && reviews?.comment?.map((item)=>{
         return (
           <div key={item?.review_id}>
             {item?.comment}
           </div>
         )
-      })}</p>
+      })}</p> */}
 
 
       {edit ? (
