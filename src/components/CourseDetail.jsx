@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactPlayer from "react-player";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -7,6 +6,7 @@ import {
   __delCreate,
   __getCreateId,
   __editCreate,
+  __postCourseId,
 } from "../Redux/modules/addCreateSlice";
 import Review from "./Review";
 import ReviewList from "./ReviewList";
@@ -14,8 +14,6 @@ import ReviewListItem from "./ReviewListItem";
 import axios from "axios";
 
 const CourseDetail = () => {
-  const { id } = useParams();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,13 +25,23 @@ const CourseDetail = () => {
 
   const [upData, setUpData] = useState(init);
 
+
+  const { id } = useParams();
+
+
   useEffect(() => {
     dispatch(__getCreateId(id));
   }, [dispatch, id]);
 
   const course = useSelector((state) => state?.addCreateSlice?.course);
-  console.log(course);
 
+
+  const postCourseId = () => {
+    dispatch(__postCourseId(course?.course_id));
+    navigate(`/course/${id}`)
+    console.log(id);
+  };
+  
   const [pay, setPay] = useState(false);
 
   const [edit, setEdit] = useState(false);
@@ -52,7 +60,6 @@ const CourseDetail = () => {
 
   return (
     <DetailWrap>
-      {/* {구매 했을 때 보이는 페이지} */}
 
       {pay ? (
         <DetailWrap>
@@ -62,7 +69,9 @@ const CourseDetail = () => {
             <AddWrap>
               <ComButton>신청완료</ComButton>
               <Price>금액:{course?.price}원</Price>
-              <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+              <IssueSpan onClick={()=>{
+                 alert("버퍼링 관련 내용을 test@test로 문의바랍니다.")
+              }}>영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
           </PayWrap>
           <ContentP>{course?.content}</ContentP>
@@ -75,27 +84,32 @@ const CourseDetail = () => {
         </DetailWrap>
       ) : (
         <DetailWrap>
-          <TitleP>{course?.title}</TitleP>
+           <TitleH1>{course?.title}</TitleH1>
           <PayWrap>
             <IMG src={course?.thumbNail} alt="test"></IMG>
             <AddWrap>
-              <AddButton
-                onClick={() => {
-                  dispatch(__getCreateId(id));
-                  alert("강의신청이 완료되었습니다.");
-                }}
-              >
-                신청하기
-              </AddButton>
+
+              <AddButton 
+              // onClick={()=>{
+              //   setPay(!pay);
+              //   alert("강의신청이 완료되었습니다")
+              // }}
+              onClick={postCourseId}
+              >신청하기</AddButton>
               <Price>금액:{course?.price}원</Price>
-              <IssueSpan>영상 버퍼링이슈가 있다면▶️</IssueSpan>
+              <IssueSpan
+              onClick={()=>{
+                alert("버퍼링 관련 내용을 test@test로 문의바랍니다.")
+              }}
+              >영상 버퍼링이슈가 있다면▶️</IssueSpan>
             </AddWrap>
           </PayWrap>
-          <ContentP>{course?.content}</ContentP>
+          <ContentP>{course?.content}</ContentP> 
+          <TitleP>{course?.title}</TitleP>
           <VidepPaySpan>
-            강의구매를 해야 해당강의를 수강할 수 있습니다.
+            강의신청을 해야 해당강의를 수강할 수 있습니다.
             <br />
-            강의신청 바로가기{" "}
+            우측 상단의 '신청하기'를 클릭해주세요!
           </VidepPaySpan>
         </DetailWrap>
       )}
@@ -239,6 +253,7 @@ const ButtonTrans = styled.button`
   background-color: transparent;
   color: transparent;
   border: none;
+  cursor: pointer;
   :hover {
     color: grey;
   }
@@ -364,6 +379,7 @@ const VidepPaySpan = styled.span`
   width: 400px;
   height: 300px;
   display: flex;
+  gap: 20px;
   text-align: center;
   margin-top: 50px;
   margin-bottom: 30px;
@@ -372,11 +388,11 @@ const VidepPaySpan = styled.span`
   justify-content: center;
   background-color: #c6c3c3;
   color: #0f4a70;
-  cursor: pointer;
+  /* cursor: pointer;
   :hover {
     color: #803d3d;
     text-decoration: underline;
-  }
+  } */
 `;
 
 const ComButton = styled.button`

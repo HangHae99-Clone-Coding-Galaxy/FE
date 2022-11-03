@@ -9,8 +9,15 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("accessToken");
+  const nick = localStorage.getItem("Nickname");
   const isOpen = useSelector((state) => state.modalSlice.isOpen);
   const searchOpen = useSelector((state) => state.modalSlice.searchOpen);
+
+  // const addClass = () => {
+  //   if(nick === "ㅣ으ㅏㅏ>ㅁ으"){
+  //     navigate("/create");
+  //   }
+  // }
 
   const toLogin = () => {
     if (token) {
@@ -52,7 +59,7 @@ const Header = () => {
                 </Li>
                 <Li>
                   <strong
-                    onClick={() => {
+                    onClick={()=>{
                       navigate("/create");
                     }}
                   >
