@@ -128,8 +128,7 @@ const CourseDetail = () => {
           </div>
         )
       })}</p>
-      {/* {주석} */}
-      {/* <p>{course?.reviewList}</p> */}
+
 
       {edit ? (
         <EditWrap>
