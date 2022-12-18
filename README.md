@@ -18,7 +18,6 @@
 <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
 <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
 <img src="https://img.shields.io/badge/redux―toolkit-4D148C?style=for-the-badge&logo=redux&logoColor=white">
-<img src="https://img.shields.io/badge/Context api-191A1B?style=for-the-badge&logo=react&logoColor=white">
 <img src="https://img.shields.io/badge/react―router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=black"> 
 <img src="https://img.shields.io/badge/redux―thunk-512BD4?style=for-the-badge&logo=redux&logoColor=white">
 
