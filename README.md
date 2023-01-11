@@ -27,7 +27,7 @@
 ---|---|
 오성은 | https://github.com/ose1012
 임소희 |	https://github.com/Limsoheeee
-장석원 | https://github.com/Ming-gry
+장석원 | https://github.com/seokuuu
 
 ### 📚 API 명세서, ERD
 
